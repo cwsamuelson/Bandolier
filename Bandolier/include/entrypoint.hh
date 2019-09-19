@@ -4,12 +4,15 @@
 #include <memory>
 
 #include <application.hh>
+#include <logger.hh>
 
 extern Bandolier::AppPtr Bandolier::CreateApplication();
 
 int main(int argc, char* argv[])
 {
   auto app = Bandolier::CreateApplication();
+  Bandolier::logging::core()->trace("APP INITIALIZED");
+  Bandolier::logging::client()->trace("INITIALIZED");
   app->run();
 }
 
