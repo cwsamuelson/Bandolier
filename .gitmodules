@@ -1,0 +1,3 @@
+[submodule "bandolier/vendor/spdlog"]
+	path = bandolier/vendor/spdlog
+	url = https://github.com/gabime/spdlog
