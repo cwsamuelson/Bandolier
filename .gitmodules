@@ -4,3 +4,6 @@
 [submodule "Bandolier/vendor/datastructures"]
 	path = Bandolier/vendor/datastructures
 	url = https://github.com/jing361/datastructures
+[submodule "Bandolier/vendor/glfw"]
+	path = Bandolier/vendor/glfw
+	url = https://github.com/glfw/glfw
