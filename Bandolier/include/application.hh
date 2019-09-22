@@ -3,10 +3,21 @@
 
 #include <memory>
 
+#include <event_handler.hh>
+
+#include <ApplicationEvent.hh>
+
 namespace Bandolier {
 
 class application
 {
+public:
+  using AppTrigger = gsw::event_trigger<Events::ApplicationEvent&>;
+  using AppChannel = AppTrigger::channel_t;
+
+protected:
+  AppTrigger mAppTrigger;
+
 public:
   application() = default;
   virtual ~application() = default;
