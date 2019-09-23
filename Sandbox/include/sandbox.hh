@@ -1,13 +1,13 @@
 #ifndef TEST_SANDBOX_HH
 #define TEST_SANDBOX_HH
 
-#include <application.hh>
+#include <Application.hh>
 
-class sandbox : public Bandolier::application
+class Sandbox : public Bandolier::Application
 {
 public:
-  sandbox() = default;
-  ~sandbox() = default;
+  Sandbox() = default;
+  ~Sandbox() = default;
 
   void run() override;
 };

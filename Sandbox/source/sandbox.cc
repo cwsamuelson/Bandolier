@@ -8,7 +8,7 @@
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
 
-void sandbox::run()
+void Sandbox::run()
 {
   using Event = WindowResizeEvent;
   using ChannelPtr = std::weak_ptr<Event::Channel_t>;
@@ -26,6 +26,6 @@ void sandbox::run()
 
 Bandolier::AppPtr Bandolier::CreateApplication()
 {
-  return std::make_unique<sandbox>();
+  return std::make_unique<Sandbox>();
 }
 

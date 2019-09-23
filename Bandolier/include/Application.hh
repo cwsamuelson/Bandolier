@@ -6,10 +6,11 @@
 #include <event_handler.hh>
 
 #include <ApplicationEvent.hh>
+#include <Windo.hh>
 
 namespace Bandolier {
 
-class application
+class Application
 {
 public:
   using AppTrigger = gsw::event_trigger<Events::ApplicationEvent&>;
@@ -17,15 +18,19 @@ public:
 
 protected:
   AppTrigger mAppTrigger;
+  std::unique_ptr<Window> mWindow;
+
+private:
+  bool mRunning = false;
 
 public:
-  application() = default;
-  virtual ~application() = default;
+  Application();
+  virtual ~Application();
 
   virtual void run() = 0;
 };
 
-using AppPtr = std::unique_ptr<application>;
+using AppPtr = std::unique_ptr<Application>;
 // To be defined by the client
 AppPtr CreateApplication();
 

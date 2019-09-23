@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <application.hh>
+#include <Application.hh>
 #include <logger.hh>
 
 extern Bandolier::AppPtr Bandolier::CreateApplication();
