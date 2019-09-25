@@ -11,5 +11,5 @@ add_library(Bandolier source/logger.cc source/Application.cc include/windows_win
 
 target_include_directories(Bandolier PUBLIC include/)
 
-target_link_libraries(Bandolier spdlog_header_only event_handler glfw)
+target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32)
 

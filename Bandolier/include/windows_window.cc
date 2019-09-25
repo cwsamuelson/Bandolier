@@ -44,7 +44,7 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
     {
         WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
-        data.closeTrigger.fire(Events::WindowClose())
+        data.closeTrigger.fire(Events::WindowClose());
     }
   );
 
