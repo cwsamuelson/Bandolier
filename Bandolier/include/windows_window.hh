@@ -34,7 +34,22 @@ public:
   virtual void
   VSync(bool enabled);
 
-  virtual void SetEventCallback(const Window::Handler_t& callback);
+  std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t>
+  ResizeChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
+  CloseChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>
+  KeyPressChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t>
+  KeyReleaseChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseButtonPressTrigger)::channel_t>
+  MousePressChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseButtonReleaseTrigger)::channel_t>
+  MouseReleaseChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseScrollTrigger)::channel_t>
+  MouseScrollChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseMoveTrigger)::channel_t>
+  MouseMoveChannel() const override;
 };
 
 }
