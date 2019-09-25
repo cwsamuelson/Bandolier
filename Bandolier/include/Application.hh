@@ -27,7 +27,8 @@ public:
   Application();
   virtual ~Application();
 
-  virtual void run() = 0;
+  virtual void
+  run() = 0;
 };
 
 using AppPtr = std::unique_ptr<Application>;

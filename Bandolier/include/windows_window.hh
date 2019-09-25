@@ -24,11 +24,15 @@ public:
 
   void OnUpdate() override;
 
-  inline unsigned int Width() const override { return mData.width; }
-  inline unsigned int Height() const override { return mData.height; }
+  inline unsigned int
+  Width() const override { return mData.width; }
+  inline unsigned int
+  Height() const override { return mData.height; }
 
-  virtual bool VSync() const;
-  virtual void VSync(bool enabled);
+  virtual bool
+  VSync() const;
+  virtual void
+  VSync(bool enabled);
 
   virtual void SetEventCallback(const Window::Handler_t& callback);
 };

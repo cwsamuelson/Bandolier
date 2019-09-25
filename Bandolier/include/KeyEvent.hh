@@ -25,7 +25,8 @@ protected:
     : mKeyCode(keycode)
   {}
 
-  virtual const char* Name() const {return "KeyEvent"; }
+  virtual const char*
+  Name() const override {return "KeyEvent"; }
 
 private:
   int mKeyCode;
@@ -45,9 +46,11 @@ public:
     , mRepeatCount(repeatCount)
   {}
 
-  virtual const char* Name() const {return "KeyPressed"; }
+  const char*
+  Name() const override {return "KeyPressed"; }
 
-  inline int RepeatCount() const
+  inline int
+  RepeatCount() const
   {
     return mRepeatCount;
   }
@@ -69,7 +72,8 @@ public:
     : KeyEvent(keycode)
   {}
 
-  virtual const char* Name() const {return "KeyReleased"; }
+  const char*
+  Name() const override {return "KeyReleased"; }
 };
 
 }

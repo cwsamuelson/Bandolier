@@ -39,12 +39,15 @@ public:
 
   virtual void OnUpdate() = 0;
 
-  virtual unsigned int Width() const = 0;
-  virtual unsigned int Height() const = 0;
+  virtual unsigned int
+  Width() const = 0;
+  virtual unsigned int
+  Height() const = 0;
 
-  virtual void SetEventCallback(const Handler_t& callback) = 0;
-  virtual bool VSync() const = 0;
-  virtual void VSync(bool enabled) = 0;
+  virtual bool
+  VSync() const = 0;
+  virtual void
+  VSync(bool enabled) = 0;
 };
 
 }
