@@ -130,6 +130,30 @@ WindowsWindow::~WindowsWindow()
   glfwDestroyWindow(mWindow);
 }
 
+std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
+WindowsWindow::AppChannel() const
+{
+  return mData.appTrigger.getChannel();
+}
+
+std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t>
+WindowsWindow::KeyChannel() const
+{
+  return mData.keyTrigger.getChannel();
+}
+
+std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t>
+WindowsWindow::MouseChannel() const
+{
+  return mData.mouseTrigger.getChannel();
+}
+
+std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t>
+WindowsWindow::MouseButtonChannel() const
+{
+  return mData.mouseButtonTrigger.getChannel();
+}
+
 std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t>
 WindowsWindow::ResizeChannel() const
 {

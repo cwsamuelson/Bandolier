@@ -34,6 +34,14 @@ public:
   virtual void
   VSync(bool enabled);
 
+  std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
+  AppChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t>
+  KeyChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t>
+  MouseChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t>
+  MouseButtonChannel() const override;
   std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t>
   ResizeChannel() const override;
   std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
