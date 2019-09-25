@@ -5,7 +5,7 @@
 
 namespace Bandolier::Events {
 
-class ApplicationEvent : BaseEvent
+class ApplicationEvent : public BaseEvent
 {
 public:
   using Trigger_t = gsw::event_trigger<ApplicationEvent>;

@@ -26,6 +26,7 @@ struct WindowProperties
   unsigned int width;
   unsigned int height;
   bool vsync;
+  trigger_t<Events::BaseEvent> allEventsTrigger;
   trigger_t<Events::ApplicationEvent> appTrigger;
   trigger_t<Events::KeyEvent> keyTrigger;
   trigger_t<Events::MouseEvent> mouseTrigger;
@@ -65,6 +66,9 @@ public:
   virtual void
   VSync(bool enabled) = 0;
 
+  virtual
+  std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
+  AllChannel() const = 0;
   virtual
   std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
   AppChannel() const = 0;

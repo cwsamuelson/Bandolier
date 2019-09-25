@@ -35,7 +35,10 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
       data.width = width;
       data.height = height;
 
-      data.resizeTrigger.fire(Events::WindowResize(width, height));
+      auto event = Events::WindowResize(width, height);
+      data.resizeTrigger.fire(event);
+      data.appTrigger.fire(event);
+      data.allEventsTrigger.fire(event);
     }
   );
 
@@ -44,7 +47,10 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
     {
         WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
-        data.closeTrigger.fire(Events::WindowClose());
+        auto event = Events::WindowClose();
+        data.closeTrigger.fire(event);
+        data.appTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
     }
   );
 
@@ -57,19 +63,28 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
          {
          case GLFW_PRESS:
          {
-           data.keyPressTrigger.fire(Events::KeyPressed(key, 0));
+           auto event = Events::KeyPressed(key, 0);
+           data.keyPressTrigger.fire(event);
+           data.keyTrigger.fire(event);
+           data.allEventsTrigger.fire(event);
          }
            break;
 
          case GLFW_RELEASE:
          {
-           data.keyReleaseTrigger.fire(Events::KeyReleased(key));
+           auto event = Events::KeyReleased(key);
+           data.keyReleaseTrigger.fire(event);
+           data.keyTrigger.fire(event);
+           data.allEventsTrigger.fire(event);
          }
            break;
 
          case GLFW_REPEAT:
          {
-           data.keyPressTrigger.fire(Events::KeyPressed(key, 1));
+           auto event = Events::KeyPressed(key, 1);
+           data.keyPressTrigger.fire(event);
+           data.keyTrigger.fire(event);
+           data.allEventsTrigger.fire(event);
          }
            break;
 
@@ -89,13 +104,21 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
       {
       case GLFW_PRESS:
       {
-        data.mouseButtonPressTrigger.fire(Events::MouseButtonPressed(button));
+        auto event = Events::MouseButtonPressed(button);
+        data.mouseButtonPressTrigger.fire(event);
+        data.mouseButtonTrigger.fire(event);
+        data.mouseTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
       }
         break;
 
       case GLFW_RELEASE:
       {
-        data.mouseButtonReleaseTrigger.fire(Events::MouseButtonReleased(button));
+        auto event = Events::MouseButtonReleased(button);
+        data.mouseButtonReleaseTrigger.fire(event);
+        data.mouseButtonTrigger.fire(event);
+        data.mouseTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
       }
         break;
 
@@ -111,7 +134,10 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
     {
       WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
-      data.mouseScrollTrigger.fire(Events::MouseScrolled((float(xOffset)), float(yOffset)));
+      auto event = Events::MouseScrolled((float(xOffset)), float(yOffset));
+      data.mouseScrollTrigger.fire(event);
+      data.mouseTrigger.fire(event);
+      data.allEventsTrigger.fire(event);
     }
   );
 
@@ -120,7 +146,10 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
      {
        WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 
-       data.mouseMoveTrigger.fire(Events::MouseMoved((float(xPos)), float(yPos)));
+       auto event = Events::MouseMoved((float(xPos)), float(yPos));
+       data.mouseMoveTrigger.fire(event);
+       data.mouseTrigger.fire(event);
+       data.allEventsTrigger.fire(event);
      }
   );
 }
@@ -128,6 +157,12 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
 WindowsWindow::~WindowsWindow()
 {
   glfwDestroyWindow(mWindow);
+}
+
+std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
+WindowsWindow::AllChannel() const
+{
+  return mData.allEventsTrigger.getChannel();
 }
 
 std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
