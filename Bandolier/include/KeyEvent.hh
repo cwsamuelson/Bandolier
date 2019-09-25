@@ -1,7 +1,9 @@
 #ifndef TEST_KEYEVENT_HH
 #define TEST_KEYEVENT_HH
 
-#include <events.hh>
+#include <event_handler.hh>
+
+#include "events.hh"
 
 namespace Bandolier::Events {
 
