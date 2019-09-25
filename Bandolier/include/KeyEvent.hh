@@ -16,13 +16,15 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  inline int KeyCode() const
+  inline int
+  KeyCode() const
   {
     return mKeyCode;
   }
 
   EVENT_CATEGORY(EventCategory::Keyboard | EventCategory::Input)
 protected:
+  explicit
   KeyEvent(int keycode)
     : mKeyCode(keycode)
   {}
@@ -70,6 +72,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
+  explicit
   KeyReleased(int keycode)
     : KeyEvent(keycode)
   {}
