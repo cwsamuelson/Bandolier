@@ -7,7 +7,7 @@ add_subdirectory(vendor/datastructures/event_handler)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
 
-add_library(Bandolier source/logger.cc source/Application.cc source/windows_window.cc)
+add_library(Bandolier source/logger.cc source/Application.cc source/windows_window.cc source/layer_stack.cc)
 
 target_include_directories(Bandolier PUBLIC include/)
 
