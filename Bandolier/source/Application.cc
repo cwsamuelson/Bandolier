@@ -1,6 +1,7 @@
 #include <GLFW/glfw3.h>
 
 #include "windows_window.hh"
+#include "logger.hh"
 
 #include "Application.hh"
 
@@ -13,6 +14,7 @@ Application::Application()
     [this](const Events::WindowClose&)
     {
       mRunning = false;
+      Bandolier::logging::client()->warn("Window close event happened!");
     }
   );
 }

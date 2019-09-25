@@ -19,8 +19,6 @@ public:
 protected:
   AppTrigger mAppTrigger;
   std::unique_ptr<Window> mWindow;
-
-private:
   bool mRunning = false;
 
 public:
