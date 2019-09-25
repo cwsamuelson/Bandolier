@@ -1,6 +1,8 @@
 #include <iostream>
 
-#include "entrypoint.hh"
+#include <GLFW/glfw3.h>
+
+#include <entrypoint.hh>
 #include <logger.hh>
 #include <ApplicationEvent.hh>
 
@@ -10,18 +12,13 @@ using WindowResizeEvent = Bandolier::Events::WindowResize;
 
 void Sandbox::run()
 {
-  using Event = WindowResizeEvent;
-  using ChannelPtr = std::weak_ptr<Event::Channel_t>;
-  Event::Trigger_t WindowResizeTrigger;
-  ChannelPtr WindowResizeChannelPtr = WindowResizeTrigger.getChannel();
-  WindowResizeChannelPtr.lock()->subscribe(
-    [](const WindowResizeEvent& e)
-    {
-      Bandolier::logging::client()->warn("Window resize event happened!\tNew dimensions are {0}, {1}", e.Width(), e.Height());
-    }
-  );
-  WindowResizeTrigger.fire({5, 12});
-  while(true);
+  mRunning = true;
+  while(mRunning)
+  {
+    glClearColor(1, 0, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    mWindow->OnUpdate();
+  }
 }
 
 Bandolier::AppPtr Bandolier::CreateApplication()
