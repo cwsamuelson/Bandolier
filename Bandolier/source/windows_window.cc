@@ -1,5 +1,6 @@
-#include "logger.hh"
+#include <glad/glad.h>
 
+#include "logger.hh"
 #include "KeyEvent.hh"
 #include "MouseEvents.hh"
 
@@ -25,6 +26,11 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
 
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
   glfwMakeContextCurrent(mWindow);
+  if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+  {
+    logging::core()->error("Failed to initialize GLAD");
+    throw std::runtime_error("Failed to initialize GLAD");
+  }
   glfwSetWindowUserPointer(mWindow, &mData);
   VSync(props.vsync);
 

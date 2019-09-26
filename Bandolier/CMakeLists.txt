@@ -6,10 +6,11 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(vendor/datastructures/event_handler)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
+add_subdirectory(vendor/glad)
 
 add_library(Bandolier source/logger.cc source/Application.cc source/windows_window.cc source/layer_stack.cc)
 
 target_include_directories(Bandolier PUBLIC include/)
 
-target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32)
+target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32 glad)
 

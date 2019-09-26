@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 #include <entrypoint.hh>
 #include <logger.hh>
@@ -19,7 +19,7 @@ void Sandbox::run()
     glClear(GL_COLOR_BUFFER_BIT);
     mWindow->OnUpdate();
 
-    for(auto layer : mLayerStack)
+    for(auto& layer : mLayerStack)
     {
       layer->OnUpdate();
     }
