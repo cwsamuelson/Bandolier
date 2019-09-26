@@ -13,9 +13,11 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
-  virtual const char* Name() const {return "MouseEvent"; }
+  virtual const char*
+  Name() const {return "MouseEvent"; }
 
   EVENT_CATEGORY(EventCategory::Mouse | EventCategory::Input)
+  EVENT_TYPE(EventType::Mouse)
 };
 
 class MouseButtonEvent : public MouseEvent
@@ -32,12 +34,17 @@ public:
     return mButton;
   }
 
+  EVENT_TYPE(EventType::MouseButton)
+
 protected:
   MouseButtonEvent(int button)
     : mButton(button)
   {}
 
-  virtual const char* Name() const {return "MouseButtonEvent"; }
+  virtual const char*
+  Name() const {return "MouseButtonEvent"; }
+
+  EVENT_CATEGORY(EventCategory::Mouse | EventCategory::MouseButton | EventCategory::Input)
 
   int mButton;
 };
@@ -54,7 +61,10 @@ public:
     : MouseButtonEvent(button)
   {}
 
-  virtual const char* Name() const {return "MouseButtonPressed"; }
+  virtual const char*
+  Name() const {return "MouseButtonPressed"; }
+
+  EVENT_TYPE(EventType::MouseButtonPressed)
 };
 
 class MouseButtonReleased : public MouseButtonEvent
@@ -69,7 +79,10 @@ public:
           : MouseButtonEvent(button)
   {}
 
-  virtual const char* Name() const {return "MouseButtonReleased"; }
+  virtual const char*
+  Name() const {return "MouseButtonReleased"; }
+
+  EVENT_TYPE(EventType::MouseButtonReleased)
 };
 
 class MouseMoved : public MouseEvent
@@ -85,7 +98,8 @@ public:
     , mY(y)
   {}
 
-  virtual const char* Name() const {return "MouseMoved"; }
+  virtual const char*
+  Name() const {return "MouseMoved"; }
 
   inline float X() const
   {
@@ -103,6 +117,8 @@ public:
   {
     return {mX, mY};
   }
+
+  EVENT_TYPE(EventType::MouseMoved)
 
 private:
   float mX;
@@ -122,7 +138,8 @@ public:
     , mYOffset(yOffset)
   {}
 
-  virtual const char* Name() const {return "MouseScrolled"; }
+  virtual const char*
+  Name() const {return "MouseScrolled"; }
 
   inline
   float
@@ -144,6 +161,8 @@ public:
   {
     return {mXOffset, mYOffset};
   }
+
+  EVENT_TYPE(EventType::MouseScrolled)
 
 private:
   float mXOffset;

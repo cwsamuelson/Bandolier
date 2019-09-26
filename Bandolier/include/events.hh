@@ -5,8 +5,17 @@
 
 #define BIT(N) (1 << N)
 #define EVENT_CATEGORY(category) virtual unsigned short Categories() const override{ return category; }
+#define EVENT_TYPE(type) virtual EventType Type() const override{ return type; }
 
 namespace Bandolier::Events {
+
+enum struct EventType{
+  Unspecified = 0,
+  Window, WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+  App, AppTick, AppUpdate, AppRender,
+  Key, KeyPressed, KeyReleased, KeyTyped,
+  Mouse, MouseButton, MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
+};
 
 enum EventCategory{
   None = 0,
@@ -22,6 +31,7 @@ class BaseEvent
 public:
   virtual const char* Name() const = 0;
   virtual unsigned short Categories() const = 0;
+  virtual EventType Type() const { return EventType::Unspecified; }
 
   inline bool HasCategory(EventCategory category) const
   {

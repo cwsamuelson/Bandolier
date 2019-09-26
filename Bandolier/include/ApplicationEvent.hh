@@ -16,6 +16,7 @@ public:
   virtual const char* Name() const {return "ApplicationEvent"; }
 
   EVENT_CATEGORY(EventCategory::Application)
+  EVENT_TYPE(EventType::App)
 };
 
 class WindowClose : public ApplicationEvent
@@ -28,6 +29,8 @@ public:
 
 public:
   WindowClose(){}
+
+  EVENT_TYPE(EventType::WindowClose)
 };
 
 class WindowResize : public ApplicationEvent
@@ -63,6 +66,8 @@ public:
   {
     return mHeight;
   }
+
+  EVENT_TYPE(EventType::WindowResize)
 };
 
 class WindowGainedFocus : public ApplicationEvent
@@ -77,6 +82,8 @@ public:
   WindowGainedFocus(){}
 
   virtual const char* Name() const {return "WindowGainedfocus"; }
+
+  EVENT_TYPE(EventType::WindowFocus)
 };
 
 class WindowLostFocus : public ApplicationEvent
@@ -91,6 +98,8 @@ public:
   WindowLostFocus(){}
 
   virtual const char* Name() const {return "WindowLostfocus"; }
+
+  EVENT_TYPE(EventType::WindowLostFocus)
 };
 
 class WindowMoved : public ApplicationEvent
@@ -105,6 +114,8 @@ public:
   WindowMoved(){}
 
   virtual const char* Name() const {return "WindowMoved"; }
+
+  EVENT_TYPE(EventType::WindowMoved)
 };
 
 class AppTick : public ApplicationEvent
@@ -119,6 +130,8 @@ public:
   AppTick(){}
 
   virtual const char* Name() const {return "AppTick"; }
+
+  EVENT_TYPE(EventType::AppTick)
 };
 
 class AppUpdate : public ApplicationEvent
@@ -133,6 +146,8 @@ public:
   AppUpdate(){}
 
   virtual const char* Name() const {return "AppUpdate"; }
+
+  EVENT_TYPE(EventType::AppUpdate)
 };
 
 class AppRender : public ApplicationEvent
@@ -147,6 +162,8 @@ public:
   AppRender(){}
 
   virtual const char* Name() const {return "AppRender"; }
+
+  EVENT_TYPE(EventType::AppRender)
 };
 
 }

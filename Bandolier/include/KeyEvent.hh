@@ -23,6 +23,7 @@ public:
   }
 
   EVENT_CATEGORY(EventCategory::Keyboard | EventCategory::Input)
+  EVENT_TYPE(EventType::Key)
 protected:
   explicit
   KeyEvent(int keycode)
@@ -59,6 +60,7 @@ public:
     return mRepeatCount;
   }
 
+  EVENT_TYPE(EventType::KeyPressed)
 private:
   int mRepeatCount;
 };
@@ -79,6 +81,8 @@ public:
 
   const char*
   Name() const override {return "KeyReleased"; }
+  
+  EVENT_TYPE(EventType::KeyReleased)
 };
 
 }
