@@ -18,6 +18,11 @@ void Sandbox::run()
     glClearColor(1, 0, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     mWindow->OnUpdate();
+
+    for(auto layer : mLayerStack)
+    {
+      layer->OnUpdate();
+    }
   }
 }
 

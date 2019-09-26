@@ -5,6 +5,7 @@
 
 #include <event_handler.hh>
 
+#include <layer_stack.hh>
 #include <ApplicationEvent.hh>
 #include <Windo.hh>
 
@@ -12,14 +13,10 @@ namespace Bandolier {
 
 class Application
 {
-public:
-  using AppTrigger = gsw::event_trigger<Events::ApplicationEvent&>;
-  using AppChannel = AppTrigger::channel_t;
-
 protected:
-  AppTrigger mAppTrigger;
   std::unique_ptr<Window> mWindow;
   bool mRunning = false;
+  LayerStack mLayerStack;
 
 public:
   Application();
@@ -27,6 +24,11 @@ public:
 
   virtual void
   run() = 0;
+
+  virtual void
+  PushLayer(LayerStack::value_type layer);
+  virtual void
+  PushOverlay(LayerStack::value_type overlay);
 };
 
 using AppPtr = std::unique_ptr<Application>;

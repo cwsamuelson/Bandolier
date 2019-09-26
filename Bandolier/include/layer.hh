@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "events.hh"
+
 namespace Bandolier {
 
 class Layer
@@ -19,6 +21,8 @@ public:
   OnDetach() {}
   virtual void
   OnUpdate() {}
+  virtual bool
+  OnEvent(const Events::BaseEvent& e) {}
 
   inline
   const std::string&
