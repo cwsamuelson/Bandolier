@@ -6,7 +6,7 @@
 #include <Application.hh>
 #include <logger.hh>
 
-extern Bandolier::AppPtr Bandolier::CreateApplication();
+extern Bandolier::Application* Bandolier::CreateApplication();
 
 int main(int argc, char* argv[])
 {

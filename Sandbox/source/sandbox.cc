@@ -26,8 +26,9 @@ void Sandbox::run()
   }
 }
 
-Bandolier::AppPtr Bandolier::CreateApplication()
+Bandolier::Application* Bandolier::CreateApplication()
 {
-  return std::make_unique<Sandbox>();
+  Application::AppInstance = new Sandbox;
+  return Application::GetApplication();
 }
 

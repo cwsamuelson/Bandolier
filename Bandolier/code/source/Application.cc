@@ -1,6 +1,6 @@
 #include <GLFW/glfw3.h>
 
-#include "windows_window.hh"
+#include "platform/Windows/windows_window.hh"
 #include "logger.hh"
 
 #include "Application.hh"
@@ -10,6 +10,13 @@ namespace Bandolier{
 Application::Application()
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties("test", 1280, 720)))
 {
+  if(Application::AppInstance)
+  {
+    logging::core()->error("Initializing a new application when one already exists!");
+    throw std::runtime_error("Initializing a new application when one already exists!");
+  }
+  Application::AppInstance = this;
+
   mWindow->CloseChannel().lock()->subscribe(
     [this](const Events::WindowClose&)
     {
