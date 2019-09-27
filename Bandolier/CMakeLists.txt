@@ -13,8 +13,12 @@ add_library(imgui vendor/imgui/imgui.cpp
                   vendor/imgui/imgui_draw.cpp
                   vendor/imgui/imgui_widgets.cpp
                   vendor/imgui/examples/imgui_impl_opengl3.cpp
-                  vendor/imgui/examples/imgui_impl_opengl3.h)
+                  vendor/imgui/examples/imgui_impl_opengl3.h
+                  vendor/imgui/examples/imgui_impl_glfw.h
+                  vendor/imgui/examples/imgui_impl_glfw.cpp)
 target_include_directories(imgui PUBLIC vendor/imgui/)
+target_compile_definitions(imgui PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+target_link_libraries(imgui glfw glad)
 
 add_library(Bandolier code/source/logger.cc
                       code/source/Application.cc
