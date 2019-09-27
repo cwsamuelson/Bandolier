@@ -6,7 +6,7 @@
 class Sandbox : public Bandolier::Application
 {
 public:
-  Sandbox() = default;
+  Sandbox();
   ~Sandbox() = default;
 
   void run() override;

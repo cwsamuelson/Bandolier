@@ -5,10 +5,17 @@
 #include <entrypoint.hh>
 #include <logger.hh>
 #include <ApplicationEvent.hh>
+#include <imgui/imgui_layer.hh>
 
 #include "sandbox.hh"
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
+
+Sandbox::Sandbox()
+{
+  //example layer?...crap!
+  PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
+}
 
 void Sandbox::run()
 {
