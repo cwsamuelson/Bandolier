@@ -37,7 +37,7 @@ void
 LayerStack::PushOverlay(value_type overlay)
 {
   mLayers.emplace_back(overlay);
-  overlay->OnDetach();
+  overlay->OnAttach();
 }
 
 void
