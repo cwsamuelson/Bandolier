@@ -158,6 +158,30 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
        data.allEventsTrigger.fire(event);
      }
   );
+
+  glfwSetWindowFocusCallback(mWindow,
+    [](GLFWwindow* window, int hasFocus)
+    {
+      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+
+      if(hasFocus)
+      {
+        auto event = Events::WindowGainedFocus();
+        data.windowGainFocusTrigger.fire(event);
+        data.windowTrigger.fire(event);
+        data.appTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
+      }
+      else
+      {
+        auto event = Events::WindowLostFocus();
+        data.windowLostFocusTrigger.fire(event);
+        data.windowTrigger.fire(event);
+        data.appTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
+      }
+    }
+  );
 }
 
 WindowsWindow::~WindowsWindow()

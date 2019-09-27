@@ -31,8 +31,11 @@ struct WindowProperties
   trigger_t<Events::KeyEvent> keyTrigger;
   trigger_t<Events::MouseEvent> mouseTrigger;
   trigger_t<Events::MouseButtonEvent> mouseButtonTrigger;
+  trigger_t<Events::WindowEvent> windowTrigger;
   trigger_t<Events::WindowResize> resizeTrigger;
   trigger_t<Events::WindowClose> closeTrigger;
+  trigger_t<Events::WindowGainedFocus> windowGainFocusTrigger;
+  trigger_t<Events::WindowLostFocus> windowLostFocusTrigger;
   trigger_t<Events::KeyPressed> keyPressTrigger;
   trigger_t<Events::KeyReleased> keyReleaseTrigger;
   trigger_t<Events::MouseButtonPressed> mouseButtonPressTrigger;
