@@ -8,10 +8,18 @@ add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/glad)
 
-add_library(imgui vendor/imgui/imgui.cpp vendor/imgui/imgui_demo.cpp vendor/imgui/imgui_draw.cpp vendor/imgui/imgui_widgets.cpp)
+add_library(imgui vendor/imgui/imgui.cpp
+                  vendor/imgui/imgui_demo.cpp
+                  vendor/imgui/imgui_draw.cpp
+                  vendor/imgui/imgui_widgets.cpp
+                  vendor/imgui/examples/imgui_impl_opengl3.cpp
+                  vendor/imgui/examples/imgui_impl_opengl3.h)
 target_include_directories(imgui PUBLIC vendor/imgui/)
 
-add_library(Bandolier code/source/logger.cc code/source/Application.cc code/platform/Windows/windows_window.cc code/source/layer_stack.cc)
+add_library(Bandolier code/source/logger.cc
+                      code/source/Application.cc
+                      code/platform/Windows/windows_window.cc
+                      code/source/layer_stack.cc code/imgui/imgui_layer.cc code/imgui/imgui_layer.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
