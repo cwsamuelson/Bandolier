@@ -13,12 +13,12 @@ namespace Bandolier {
 
 class Application;
 // To be defined by the client
-Application* CreateApplication();
+Application& CreateApplication();
 
 class Application
 {
 protected:
-  friend Application* Bandolier::CreateApplication();
+  friend Application& Bandolier::CreateApplication();
   inline static Application* AppInstance = nullptr;
 
   std::unique_ptr<Bandolier::Window> mWindow;
@@ -46,10 +46,10 @@ public:
 
   //Using a static app instance allows the application to be accessed using only this base class,
   // and without knowledge of the client's implimentation.
-  static Application*
+  static Application&
   GetApplication()
   {
-    return AppInstance;
+    return *AppInstance;
   }
 
   virtual void

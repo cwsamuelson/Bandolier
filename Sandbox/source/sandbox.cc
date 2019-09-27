@@ -33,7 +33,7 @@ void Sandbox::run()
   }
 }
 
-Bandolier::Application* Bandolier::CreateApplication()
+Bandolier::Application& Bandolier::CreateApplication()
 {
   Application::AppInstance = new Sandbox;
   return Application::GetApplication();
