@@ -7,3 +7,6 @@
 [submodule "Bandolier/vendor/glfw"]
 	path = Bandolier/vendor/glfw
 	url = https://github.com/glfw/glfw
+[submodule "Bandolier/vendor/imgui"]
+	path = Bandolier/vendor/imgui
+	url = https://github.com/ocornut/imgui
