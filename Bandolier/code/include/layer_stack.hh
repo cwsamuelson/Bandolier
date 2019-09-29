@@ -13,6 +13,7 @@ class LayerStack
 public:
   using container = std::vector<std::shared_ptr<Bandolier::Layer>>;
   using iterator = container::iterator;
+  using reverse_iterator = container::reverse_iterator;
   using const_iterator = container::const_iterator;
   using value_type = container::value_type;
   using size_type = container::size_type;
@@ -60,6 +61,18 @@ public:
   cend()
   {
     return mLayers.cend();
+  }
+
+  reverse_iterator
+  rbegin()
+  {
+    return mLayers.rbegin();
+  }
+
+  reverse_iterator
+  rend()
+  {
+    return mLayers.rend();
   }
 };
 
