@@ -2,10 +2,12 @@
 
 #include <imgui.h>
 
-#include <examples/imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 
 #include "Application.hh"
+#include "logger.hh"
 
 namespace Bandolier{
 
@@ -74,6 +76,17 @@ ImguiLayer::OnUpdate()
 
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+bool
+ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e)
+{
+  if(mEventHandlers.count(e.Type()))
+  {
+    return mEventHandlers.at(e.Type());
+  }
+
+  return false;
 }
 
 }
