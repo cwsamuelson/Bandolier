@@ -19,7 +19,7 @@ class Application
 {
 protected:
   friend Application& Bandolier::CreateApplication();
-  inline static Application* AppInstance = nullptr;
+  inline static Application* Instance = nullptr;
 
   std::unique_ptr<Bandolier::Window> mWindow;
   bool mRunning = false;
@@ -47,9 +47,9 @@ public:
   //Using a static app instance allows the application to be accessed using only this base class,
   // and without knowledge of the client's implimentation.
   static Application&
-  GetApplication()
+  Get()
   {
-    return *AppInstance;
+    return *Instance;
   }
 
   virtual void

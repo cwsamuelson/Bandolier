@@ -10,12 +10,12 @@ namespace Bandolier{
 Application::Application()
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties("test", 1280, 720)))
 {
-  if(Application::AppInstance)
+  if(Application::Instance)
   {
     logging::core()->error("Initializing a new application when one already exists!");
     throw std::runtime_error("Initializing a new application when one already exists!");
   }
-  Application::AppInstance = this;
+  Application::Instance = this;
 
   mWindow->CloseChannel().lock()->subscribe(
     [this](const Events::WindowClose&)
