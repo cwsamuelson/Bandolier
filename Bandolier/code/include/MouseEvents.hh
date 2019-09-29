@@ -1,6 +1,8 @@
 #ifndef TEST_MOUSEEVENTS_HH
 #define TEST_MOUSEEVENTS_HH
 
+#include <event_handler.hh>
+
 #include <events.hh>
 
 namespace Bandolier::Events {
