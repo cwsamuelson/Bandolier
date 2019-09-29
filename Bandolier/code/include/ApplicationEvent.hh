@@ -97,7 +97,7 @@ public:
 
   virtual const char* Name() const {return "WindowGainedfocus"; }
 
-  EVENT_TYPE(EventType::WindowFocus)
+  EVENT_TYPE(EventType::WindowGainedFocus)
 };
 
 class WindowLostFocus : public WindowEvent

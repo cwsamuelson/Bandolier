@@ -11,7 +11,7 @@ namespace Bandolier::Events {
 
 enum struct EventType{
   Unspecified = 0,
-  Window, WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+  Window, WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowGainedFocus, WindowMoved,
   App, AppTick, AppUpdate, AppRender,
   Key, KeyPressed, KeyReleased, KeyTyped,
   Mouse, MouseButton, MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
