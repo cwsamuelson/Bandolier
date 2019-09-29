@@ -83,7 +83,7 @@ ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e)
 {
   if(mEventHandlers.count(e.Type()))
   {
-    return mEventHandlers.at(e.Type());
+    return std::invoke(mEventHandlers.at(e.Type()), this, e);
   }
 
   return false;
