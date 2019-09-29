@@ -19,12 +19,13 @@ Sandbox::Sandbox()
 
 void Sandbox::run()
 {
+  glClearColor(1, 0, 1, 1);
+
   mRunning = true;
   while(mRunning)
   {
-    glClearColor(1, 0, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
     mWindow->OnUpdate();
+    glClear(GL_COLOR_BUFFER_BIT);
 
     for(auto& layer : mLayerStack)
     {
