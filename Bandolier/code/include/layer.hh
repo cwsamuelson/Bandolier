@@ -22,7 +22,7 @@ public:
   virtual void
   OnUpdate() {}
   virtual bool
-  OnEvent(const Events::BaseEvent& e) {}
+  OnEvent(const Events::BaseEvent& e) { return false; }
 
   inline
   const std::string&
