@@ -48,6 +48,8 @@ public:
   ResizeChannel() const override;
   std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
   CloseChannel() const override;
+  std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t>
+  KeyTypedChannel() const override;
   std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>
   KeyPressChannel() const override;
   std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t>

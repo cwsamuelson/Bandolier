@@ -185,6 +185,18 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
       }
     }
   );
+
+  glfwSetCharCallback(mWindow,
+    [](GLFWwindow* window, unsigned int keycode)
+    {
+      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+
+      auto event = Events::KeyTyped(keycode);
+      data.keyTypedTrigger.fire(event);
+      data.keyTrigger.fire(event);
+      data.allEventsTrigger.fire(event);
+    }
+  );
 }
 
 WindowsWindow::~WindowsWindow()
@@ -232,6 +244,12 @@ std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
 WindowsWindow::CloseChannel() const
 {
   return mData.closeTrigger.getChannel();
+}
+
+std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t>
+WindowsWindow::KeyTypedChannel() const
+{
+  return mData.keyTypedTrigger.getChannel();
 }
 
 std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>

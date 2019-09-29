@@ -81,8 +81,25 @@ public:
 
   const char*
   Name() const override {return "KeyReleased"; }
-  
+
   EVENT_TYPE(EventType::KeyReleased)
+};
+
+class KeyTyped : public KeyEvent
+{
+public:
+  using Trigger_t = gsw::event_trigger<KeyReleased>;
+  using Channel_t = Trigger_t::channel_t;
+  using Handler_t = Channel_t::handler;
+  using SimpleHandler_t = Channel_t::simple_handler;
+
+public:
+  explicit
+  KeyTyped(int keycode)
+    : KeyEvent(keycode)
+  {}
+
+  EVENT_TYPE(EventType::KeyTyped)
 };
 
 }

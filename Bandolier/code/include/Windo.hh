@@ -36,6 +36,7 @@ struct WindowProperties
   trigger_t<Events::WindowClose> closeTrigger;
   trigger_t<Events::WindowGainedFocus> windowGainFocusTrigger;
   trigger_t<Events::WindowLostFocus> windowLostFocusTrigger;
+  trigger_t<Events::KeyTyped> keyTypedTrigger;
   trigger_t<Events::KeyPressed> keyPressTrigger;
   trigger_t<Events::KeyReleased> keyReleaseTrigger;
   trigger_t<Events::MouseButtonPressed> mouseButtonPressTrigger;
@@ -90,6 +91,9 @@ public:
   virtual
   std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
   CloseChannel() const = 0;
+  virtual
+  std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t>
+  KeyTypedChannel() const = 0;
   virtual
   std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>
   KeyPressChannel() const = 0;
