@@ -24,6 +24,9 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
     glfwSetErrorCallback(WindowErrorHandler);
   }
 
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
   glfwMakeContextCurrent(mWindow);
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
