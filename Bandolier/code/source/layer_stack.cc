@@ -6,6 +6,15 @@ LayerStack::LayerStack()
   : mSplitIndex(0)
 {}
 
+LayerStack::~LayerStack()
+{
+  while(!mLayers.empty())
+  {
+    mLayers.back()->OnDetach();
+    mLayers.pop_back();
+  }
+}
+
 void
 LayerStack::PushLayer(value_type layer)
 {

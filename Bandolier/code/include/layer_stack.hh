@@ -24,7 +24,7 @@ private:
 
 public:
   LayerStack();
-  ~LayerStack() = default;
+  ~LayerStack();
 
   void
   PushLayer(value_type layer);
