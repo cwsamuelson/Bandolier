@@ -13,6 +13,19 @@ using WindowResizeEvent = Bandolier::Events::WindowResize;
 
 Sandbox::Sandbox()
 {
+  Window().AllChannel().lock()->subscribe(
+    [this](const Bandolier::Events::BaseEvent& e)
+    {
+      for(auto it = mLayerStack.rbegin(); it != mLayerStack.rend(); ++it)
+      {
+        if((*it)->OnEvent(e))
+        {
+          break;
+        }
+      }
+    }
+  );
+
   //example layer?...crap!
   PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
 }
