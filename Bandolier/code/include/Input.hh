@@ -9,7 +9,7 @@ class Input{
 public:
   inline static
   bool
-  IsKeyPressed(int keycode){ return Instance->IsKeyPressedImpl(); }
+  IsKeyPressed(int keycode){ return Instance->IsKeyPressedImpl(keycode); }
   inline static
   bool
   IsMouseButtonPressed(int button){ return Instance->IsMouseButtonPressedImpl(button); }
