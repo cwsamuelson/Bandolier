@@ -10,3 +10,6 @@
 [submodule "Bandolier/vendor/imgui"]
 	path = Bandolier/vendor/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "Bandolier/vendor/glm"]
+	path = Bandolier/vendor/glm
+	url = https://github.com/g-truc/glm
