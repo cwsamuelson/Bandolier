@@ -1,8 +1,3 @@
-/* The file name "Windo" is not an accident
- * For some reason CLION would not do proper syntax highlighting in a file named Window.hh
- * Naming the file Windo.hh is a small work around for that.
- */
-
 #ifndef TEST_WINDO_HH
 #define TEST_WINDO_HH
 

@@ -29,7 +29,9 @@ add_library(Bandolier code/source/logger.cc
                       code/platform/Windows/windows_input.cc
                       code/platform/Windows/windows_input.hh
                       code/include/Input.hh
-                      code/include/Window.hh)
+                      code/include/Window.hh
+                      code/include/mouse_button_codes.hh
+                      code/include/key_codes.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
