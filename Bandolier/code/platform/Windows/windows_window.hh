@@ -34,6 +34,9 @@ public:
   virtual void
   VSync(bool enabled);
 
+  virtual void*
+  Native();
+
   std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
   AllChannel() const override;
   std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>

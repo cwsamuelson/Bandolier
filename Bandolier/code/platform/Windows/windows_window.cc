@@ -288,13 +288,15 @@ WindowsWindow::MouseMoveChannel() const
   return mData.mouseMoveTrigger.getChannel();
 }
 
-void WindowsWindow::OnUpdate()
+void
+WindowsWindow::OnUpdate()
 {
   glfwPollEvents();
   glfwSwapBuffers(mWindow);
 }
 
-void WindowsWindow::VSync(bool enabled)
+void
+WindowsWindow::VSync(bool enabled)
 {
   if(enabled)
   {
@@ -308,9 +310,16 @@ void WindowsWindow::VSync(bool enabled)
   mData.vsync = enabled;
 }
 
-bool WindowsWindow::VSync() const
+bool
+WindowsWindow::VSync() const
 {
   return mData.vsync;
+}
+
+void*
+WindowsWindow::Native()
+{
+  return mWindow;
 }
 
 }

@@ -70,6 +70,9 @@ public:
   virtual void
   VSync(bool enabled) = 0;
 
+  virtual void*
+  Native() = 0;
+
   virtual
   std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
   AllChannel() const = 0;
