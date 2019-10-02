@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Windo.hh"
+#include "Window.hh"
 
 #include <GLFW/glfw3.h>
 

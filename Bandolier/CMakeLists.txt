@@ -23,7 +23,13 @@ target_link_libraries(imgui glfw glad)
 add_library(Bandolier code/source/logger.cc
                       code/source/Application.cc
                       code/platform/Windows/windows_window.cc
-                      code/source/layer_stack.cc code/imgui/imgui_layer.cc code/imgui/imgui_layer.hh code/platform/Windows/windows_input.cc code/platform/Windows/windows_input.hh code/include/Input.hh)
+                      code/source/layer_stack.cc
+                      code/imgui/imgui_layer.cc
+                      code/imgui/imgui_layer.hh
+                      code/platform/Windows/windows_input.cc
+                      code/platform/Windows/windows_input.hh
+                      code/include/Input.hh
+                      code/include/Window.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 

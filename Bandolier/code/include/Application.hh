@@ -7,7 +7,7 @@
 
 #include <layer_stack.hh>
 #include <ApplicationEvent.hh>
-#include <Windo.hh>
+#include <Window.hh>
 
 namespace Bandolier {
 
