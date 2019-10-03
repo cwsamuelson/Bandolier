@@ -89,4 +89,94 @@ ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e)
   return false;
 }
 
+bool
+ImguiLayer::MouseButtonPressed(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::MouseButtonPressed&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.MouseDown[event.MouseButton()] = true;
+  return false;
+}
+
+bool
+ImguiLayer::MouseButtonReleased(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::MouseButtonReleased&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.MouseDown[event.MouseButton()] = false;
+  return false;
+}
+
+bool
+ImguiLayer::MouseMoved(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::MouseMoved&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.MousePos = ImVec2(event.X(), event.Y());
+  return false;
+}
+
+bool
+ImguiLayer::MouseScrolled(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::MouseScrolled&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.MouseWheelH += event.XOffset();
+  io.MouseWheel += event.YOffset();
+  return false;
+}
+
+bool
+ImguiLayer::KeyPressed(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::KeyPressed&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.KeysDown[event.KeyCode()] = true;
+
+  io.KeyCtrl  = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+  io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT]   || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+  io.KeyAlt   = io.KeysDown[GLFW_KEY_LEFT_ALT]     || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+  io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER]   || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+  return false;
+}
+
+bool
+ImguiLayer::KeyReleased(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::KeyReleased&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.KeysDown[event.KeyCode()] = false;
+
+  io.KeyCtrl  = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+  io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT]   || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+  io.KeyAlt   = io.KeysDown[GLFW_KEY_LEFT_ALT]     || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+  io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER]   || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+  return false;
+}
+
+bool
+ImguiLayer::KeyTyped(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::KeyEvent&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  int keycode = event.KeyCode();
+  if(keycode > 0 && keycode < 0x10000)
+  {
+    io.AddInputCharacter((unsigned short)keycode);
+  }
+
+  return false;
+}
+
+bool
+ImguiLayer::WindowResize(const Bandolier::Events::BaseEvent& e)
+{
+  auto& event = static_cast<const Events::WindowResize&>(e);
+  ImGuiIO& io = ImGui::GetIO();
+  io.DisplaySize = ImVec2(event.Width(), event.Height());
+  io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+  glViewport(0, 0, event.Width(), event.Height());
+  return false;
+}
+
 }
