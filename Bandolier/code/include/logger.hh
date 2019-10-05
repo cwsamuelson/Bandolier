@@ -10,17 +10,15 @@
 namespace Bandolier {
 using logger_ptr = std::shared_ptr<spdlog::logger>;
 
-namespace detail
-{
-  logger_ptr
-  make_logger(const std::string& name);
-}
-
 class logging
 {
 private:
-  inline static auto mCoreLogger = detail::make_logger("Bandolier");
-  inline static auto mAppLogger = detail::make_logger("APP");
+  static
+  logger_ptr
+  make_logger(const std::string& name);
+
+  inline static auto mCoreLogger = make_logger("Bandolier");
+  inline static auto mAppLogger = make_logger("APP");
 
 public:
   static

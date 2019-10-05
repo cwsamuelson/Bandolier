@@ -3,7 +3,7 @@
 namespace Bandolier {
 
 logger_ptr
-detail::make_logger(const std::string& name)
+logging::make_logger(const std::string& name)
 {
   auto lgr = spdlog::stdout_color_mt(name);
 

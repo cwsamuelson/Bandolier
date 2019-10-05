@@ -10,8 +10,8 @@ extern Bandolier::Application& Bandolier::CreateApplication();
 
 int main(int argc, char* argv[])
 {
+  Bandolier::logging::core()->trace("INITIALIZED");
   auto& app = Bandolier::CreateApplication();
-  Bandolier::logging::core()->trace("APP INITIALIZED");
   Bandolier::logging::client()->trace("INITIALIZED");
   app.run();
 }
