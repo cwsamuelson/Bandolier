@@ -22,8 +22,9 @@ ImguiLayer::OnAttach()
   ImGui::StyleColorsDark();
 
   ImGuiIO& io = ImGui::GetIO();
-  io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-  io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+  io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
   io.KeyMap[ImGuiKey_Tab] =        int(KeyCodes::TAB);
   io.KeyMap[ImGuiKey_LeftArrow] =  int(KeyCodes::LEFT);
@@ -47,6 +48,7 @@ ImguiLayer::OnAttach()
   io.KeyMap[ImGuiKey_Y] =          int(KeyCodes::Y);
   io.KeyMap[ImGuiKey_Z] =          int(KeyCodes::Z);
 
+  ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::Get().Window().Native()), false);
   ImGui_ImplOpenGL3_Init("#version 410");
 
   mTime = float(glfwGetTime());
@@ -54,7 +56,11 @@ ImguiLayer::OnAttach()
 
 void
 ImguiLayer::OnDetach()
-{}
+{
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplGlfw_Shutdown();
+  ImGui::DestroyContext();
+}
 
 void
 ImguiLayer::OnUpdate()
@@ -62,6 +68,7 @@ ImguiLayer::OnUpdate()
   ImGuiIO& io = ImGui::GetIO();
   Application& app = Application::Get();
   Window& window = app.Window();
+  //ImGui::GetDrawData()->DisplaySize = ImVec2(window.Width(), window.Height());
   io.DisplaySize = ImVec2(window.Width(), window.Height());
 
   float time = float(glfwGetTime());
@@ -69,6 +76,7 @@ ImguiLayer::OnUpdate()
   mTime = time;
 
   ImGui_ImplOpenGL3_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
 
   static bool show = true;
@@ -76,6 +84,14 @@ ImguiLayer::OnUpdate()
 
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+  {
+    GLFWwindow*backup_window = glfwGetCurrentContext();
+    ImGui::UpdatePlatformWindows();
+    ImGui::RenderPlatformWindowsDefault();
+    glfwMakeContextCurrent(backup_window);
+  }
 }
 
 bool

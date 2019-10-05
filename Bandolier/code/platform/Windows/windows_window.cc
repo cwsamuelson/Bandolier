@@ -28,6 +28,7 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
+  //! @TODO error handling/check the window
   glfwMakeContextCurrent(mWindow);
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   {
@@ -202,6 +203,7 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
 WindowsWindow::~WindowsWindow()
 {
   glfwDestroyWindow(mWindow);
+  glfwTerminate();//maybe shouldn't do this one, but eh for now
 }
 
 std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
