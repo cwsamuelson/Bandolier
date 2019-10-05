@@ -2,7 +2,7 @@
 
 #include <imgui.h>
 
-#include <GLFW/glfw3.h>
+#include <key_codes.hh>
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
 
@@ -25,27 +25,27 @@ ImguiLayer::OnAttach()
   io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
   io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
-  io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
-  io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
-  io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
-  io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
-  io.KeyMap[ImGuiKey_DownArrow] = GLFW_KEY_DOWN;
-  io.KeyMap[ImGuiKey_PageUp] = GLFW_KEY_PAGE_UP;
-  io.KeyMap[ImGuiKey_PageDown] = GLFW_KEY_PAGE_DOWN;
-  io.KeyMap[ImGuiKey_Home] = GLFW_KEY_HOME;
-  io.KeyMap[ImGuiKey_End] = GLFW_KEY_END;
-  io.KeyMap[ImGuiKey_Insert] = GLFW_KEY_INSERT;
-  io.KeyMap[ImGuiKey_Delete] = GLFW_KEY_DELETE;
-  io.KeyMap[ImGuiKey_Backspace] = GLFW_KEY_BACKSPACE;
-  io.KeyMap[ImGuiKey_Space] = GLFW_KEY_SPACE;
-  io.KeyMap[ImGuiKey_Enter] = GLFW_KEY_ENTER;
-  io.KeyMap[ImGuiKey_Escape] = GLFW_KEY_ESCAPE;
-  io.KeyMap[ImGuiKey_A] = GLFW_KEY_A;
-  io.KeyMap[ImGuiKey_C] = GLFW_KEY_C;
-  io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
-  io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
-  io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
-  io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+  io.KeyMap[ImGuiKey_Tab] =        int(KeyCodes::TAB);
+  io.KeyMap[ImGuiKey_LeftArrow] =  int(KeyCodes::LEFT);
+  io.KeyMap[ImGuiKey_RightArrow] = int(KeyCodes::RIGHT);
+  io.KeyMap[ImGuiKey_UpArrow] =    int(KeyCodes::UP);
+  io.KeyMap[ImGuiKey_DownArrow] =  int(KeyCodes::DOWN);
+  io.KeyMap[ImGuiKey_PageUp] =     int(KeyCodes::PAGE_UP);
+  io.KeyMap[ImGuiKey_PageDown] =   int(KeyCodes::PAGE_DOWN);
+  io.KeyMap[ImGuiKey_Home] =       int(KeyCodes::HOME);
+  io.KeyMap[ImGuiKey_End] =        int(KeyCodes::END);
+  io.KeyMap[ImGuiKey_Insert] =     int(KeyCodes::INSERT);
+  io.KeyMap[ImGuiKey_Delete] =     int(KeyCodes::DELEET);
+  io.KeyMap[ImGuiKey_Backspace] =  int(KeyCodes::BACKSPACE);
+  io.KeyMap[ImGuiKey_Space] =      int(KeyCodes::SPACE);
+  io.KeyMap[ImGuiKey_Enter] =      int(KeyCodes::ENTER);
+  io.KeyMap[ImGuiKey_Escape] =     int(KeyCodes::ESCAPE);
+  io.KeyMap[ImGuiKey_A] =          int(KeyCodes::A);
+  io.KeyMap[ImGuiKey_C] =          int(KeyCodes::C);
+  io.KeyMap[ImGuiKey_V] =          int(KeyCodes::V);
+  io.KeyMap[ImGuiKey_X] =          int(KeyCodes::X);
+  io.KeyMap[ImGuiKey_Y] =          int(KeyCodes::Y);
+  io.KeyMap[ImGuiKey_Z] =          int(KeyCodes::Z);
 
   ImGui_ImplOpenGL3_Init("#version 410");
 
