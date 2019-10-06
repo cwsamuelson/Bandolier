@@ -1,8 +1,11 @@
+#include <memory>
+
 #include <glad/glad.h>
 
 #include "logger.hh"
 #include "KeyEvent.hh"
 #include "MouseEvents.hh"
+#include "platform/OpenGL/open_gl_context.hh"
 
 #include "windows_window.hh"
 
@@ -29,7 +32,7 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
   //! @TODO error handling/check the window
-  glfwMakeContextCurrent(mWindow);
+  mContext = std::make_unique<OpenGLContext>(mWindow);
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   {
     logging::core()->error("Failed to initialize GLAD");
@@ -294,7 +297,7 @@ void
 WindowsWindow::OnUpdate()
 {
   glfwPollEvents();
-  glfwSwapBuffers(mWindow);
+  mContext->SwapBuffers();
 }
 
 void

@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "Renderer/GraphicsContext.hh"
 #include "Window.hh"
 
 #include <GLFW/glfw3.h>
@@ -14,6 +15,7 @@ class WindowsWindow : public Window
 private:
   WindowProperties mData;
   GLFWwindow* mWindow;
+  std::unique_ptr<GraphicsContext> mContext;
 
   inline static bool sGLFWInitialized = false;
 

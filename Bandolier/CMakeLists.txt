@@ -31,7 +31,10 @@ add_library(Bandolier code/source/logger.cc
                       code/include/Input.hh
                       code/include/Window.hh
                       code/include/mouse_button_codes.hh
-                      code/include/key_codes.hh)
+                      code/include/key_codes.hh
+                      code/Renderer/GraphicsContext.hh
+                      code/platform/OpenGL/open_gl_context.cc
+                      code/platform/OpenGL/open_gl_context.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 

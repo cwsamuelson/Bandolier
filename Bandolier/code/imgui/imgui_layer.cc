@@ -87,7 +87,7 @@ ImguiLayer::OnUpdate()
 
   if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
   {
-    GLFWwindow*backup_window = glfwGetCurrentContext();
+    GLFWwindow* backup_window = glfwGetCurrentContext();
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
     glfwMakeContextCurrent(backup_window);
