@@ -6,7 +6,7 @@
 #include "Renderer/GraphicsContext.hh"
 #include "Window.hh"
 
-#include <GLFW/glfw3.h>
+struct GLFWwindow;
 
 namespace Bandolier {
 
