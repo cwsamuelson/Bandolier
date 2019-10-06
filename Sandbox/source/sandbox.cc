@@ -52,6 +52,35 @@ Sandbox::Sandbox()
 
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+  std::string vertexSource = R"glsl(
+#version 330 core
+
+layout(location = 0) in vec3 a_Position;
+
+out vec3 v_Position;
+
+void main()
+{
+  v_Position = a_Position;
+  gl_Position = vec4(a_Position, 1.0f);
+}
+)glsl";
+
+  std::string fragmentSource = R"glsl(
+#version 330 core
+
+in vec3 v_Position;
+
+out vec4 color;
+
+void main()
+{
+  color = vec4(v_Position * 0.5 + 0.5, 1.0);
+}
+)glsl";
+
+  mShader = std::make_unique<Bandolier::Shader>(vertexSource, fragmentSource);
 }
 
 void Sandbox::run()
@@ -64,6 +93,7 @@ void Sandbox::run()
     mWindow->OnUpdate();
     glClear(GL_COLOR_BUFFER_BIT);
 
+    mShader->Bind();
     glBindVertexArray(mVAO);
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
