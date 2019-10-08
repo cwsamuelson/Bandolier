@@ -39,7 +39,9 @@ add_library(Bandolier code/source/logger.cc
                       code/Renderer/shader.hh
                       code/Renderer/buffer.cc
                       code/Renderer/buffer.hh
-                      code/Renderer/renderer.hh)
+                      code/Renderer/renderer.hh
+                      code/platform/OpenGL/open_gl_buffer.cc
+                      code/platform/OpenGL/open_gl_buffer.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 

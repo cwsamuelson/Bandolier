@@ -2,6 +2,7 @@
 #define BANDOLIER_BUFFER_HH
 
 #include <memory>
+#include <vector>
 
 namespace Bandolier{
 
@@ -16,7 +17,9 @@ public:
   Unbind() const = 0;
 
   static std::unique_ptr<VertexBuffer>
-  create(float* vertices, uint32_t size);
+  create(const float* vertices, uint32_t size);
+  static std::unique_ptr<VertexBuffer>
+  create(const std::vector<float>& indices);
 };
 
 class IndexBuffer
@@ -30,7 +33,9 @@ public:
   Unbind() const = 0;
 
   static std::unique_ptr<IndexBuffer>
-  create(float* vertices, uint32_t size);
+  create(const float* indices, uint32_t count);
+  static std::unique_ptr<IndexBuffer>
+  create(const std::vector<float>& indices);
 };
 
 }
