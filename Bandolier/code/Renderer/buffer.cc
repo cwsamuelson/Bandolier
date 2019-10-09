@@ -9,7 +9,7 @@ namespace Bandolier{
 std::unique_ptr<VertexBuffer>
 VertexBuffer::create(const float* vertices, uint32_t size)
 {
-  switch(Renderer::API())
+  switch(Renderer::GetAPI())
   {
   case Renderer::API::None:
     logging::core()->error("Rendering API must be specified!");
@@ -41,9 +41,9 @@ VertexBuffer::create(const std::vector<float>& indices)
 }
 
 std::unique_ptr<IndexBuffer>
-IndexBuffer::create(const float* indices, uint32_t count)
+IndexBuffer::create(const uint32_t* indices, uint32_t count)
 {
-  switch(Renderer::API())
+  switch(Renderer::GetAPI())
   {
   case Renderer::API::None:
     logging::core()->error("Rendering API must be specified!");
