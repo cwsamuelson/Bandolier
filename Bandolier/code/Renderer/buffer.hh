@@ -128,6 +128,70 @@ struct BufferElement
   }
 };
 
+class BufferLayout
+{
+private:
+  std::vector<BufferElement> mElements;
+  uint32_t mStride = 0;
+
+public:
+  BufferLayout(const std::initializer_list<BufferElement>& elements)
+    : mElements(elements)
+  {
+    CalculateOffsetAndStride();
+  }
+
+  inline uint32_t
+  Stride() const
+  {
+    return mStride;
+  }
+
+  inline const std::vector<BufferElement>&
+  Elements() const
+  {
+    return mElements;
+  }
+
+  auto
+  begin()
+  {
+    return mElements.begin();
+  }
+
+  auto
+  end()
+  {
+    return mElements.end();
+  }
+
+  auto
+  begin() const
+  {
+    return mElements.begin();
+  }
+
+  auto
+  end() const
+  {
+    return mElements.end();
+  }
+
+private:
+  void
+  CalculateOffsetAndStride()
+  {
+    uint32_t offset = 0;
+    mStride = 0;
+    for(auto& element : mElements)
+    {
+      element.Offset = offset;
+      offset += element.Size;
+      mStride += element.Size;
+    }
+  }
+};
+
 class VertexBuffer
 {
 public:
