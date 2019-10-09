@@ -228,9 +228,9 @@ public:
   Unbind() const = 0;
 
   static std::unique_ptr<IndexBuffer>
-  create(const float* indices, uint32_t count);
+  create(const uint32_t* indices, uint32_t count);
   static std::unique_ptr<IndexBuffer>
-  create(const std::vector<float>& indices);
+  create(const std::vector<uint32_t>& indices);
 };
 
 }

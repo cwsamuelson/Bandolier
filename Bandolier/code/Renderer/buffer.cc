@@ -69,7 +69,7 @@ IndexBuffer::create(const float* indices, uint32_t count)
 }
 
 std::unique_ptr<IndexBuffer>
-IndexBuffer::create(const std::vector<float>& indices)
+IndexBuffer::create(const std::vector<uint32_t>& indices)
 {
   return IndexBuffer::create(indices.data(), indices.size());
 }

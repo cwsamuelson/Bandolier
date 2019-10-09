@@ -32,7 +32,7 @@ OpenGlVertexBuffer::Unbind() const
 **INDEX BUFFER**
 ****************/
 
-OpenGlIndexBuffer::OpenGlIndexBuffer(const float* indices, uint32_t count)
+OpenGlIndexBuffer::OpenGlIndexBuffer(const uint32_t* indices, uint32_t count)
 {
   glCreateBuffers(1, &mID);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mID);

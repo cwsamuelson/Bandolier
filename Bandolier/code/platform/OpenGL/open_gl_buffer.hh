@@ -36,14 +36,13 @@ public:
 class OpenGlIndexBuffer : public IndexBuffer
 {
 public:
-  OpenGlIndexBuffer(const float* indices, uint32_t count);
+  OpenGlIndexBuffer(const uint32_t* indices, uint32_t count);
   virtual ~OpenGlIndexBuffer();
 
   virtual void
   Bind() const override;
   virtual void
   Unbind() const override;
-
 
   virtual uint32_t
   Count() const
