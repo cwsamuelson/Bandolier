@@ -1,7 +1,8 @@
 #ifndef TEST_SANDBOX_HH
 #define TEST_SANDBOX_HH
 
-#include"Renderer/shader.hh"
+#include "Renderer/shader.hh"
+#include "Renderer/buffer.hh"
 
 #include <Application.hh>
 
@@ -15,8 +16,8 @@ public:
 
 private:
   unsigned int mVAO;
-  unsigned int mVBO;
-  unsigned int mIBO;
+  std::unique_ptr<Bandolier::VertexBuffer> mVBO;
+  std::unique_ptr<Bandolier::IndexBuffer> mIBO;
   std::unique_ptr<Bandolier::Shader> mShader;
 };
 

@@ -6,10 +6,45 @@
 #include <logger.hh>
 #include <ApplicationEvent.hh>
 #include <imgui/imgui_layer.hh>
+#include <Renderer/buffer.hh>
 
 #include "sandbox.hh"
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
+
+GLenum ShaderDataTypeToOpenGLBase(Bandolier::ShaderDataType type)
+{
+  switch(type)
+  {
+  case Bandolier::ShaderDataType::Float:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Float2:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Float3:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Float4:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Mat2:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Mat3:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Mat4:
+    return GL_FLOAT;
+  case Bandolier::ShaderDataType::Int:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Int2:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Int3:
+    [[fallthrough]];
+  case Bandolier::ShaderDataType::Int4:
+    return GL_INT;
+  case Bandolier::ShaderDataType::Bool:
+    return GL_BOOL;
+  }
+
+  Bandolier::logging::client()->error("Unrecognized shader data type!");
+  return GL_NONE;
+}
 
 Sandbox::Sandbox()
 {
@@ -32,36 +67,54 @@ Sandbox::Sandbox()
   glGenVertexArrays(1, &mVAO);
   glBindVertexArray(mVAO);
 
-  glGenBuffers(1, &mVBO);
-  glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-
-  glGenBuffers(1, &mIBO);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
-
   float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f,
+    -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+     0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+     0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
   };
   unsigned int indices[] = {
-          0, 1, 2,
+    0, 1, 2,
   };
 
-  glBufferData(GL_ARRAY_BUFFER,         sizeof(vertices), vertices, GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+  mVBO = Bandolier::VertexBuffer::create(vertices, sizeof(vertices));
+  mIBO = Bandolier::IndexBuffer::create(indices, sizeof(indices) / sizeof(decltype(indices[0])));
 
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+  {
+    Bandolier::BufferLayout layout = {
+      {Bandolier::ShaderDataType::Float3, "a_Position"},
+      {Bandolier::ShaderDataType::Float4, "a_Color"},
+    };
+
+    mVBO->Layout() = layout;
+  }
+
+  uint32_t index = 0;
+  const auto& layout = mVBO->Layout();
+  for(const auto& element : layout)
+  {
+    glEnableVertexAttribArray(index);
+    glVertexAttribPointer(
+            index,
+            element.GetComponentCount(),
+            ShaderDataTypeToOpenGLBase(element.Type),
+            element.Normalized ? GL_TRUE : GL_FALSE,
+            layout.Stride(),
+            (const void*)element.Offset);
+    ++index;
+  }
 
   std::string vertexSource = R"glsl(
 #version 330 core
 
 layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec4 a_Color;
 
 out vec3 v_Position;
+out vec4 v_Color;
 
 void main()
 {
+  v_Color = a_Color;
   v_Position = a_Position;
   gl_Position = vec4(a_Position, 1.0f);
 }
@@ -71,12 +124,13 @@ void main()
 #version 330 core
 
 in vec3 v_Position;
+in vec4 v_Color;
 
 out vec4 color;
 
 void main()
 {
-  color = vec4(v_Position * 0.5 + 0.5, 1.0);
+  color = v_Color;
 }
 )glsl";
 
