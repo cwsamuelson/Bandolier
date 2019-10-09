@@ -4,6 +4,8 @@
 #include <memory>
 #include <vector>
 
+#include "logger.hh"
+
 namespace Bandolier{
 
 enum class ShaderDataType
@@ -135,6 +137,8 @@ private:
   uint32_t mStride = 0;
 
 public:
+  BufferLayout() = default;
+
   BufferLayout(const std::initializer_list<BufferElement>& elements)
     : mElements(elements)
   {
