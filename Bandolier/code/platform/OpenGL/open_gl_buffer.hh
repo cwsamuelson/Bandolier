@@ -7,6 +7,10 @@ namespace Bandolier {
 
 class OpenGlVertexBuffer : public VertexBuffer
 {
+private:
+  uint32_t mID;
+  BufferLayout mLayout;
+
 public:
   OpenGlVertexBuffer(const float* vertices, uint32_t size);
   virtual ~OpenGlVertexBuffer();
@@ -16,8 +20,17 @@ public:
   virtual void
   Unbind() const override;
 
-private:
-  uint32_t mID;
+  virtual const BufferLayout&
+  Layout() const override
+  {
+    return mLayout;
+  }
+
+  virtual BufferLayout&
+  Layout() override
+  {
+    return mLayout;
+  }
 };
 
 class OpenGlIndexBuffer : public IndexBuffer
