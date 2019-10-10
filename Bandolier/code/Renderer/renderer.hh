@@ -3,7 +3,6 @@
 
 namespace Bandolier{
 
-
 class Renderer
 {
 public:

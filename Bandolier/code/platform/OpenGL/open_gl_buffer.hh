@@ -35,6 +35,10 @@ public:
 
 class OpenGlIndexBuffer : public IndexBuffer
 {
+private:
+  uint32_t mID;
+  uint32_t mCount;
+
 public:
   OpenGlIndexBuffer(const uint32_t* indices, uint32_t count);
   virtual ~OpenGlIndexBuffer();
@@ -49,9 +53,6 @@ public:
   {
     return mCount;
   }
-private:
-  uint32_t mID;
-  uint32_t mCount;
 };
 
 }
