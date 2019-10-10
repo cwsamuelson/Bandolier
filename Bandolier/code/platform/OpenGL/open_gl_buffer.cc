@@ -6,7 +6,7 @@ namespace Bandolier{
 
 OpenGlVertexBuffer::OpenGlVertexBuffer(const float* vertices, uint32_t size)
 {
-  glGenBuffers(1, &mID);
+  glCreateBuffers(1, &mID);
   glBindBuffer(GL_ARRAY_BUFFER, mID);
   glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 }
@@ -34,7 +34,7 @@ OpenGlVertexBuffer::Unbind() const
 
 OpenGlIndexBuffer::OpenGlIndexBuffer(const uint32_t* indices, uint32_t count)
 {
-  glGenBuffers(1, &mID);
+  glCreateBuffers(1, &mID);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mID);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 }
