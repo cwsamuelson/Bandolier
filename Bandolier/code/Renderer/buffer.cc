@@ -6,7 +6,7 @@
 
 namespace Bandolier{
 
-std::unique_ptr<VertexBuffer>
+std::shared_ptr<VertexBuffer>
 VertexBuffer::create(const float* vertices, uint32_t size)
 {
   switch(Renderer::GetAPI())
@@ -16,7 +16,7 @@ VertexBuffer::create(const float* vertices, uint32_t size)
     return nullptr;
 
   case Renderer::API::OpenGL:
-    return std::make_unique<OpenGlVertexBuffer>(vertices, size);
+    return std::make_shared<OpenGlVertexBuffer>(vertices, size);
 
   case Renderer::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
@@ -34,13 +34,13 @@ VertexBuffer::create(const float* vertices, uint32_t size)
   return nullptr;
 }
 
-std::unique_ptr<VertexBuffer>
+std::shared_ptr<VertexBuffer>
 VertexBuffer::create(const std::vector<float>& indices)
 {
   return VertexBuffer::create(indices.data(), indices.size());
 }
 
-std::unique_ptr<IndexBuffer>
+std::shared_ptr<IndexBuffer>
 IndexBuffer::create(const uint32_t* indices, uint32_t count)
 {
   switch(Renderer::GetAPI())
@@ -50,7 +50,7 @@ IndexBuffer::create(const uint32_t* indices, uint32_t count)
     return nullptr;
 
   case Renderer::API::OpenGL:
-    return std::make_unique<OpenGlIndexBuffer>(indices, count);
+    return std::make_shared<OpenGlIndexBuffer>(indices, count);
 
   case Renderer::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
@@ -68,7 +68,7 @@ IndexBuffer::create(const uint32_t* indices, uint32_t count)
   return nullptr;
 }
 
-std::unique_ptr<IndexBuffer>
+std::shared_ptr<IndexBuffer>
 IndexBuffer::create(const std::vector<uint32_t>& indices)
 {
   return IndexBuffer::create(indices.data(), indices.size());

@@ -211,9 +211,9 @@ public:
   virtual BufferLayout&
   Layout() = 0;
 
-  static std::unique_ptr<VertexBuffer>
+  static std::shared_ptr<VertexBuffer>
   create(const float* vertices, uint32_t size);
-  static std::unique_ptr<VertexBuffer>
+  static std::shared_ptr<VertexBuffer>
   create(const std::vector<float>& indices);
 };
 
@@ -227,9 +227,12 @@ public:
   virtual void
   Unbind() const = 0;
 
-  static std::unique_ptr<IndexBuffer>
+  virtual uint32_t
+  Count() const = 0;
+
+  static std::shared_ptr<IndexBuffer>
   create(const uint32_t* indices, uint32_t count);
-  static std::unique_ptr<IndexBuffer>
+  static std::shared_ptr<IndexBuffer>
   create(const std::vector<uint32_t>& indices);
 };
 
