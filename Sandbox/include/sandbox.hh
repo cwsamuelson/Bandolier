@@ -5,6 +5,7 @@
 #include "Renderer/buffer.hh"
 
 #include <Application.hh>
+#include <Renderer/vertex_array.hh>
 
 class Sandbox : public Bandolier::Application
 {
@@ -15,10 +16,10 @@ public:
   void run() override;
 
 private:
-  unsigned int mVAO;
-  std::unique_ptr<Bandolier::VertexBuffer> mVBO;
-  std::unique_ptr<Bandolier::IndexBuffer> mIBO;
+  std::shared_ptr<Bandolier::Shader> mColorShader;
   std::unique_ptr<Bandolier::Shader> mShader;
+  std::shared_ptr<Bandolier::VertexArray> mVAO;
+  std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
 };
 
 #endif //TEST_SANDBOX_HH
