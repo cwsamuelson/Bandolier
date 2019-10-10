@@ -41,7 +41,11 @@ add_library(Bandolier code/source/logger.cc
                       code/Renderer/buffer.hh
                       code/Renderer/renderer.hh
                       code/platform/OpenGL/open_gl_buffer.cc
-                      code/platform/OpenGL/open_gl_buffer.hh)
+                      code/platform/OpenGL/open_gl_buffer.hh
+                      code/platform/OpenGL/open_gl_vertex_array.cc
+                      code/platform/OpenGL/open_gl_vertex_array.hh
+                      code/Renderer/vertex_array.cc
+                      code/Renderer/vertex_array.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
