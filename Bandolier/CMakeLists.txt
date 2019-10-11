@@ -7,6 +7,7 @@ add_subdirectory(vendor/datastructures/event_handler)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/glad)
+add_subdirectory(vendor/glm)
 
 add_library(imgui vendor/imgui/imgui.cpp
                   vendor/imgui/imgui_demo.cpp
@@ -45,9 +46,14 @@ add_library(Bandolier code/source/logger.cc
                       code/platform/OpenGL/open_gl_vertex_array.cc
                       code/platform/OpenGL/open_gl_vertex_array.hh
                       code/Renderer/vertex_array.cc
-                      code/Renderer/vertex_array.hh)
+                      code/Renderer/vertex_array.hh
+                      code/Renderer/render_command.hh
+                      code/Renderer/renderer_api.hh
+                      code/platform/OpenGL/open_gl_renderer_api.cc
+                      code/platform/OpenGL/open_gl_renderer_api.hh
+                      code/Renderer/renderer.cc)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
-target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32 glad imgui)
+target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32 glad imgui glm_static)
 
