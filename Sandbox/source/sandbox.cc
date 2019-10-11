@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include <glad/glad.h>
-
+#include <Renderer/render_command.hh>
+#include <Renderer/renderer.hh>
 #include <entrypoint.hh>
 #include <logger.hh>
 #include <ApplicationEvent.hh>
@@ -137,21 +137,23 @@ void main()
 
 void Sandbox::run()
 {
-  glClearColor(0.1f, 0.1f, 0.1f, 1);
+  Bandolier::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
 
   mRunning = true;
   while(mRunning)
   {
     mWindow->OnUpdate();
-    glClear(GL_COLOR_BUFFER_BIT);
+    Bandolier::RenderCommand::Clear();
+
+    Bandolier::Renderer::BeginScene();
 
     mColorShader->Bind();
-    mSquareVAO->Bind();
-    glDrawElements(GL_TRIANGLES, mSquareVAO->GetIndexBuffer()->Count(), GL_UNSIGNED_INT, nullptr);
+    Bandolier::Renderer::Submit(mSquareVAO);
 
     mShader->Bind();
-    mVAO->Bind();
-    glDrawElements(GL_TRIANGLES, mVAO->GetIndexBuffer()->Count(), GL_UNSIGNED_INT, nullptr);
+    Bandolier::Renderer::Submit(mVAO);
+
+    Bandolier::Renderer::EndScene();
 
     for(auto& layer : mLayerStack)
     {
