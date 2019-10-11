@@ -1,28 +1,30 @@
 #include "logger.hh"
 #include "platform/OpenGL/open_gl_buffer.hh"
+#include "Renderer/renderer_api.hh"
 
 #include "buffer.hh"
 #include "renderer.hh"
+#include "renderer_api.hh"
 
 namespace Bandolier{
 
 std::shared_ptr<VertexBuffer>
 VertexBuffer::create(const float* vertices, uint32_t size)
 {
-  switch(Renderer::GetAPI())
+  switch(RendererAPI::GetAPI())
   {
-  case Renderer::API::None:
+  case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
 
-  case Renderer::API::OpenGL:
+  case RendererAPI::API::OpenGL:
     return std::make_shared<OpenGlVertexBuffer>(vertices, size);
 
-  case Renderer::API::Direct3D:
+  case RendererAPI::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
     break;
 
-  case Renderer::API::Vulkan:
+  case RendererAPI::API::Vulkan:
     logging::core()->error("Rendering API Vulkan is not supported!");
     break;
 
@@ -43,20 +45,20 @@ VertexBuffer::create(const std::vector<float>& indices)
 std::shared_ptr<IndexBuffer>
 IndexBuffer::create(const uint32_t* indices, uint32_t count)
 {
-  switch(Renderer::GetAPI())
+  switch(RendererAPI::GetAPI())
   {
-  case Renderer::API::None:
+  case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
 
-  case Renderer::API::OpenGL:
+  case RendererAPI::API::OpenGL:
     return std::make_shared<OpenGlIndexBuffer>(indices, count);
 
-  case Renderer::API::Direct3D:
+  case RendererAPI::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
     break;
 
-  case Renderer::API::Vulkan:
+  case RendererAPI::API::Vulkan:
     logging::core()->error("Rendering API Vulkan is not supported!");
     break;
 

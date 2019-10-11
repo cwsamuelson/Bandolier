@@ -8,20 +8,20 @@ namespace Bandolier{
 std::unique_ptr<VertexArray>
 VertexArray::create()
 {
-  switch(Renderer::GetAPI())
+  switch(RendererAPI::GetAPI())
   {
-  case Renderer::API::None:
+  case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
 
-  case Renderer::API::OpenGL:
+  case RendererAPI::API::OpenGL:
     return std::make_unique<OpenGlVertexArray>();
 
-  case Renderer::API::Direct3D:
+  case RendererAPI::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
     break;
 
-  case Renderer::API::Vulkan:
+  case RendererAPI::API::Vulkan:
     logging::core()->error("Rendering API Vulkan is not supported!");
     break;
 
