@@ -2,6 +2,7 @@
 #define BANDOLIER_SHADER_HH
 
 #include <string>
+#include "../../vendor/glm/glm/glm.hpp"
 
 namespace Bandolier {
 
@@ -17,6 +18,9 @@ public:
 
   void
   Unbind() const;
+
+  void
+  UploaduniformMat4(const std::string& name, const glm::mat4& matrix);
 
 private:
   uint32_t mID;
