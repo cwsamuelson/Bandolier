@@ -51,7 +51,9 @@ add_library(Bandolier code/source/logger.cc
                       code/Renderer/renderer_api.hh
                       code/platform/OpenGL/open_gl_renderer_api.cc
                       code/platform/OpenGL/open_gl_renderer_api.hh
-                      code/Renderer/renderer.cc)
+                      code/Renderer/renderer.cc
+                      code/Renderer/orthographic_camera.cc
+                      code/Renderer/orthographic_camera.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
