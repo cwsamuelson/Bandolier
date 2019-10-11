@@ -23,9 +23,13 @@ public:
 
   const glm::vec3&
   GetPosition() const;
+  void
+  SetPosition(const glm::vec3& position);
 
   const glm::mat4&
   GetProjection() const;
+  void
+  SetRotation(float rotation);
 
   const glm::mat4&
   GetView() const;

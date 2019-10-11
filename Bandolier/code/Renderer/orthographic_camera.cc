@@ -18,6 +18,20 @@ OrthographicCamera::RecalculateViewMatrix()
   mViewProjection = mProjection * mView;
 }
 
+void
+OrthographicCamera::SetPosition(const glm::vec3& position)
+{
+  mPosition = position;
+  RecalculateViewMatrix();
+}
+
+void
+OrthographicCamera::SetRotation(float rotation)
+{
+  mRotation = rotation;
+  RecalculateViewMatrix();
+}
+
 const glm::vec3&
 OrthographicCamera::GetPosition() const
 {
