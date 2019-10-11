@@ -69,9 +69,9 @@ ImguiLayer::OnUpdate()
   Application& app = Application::Get();
   Window& window = app.Window();
   //ImGui::GetDrawData()->DisplaySize = ImVec2(window.Width(), window.Height());
-  io.DisplaySize = ImVec2(window.Width(), window.Height());
+  io.DisplaySize = ImVec2(float(window.Width()), float(window.Height()));
 
-  float time = float(glfwGetTime());
+  auto time = float(glfwGetTime());
   io.DeltaTime = time - mTime;
   mTime = time;
 
@@ -189,7 +189,7 @@ ImguiLayer::WindowResize(const Bandolier::Events::BaseEvent& e)
 {
   auto& event = static_cast<const Events::WindowResize&>(e);
   ImGuiIO& io = ImGui::GetIO();
-  io.DisplaySize = ImVec2(event.Width(), event.Height());
+  io.DisplaySize = ImVec2(float(event.Width()), float(event.Height()));
   io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
   glViewport(0, 0, event.Width(), event.Height());
   return false;

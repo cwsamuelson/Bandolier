@@ -37,9 +37,9 @@ VertexBuffer::create(const float* vertices, uint32_t size)
 }
 
 std::shared_ptr<VertexBuffer>
-VertexBuffer::create(const std::vector<float>& indices)
+VertexBuffer::create(const std::vector<float>& vertexes)
 {
-  return VertexBuffer::create(indices.data(), indices.size());
+  return VertexBuffer::create(vertexes.data(), vertexes.size() * sizeof(float));
 }
 
 std::shared_ptr<IndexBuffer>

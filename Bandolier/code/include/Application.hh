@@ -26,8 +26,9 @@ protected:
   LayerStack mLayerStack;
 
 public:
-  Application();
-  virtual ~Application();
+  explicit
+  Application(std::string WindowName = "Bandolier", std::tuple<unsigned int, unsigned int> dims = {1280, 720});
+  virtual ~Application() = default;
 
   virtual void
   run() = 0;

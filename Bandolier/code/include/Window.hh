@@ -68,45 +68,59 @@ public:
   virtual void*
   Native() = 0;
 
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
   AllChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
   AppChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t>
   KeyChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t>
   MouseChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t>
   MouseButtonChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t>
   ResizeChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
   CloseChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t>
   KeyTypedChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>
   KeyPressChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t>
   KeyReleaseChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseButtonPressTrigger)::channel_t>
   MousePressChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseButtonReleaseTrigger)::channel_t>
   MouseReleaseChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseScrollTrigger)::channel_t>
   MouseScrollChannel() const = 0;
+  [[nodiscard]]
   virtual
   std::weak_ptr<decltype(WindowProperties::mouseMoveTrigger)::channel_t>
   MouseMoveChannel() const = 0;

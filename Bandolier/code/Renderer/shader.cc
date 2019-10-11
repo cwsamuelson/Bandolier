@@ -14,7 +14,7 @@ Shader::Shader(const std::string& vertexSource, const std::string& fragmentSourc
 
   const GLchar* source = vertexSource.c_str();
 
-  glShaderSource(vertexShader, 1, &source, 0);
+  glShaderSource(vertexShader, 1, &source, nullptr);
 
   glCompileShader(vertexShader);
 

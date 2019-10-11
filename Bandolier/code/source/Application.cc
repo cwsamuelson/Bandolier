@@ -7,8 +7,8 @@
 
 namespace Bandolier{
 
-Application::Application()
-  : mWindow(std::make_unique<WindowsWindow>(WindowProperties("test", 1280, 720)))
+Application::Application(std::string WindowName, std::tuple<unsigned int, unsigned int> dims)
+  : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName), std::get<0>(dims), std::get<1>(dims))))
 {
   if(Application::Instance)
   {
@@ -20,14 +20,10 @@ Application::Application()
   mWindow->CloseChannel().lock()->subscribe(
     [this](const Events::WindowClose&)
     {
-      mRunning = false;
-      Bandolier::logging::client()->trace("Window close event occurred!");
+        mRunning = false;
+        Bandolier::logging::client()->trace("Window close event occurred!");
     }
   );
-}
-
-Application::~Application()
-{
 }
 
 void

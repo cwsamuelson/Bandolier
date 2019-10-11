@@ -15,18 +15,18 @@ public:
   OpenGlVertexBuffer(const float* vertices, uint32_t size);
   virtual ~OpenGlVertexBuffer();
 
-  virtual void
+  void
   Bind() const override;
-  virtual void
+  void
   Unbind() const override;
 
-  virtual const BufferLayout&
+  const BufferLayout&
   Layout() const override
   {
     return mLayout;
   }
 
-  virtual BufferLayout&
+  BufferLayout&
   Layout() override
   {
     return mLayout;
@@ -43,13 +43,13 @@ public:
   OpenGlIndexBuffer(const uint32_t* indices, uint32_t count);
   virtual ~OpenGlIndexBuffer();
 
-  virtual void
+  void
   Bind() const override;
-  virtual void
+  void
   Unbind() const override;
 
-  virtual uint32_t
-  Count() const
+  uint32_t
+  Count() const override
   {
     return mCount;
   }

@@ -30,43 +30,40 @@ Sandbox::Sandbox()
   //example layer?...crap!
   PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
 
-  float vertices[] = {
+  std::vector<float> vertices{
     -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
      0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
      0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
   };
-  unsigned int indices[] = {
+  std::vector<unsigned int> indices{
     0, 1, 2,
   };
 
   mVAO = Bandolier::VertexArray::create();
-  auto VBO = Bandolier::VertexBuffer::create(vertices, sizeof(vertices));
-  auto IBO = Bandolier::IndexBuffer::create(indices, sizeof(indices) / sizeof(decltype(indices[0])));
+  auto VBO = Bandolier::VertexBuffer::create(vertices);
+  auto IBO = Bandolier::IndexBuffer::create(indices);
 
-  {
-    Bandolier::BufferLayout layout = {
-      {Bandolier::ShaderDataType::Float3, "a_Position"},
-      {Bandolier::ShaderDataType::Float4, "a_Color"},
-    };
+  VBO->Layout() = Bandolier::BufferLayout {
+          {Bandolier::ShaderDataType::Float3, "a_Position"},
+          {Bandolier::ShaderDataType::Float4, "a_Color"},
+  };
 
-    VBO->Layout() = layout;
-    mVAO->AddVertexBuffer(VBO);
-  }
+  mVAO->AddVertexBuffer(VBO);
   mVAO->SetIndexBuffer(IBO);
 
-  float squareVertices[] = {
+  std::vector<float> squareVertices{
     -0.5f, -0.5f, 0.0f,
      0.5f, -0.5f, 0.0f,
      0.5f,  0.5f, 0.0f,
     -0.5f,  0.5f, 0.0f,
   };
-  uint32_t squareIndices[] = {
+  std::vector<uint32_t> squareIndices{
     0, 1, 2, 2, 3, 0
   };
 
   mSquareVAO = Bandolier::VertexArray::create();
-  auto squareVB = Bandolier::VertexBuffer::create(squareVertices, sizeof(squareVertices));
-  auto squareIB = Bandolier::IndexBuffer::create(squareIndices, sizeof(squareIndices) / sizeof(squareIndices[0]));
+  auto squareVB = Bandolier::VertexBuffer::create(squareVertices);
+  auto squareIB = Bandolier::IndexBuffer::create(squareIndices);
   squareVB->Layout() = Bandolier::BufferLayout{
     {Bandolier::ShaderDataType::Float3, "a_Position"}
   };
