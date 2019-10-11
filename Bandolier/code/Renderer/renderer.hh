@@ -1,23 +1,29 @@
 #ifndef BANDOLIER_RENDERER_HH
 #define BANDOLIER_RENDERER_HH
 
+#include <memory>
+#include "vertex_array.hh"
+#include "renderer_api.hh"
+
 namespace Bandolier{
 
 class Renderer
 {
 public:
-  enum class API{
-    None = 0,
-    OpenGL,
-    Direct3D,
-    Vulkan,
-    DirectX = int(Direct3D),
-  };
+  static void
+  BeginScene();
 
-  inline static API GetAPI(){ return sRendererAPI; }
+  static void
+  EndScene();
 
-private:
-  inline static API sRendererAPI = API::OpenGL;
+  static void
+  Submit(std::shared_ptr<VertexArray> VAO);
+
+  inline static
+  RendererAPI::API GetAPI()
+  {
+    return RendererAPI::GetAPI();
+  }
 };
 
 }
