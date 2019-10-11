@@ -9,6 +9,7 @@ namespace Bandolier{
 
 Application::Application(std::string WindowName, std::tuple<unsigned int, unsigned int> dims)
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName), std::get<0>(dims), std::get<1>(dims))))
+  , mCamera(0, 0, 0, 0)//! @TODO don't do it this way..?
 {
   if(Application::Instance)
   {

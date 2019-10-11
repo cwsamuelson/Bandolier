@@ -8,6 +8,7 @@
 #include <layer_stack.hh>
 #include <ApplicationEvent.hh>
 #include <Window.hh>
+#include <Renderer/orthographic_camera.hh>
 
 namespace Bandolier {
 
@@ -24,6 +25,7 @@ protected:
   std::unique_ptr<Bandolier::Window> mWindow;
   bool mRunning = false;
   LayerStack mLayerStack;
+  OrthographicCamera mCamera;
 
 public:
   explicit
