@@ -17,7 +17,7 @@ public:
 
 private:
   std::shared_ptr<Bandolier::Shader> mColorShader;
-  std::unique_ptr<Bandolier::Shader> mShader;
+  std::shared_ptr<Bandolier::Shader> mShader;
   std::shared_ptr<Bandolier::VertexArray> mVAO;
   std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
 };

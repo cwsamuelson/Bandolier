@@ -128,8 +128,8 @@ void main()
 }
 )glsl";
 
-  mShader = std::make_unique<Bandolier::Shader>(vertexSource, fragmentSource);
-  mColorShader = std::make_unique<Bandolier::Shader>(colorVertexSource, colorFragmentSource);
+  mShader = std::make_shared<Bandolier::Shader>(vertexSource, fragmentSource);
+  mColorShader = std::make_shared<Bandolier::Shader>(colorVertexSource, colorFragmentSource);
 }
 
 void Sandbox::run()
