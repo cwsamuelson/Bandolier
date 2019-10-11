@@ -5,7 +5,10 @@
 namespace Bandolier{
 
 OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
+  : mProjection(glm::ortho(left, right, bottom,  top, -1.0f, 1.0f))
+  , mView(1.0)
 {
+  mViewProjection = mProjection * mView;
 }
 
 void
