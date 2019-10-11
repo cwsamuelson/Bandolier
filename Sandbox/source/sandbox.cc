@@ -13,7 +13,10 @@
 using WindowResizeEvent = Bandolier::Events::WindowResize;
 
 Sandbox::Sandbox()
+  : Application("Sandbox")
 {
+  //! @TODO use member-initialization?
+  mCamera = Bandolier::OrthographicCamera(-1.6f,  1.6f, -0.9f, 0.9f);
   Window().AllChannel().lock()->subscribe(
     [this](const Bandolier::Events::BaseEvent& e)
     {
@@ -79,11 +82,13 @@ layout(location = 1) in vec4 a_Color;
 out vec3 v_Position;
 out vec4 v_Color;
 
+uniform mat4 u_ViewProjection;
+
 void main()
 {
   v_Color = a_Color;
   v_Position = a_Position;
-  gl_Position = vec4(a_Position, 1.0f);
+  gl_Position = u_ViewProjection * vec4(a_Position, 1.0f);
 }
 )glsl";
 
@@ -108,10 +113,12 @@ layout(location = 0) in vec3 a_Position;
 
 out vec3 v_Position;
 
+uniform mat4 u_ViewProjection;
+
 void main()
 {
   v_Position = a_Position;
-  gl_Position = vec4(a_Position, 1.0);
+  gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 }
 )glsl";
 
@@ -142,13 +149,14 @@ void Sandbox::run()
     mWindow->OnUpdate();
     Bandolier::RenderCommand::Clear();
 
-    Bandolier::Renderer::BeginScene();
+    mCamera.SetPosition({0.5f, 0.5f, 0.0f});
+    mCamera.SetRotation(45.0f);
 
-    mColorShader->Bind();
-    Bandolier::Renderer::Submit(mSquareVAO);
+    Bandolier::Renderer::BeginScene(mCamera);
 
-    mShader->Bind();
-    Bandolier::Renderer::Submit(mVAO);
+      Bandolier::Renderer::Submit(mColorShader, mSquareVAO);
+
+      Bandolier::Renderer::Submit(mShader, mVAO);
 
     Bandolier::Renderer::EndScene();
 
