@@ -12,43 +12,26 @@
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
 
-Sandbox::Sandbox()
-  : Application("Sandbox")
+Example::Example()
+  : Layer("Example")
+  , mVAO(Bandolier::VertexArray::create())
+  , mCamera(-1.6f, 1.6f, -0.1f, 0.9f)//! @TODO don't do it this way..?
 {
-  //! @TODO use member-initialization?
-  mCamera = Bandolier::OrthographicCamera(-1.6f,  1.6f, -0.9f, 0.9f);
-  Window().AllChannel().lock()->subscribe(
-    [this](const Bandolier::Events::BaseEvent& e)
-    {
-      for(auto it = mLayerStack.rbegin(); it != mLayerStack.rend(); ++it)
-      {
-        if((*it)->OnEvent(e))
-        {
-          break;
-        }
-      }
-    }
-  );
-
-  //example layer?...crap!
-  PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
-
   std::vector<float> vertices{
     -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-     0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-     0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
+    0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+    0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
   };
   std::vector<unsigned int> indices{
     0, 1, 2,
   };
 
-  mVAO = Bandolier::VertexArray::create();
   auto VBO = Bandolier::VertexBuffer::create(vertices);
   auto IBO = Bandolier::IndexBuffer::create(indices);
 
   VBO->Layout() = Bandolier::BufferLayout {
-          {Bandolier::ShaderDataType::Float3, "a_Position"},
-          {Bandolier::ShaderDataType::Float4, "a_Color"},
+    {Bandolier::ShaderDataType::Float3, "a_Position"},
+    {Bandolier::ShaderDataType::Float4, "a_Color"},
   };
 
   mVAO->AddVertexBuffer(VBO);
@@ -139,32 +122,46 @@ void main()
   mColorShader = std::make_shared<Bandolier::Shader>(colorVertexSource, colorFragmentSource);
 }
 
-void Sandbox::run()
+Example::~Example()
+{}
+
+void
+Example::OnAttach()
 {
-  Bandolier::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+  Bandolier::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 
-  mRunning = true;
-  while(mRunning)
-  {
-    mWindow->OnUpdate();
-    Bandolier::RenderCommand::Clear();
+  mCamera.SetPosition({ 0.5f, 0.5f, 0.0f });
+  mCamera.SetRotation(45.0f);
+}
 
-    mCamera.SetPosition({0.5f, 0.5f, 0.0f});
-    mCamera.SetRotation(45.0f);
+void
+Example::OnDetach()
+{}
 
-    Bandolier::Renderer::BeginScene(mCamera);
+void
+Example::OnUpdate()
+{
+  Bandolier::Renderer::BeginScene(mCamera);
 
-      Bandolier::Renderer::Submit(mColorShader, mSquareVAO);
+    Bandolier::Renderer::Submit(mColorShader, mSquareVAO);
 
-      Bandolier::Renderer::Submit(mShader, mVAO);
+    Bandolier::Renderer::Submit(mShader, mVAO);
 
-    Bandolier::Renderer::EndScene();
+  Bandolier::Renderer::EndScene();
+}
 
-    for(auto& layer : mLayerStack)
-    {
-      layer->OnUpdate();
-    }
-  }
+bool
+Example::OnEvent(const Bandolier::Events::BaseEvent& e)
+{
+  return false;
+}
+
+Sandbox::Sandbox()
+  : Application("Sandbox")
+{
+  //! @TODO use member-initialization?
+  PushLayer(std::make_shared<Example>());
+  PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
 }
 
 Bandolier::Application& Bandolier::CreateApplication()
