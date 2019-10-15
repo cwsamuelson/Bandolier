@@ -112,8 +112,22 @@ Shader::Unbind() const
 void
 Shader::UploaduniformMat4(const std::string& name, const glm::mat4& matrix)
 {
-  GLint location = glGetUniformLocation(mID, name.c_str());
-  glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+  glUniformMatrix4fv(GetCached(name), 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+int
+Shader::GetCached(const std::string& name)
+{
+  if(mUniformCache.count(name) > 0)
+  {
+    return mUniformCache.at(name);
+  }
+  else
+  {
+    int location = glGetUniformLocation(mID, name.c_str());
+    mUniformCache.emplace(name, location);
+    return location;
+  }
 }
 
 }
