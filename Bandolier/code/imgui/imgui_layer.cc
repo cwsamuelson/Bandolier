@@ -63,7 +63,7 @@ ImguiLayer::OnDetach()
 }
 
 void
-ImguiLayer::OnUpdate()
+ImguiLayer::OnUpdate(time_step)
 {
   ImGuiIO& io = ImGui::GetIO();
   Application& app = Application::Get();

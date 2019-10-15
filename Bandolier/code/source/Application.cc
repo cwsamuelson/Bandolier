@@ -10,6 +10,7 @@ namespace Bandolier{
 
 Application::Application(std::string WindowName, std::tuple<unsigned int, unsigned int> dims)
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName), std::get<0>(dims), std::get<1>(dims))))
+  , mLastTime(float(glfwGetTime()))
 {
   if(Application::Instance)
   {
@@ -59,13 +60,18 @@ Application::run()
 
   while(mRunning)
   {
-    mWindow->OnUpdate();
+    auto time = float(glfwGetTime());
+    float timestep = time - mLastTime;
+    mLastTime = time;
+
     Bandolier::RenderCommand::Clear();
 
     for(auto& layer : mLayerStack)
     {
-      layer->OnUpdate();
+      layer->OnUpdate(timestep);
     }
+
+    mWindow->OnUpdate();
   }
 }
 

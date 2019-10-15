@@ -25,7 +25,7 @@ public:
   void
   OnDetach();
   void
-  OnUpdate();
+  OnUpdate(Bandolier::time_step ts);
   bool
   OnEvent(const Bandolier::Events::BaseEvent& e);
 };

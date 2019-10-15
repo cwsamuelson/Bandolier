@@ -7,6 +7,8 @@
 
 namespace Bandolier {
 
+using time_step = float;
+
 class Layer
 {
 public:
@@ -20,7 +22,7 @@ public:
   virtual void
   OnDetach() {}
   virtual void
-  OnUpdate() {}
+  OnUpdate(time_step ts) {}
   virtual bool
   OnEvent(const Events::BaseEvent& e) { return false; }
 

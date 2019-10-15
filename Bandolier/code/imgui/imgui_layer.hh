@@ -31,7 +31,7 @@ public:
   void
   OnDetach() override;
   void
-  OnUpdate() override;
+  OnUpdate(time_step ts) override;
   bool
   OnEvent(const Events::BaseEvent& e) override;
 

@@ -139,7 +139,7 @@ Example::OnDetach()
 {}
 
 void
-Example::OnUpdate()
+Example::OnUpdate(Bandolier::time_step)
 {
   Bandolier::Renderer::BeginScene(mCamera);
 
