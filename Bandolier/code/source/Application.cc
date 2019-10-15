@@ -1,5 +1,6 @@
 #include <GLFW/glfw3.h>
 
+#include "Renderer/render_command.hh"
 #include "platform/Windows/windows_window.hh"
 #include "logger.hh"
 
@@ -9,7 +10,6 @@ namespace Bandolier{
 
 Application::Application(std::string WindowName, std::tuple<unsigned int, unsigned int> dims)
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName), std::get<0>(dims), std::get<1>(dims))))
-  , mCamera(0, 0, 0, 0)//! @TODO don't do it this way..?
 {
   if(Application::Instance)
   {
@@ -25,6 +25,19 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
         Bandolier::logging::client()->trace("Window close event occurred!");
     }
   );
+
+  Window().AllChannel().lock()->subscribe(
+    [this](const Bandolier::Events::BaseEvent& e)
+    {
+      for(auto it = mLayerStack.rbegin(); it != mLayerStack.rend(); ++it)
+      {
+        if((*it)->OnEvent(e))
+        {
+          break;
+        }
+      }
+    }
+  );
 }
 
 void
@@ -37,6 +50,23 @@ void
 Application::PushOverlay(Bandolier::LayerStack::value_type overlay)
 {
   mLayerStack.PushOverlay(std::move(overlay));
+}
+
+void
+Application::run()
+{
+  mRunning = true;
+
+  while(mRunning)
+  {
+    mWindow->OnUpdate();
+    Bandolier::RenderCommand::Clear();
+
+    for(auto& layer : mLayerStack)
+    {
+      layer->OnUpdate();
+    }
+  }
 }
 
 }

@@ -25,7 +25,6 @@ protected:
   std::unique_ptr<Bandolier::Window> mWindow;
   bool mRunning = false;
   LayerStack mLayerStack;
-  OrthographicCamera mCamera;
 
 public:
   explicit
@@ -33,7 +32,7 @@ public:
   virtual ~Application() = default;
 
   virtual void
-  run() = 0;
+  run() final;
 
   Bandolier::Window&
   Window()
