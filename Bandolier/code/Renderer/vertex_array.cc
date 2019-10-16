@@ -6,7 +6,7 @@
 namespace Bandolier{
 
 std::unique_ptr<VertexArray>
-VertexArray::create()
+VertexArray::Create()
 {
   switch(RendererAPI::GetAPI())
   {

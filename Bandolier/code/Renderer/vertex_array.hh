@@ -28,7 +28,7 @@ public:
   GetIndexBuffer() const = 0;
 
   static std::unique_ptr<VertexArray>
-  create();
+  Create();
 };
 
 }

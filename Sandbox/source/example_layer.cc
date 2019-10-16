@@ -7,7 +7,7 @@
 
 Example::Example()
         : Layer("Example")
-          , mVAO(Bandolier::VertexArray::create())
+          , mVAO(Bandolier::VertexArray::Create())
           , mCamera(-1.6f, 1.6f, -0.1f, 0.9f)//! @TODO don't do it this way..?
 {
   std::vector<float> vertices{
@@ -40,7 +40,7 @@ Example::Example()
           0, 1, 2, 2, 3, 0
   };
 
-  mSquareVAO = Bandolier::VertexArray::create();
+  mSquareVAO = Bandolier::VertexArray::Create();
   auto squareVB = Bandolier::VertexBuffer::create(squareVertices);
   auto squareIB = Bandolier::IndexBuffer::create(squareIndices);
   squareVB->Layout() = Bandolier::BufferLayout{
