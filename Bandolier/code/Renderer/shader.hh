@@ -3,32 +3,28 @@
 
 #include <unordered_map>
 #include <string>
+#include <memory>
+
 #include "../../vendor/glm/glm/glm.hpp"
 
 namespace Bandolier {
 
 class Shader
 {
-private:
+protected:
   uint32_t mID;
-  std::unordered_map<std::string, int> mUniformCache;
-
-  int
-  GetCached(const std::string& name);
 
 public:
-  Shader(const std::string& vertexSource, const std::string& fragmentSource);
+  ~Shader() = default;
 
-  ~Shader();
+  virtual void
+  Bind() const = 0;
 
-  void
-  Bind() const;
+  virtual void
+  Unbind() const = 0;
 
-  void
-  Unbind() const;
-
-  void
-  UploaduniformMat4(const std::string& name, const glm::mat4& matrix);
+  static std::shared_ptr<Shader>
+  Create(const std::string& vertexSource, const std::string& fragmentSource);
 };
 
 }
