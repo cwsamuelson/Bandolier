@@ -9,6 +9,7 @@
 #include <Renderer/buffer.hh>
 
 #include "sandbox.hh"
+#include "../../Bandolier/vendor/glm/glm/gtc/matrix_transform.hpp"
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
 
@@ -145,7 +146,18 @@ Example::OnUpdate(Bandolier::time_step)
 {
   Bandolier::Renderer::BeginScene(mCamera);
 
-    Bandolier::Renderer::Submit(mColorShader, mSquareVAO);
+    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+    for(int y = 0; y < 20; ++y)
+    {
+      for(int x = 0; x < 20; ++x)
+      {
+        glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+
+        Bandolier::Renderer::Submit(mColorShader, mSquareVAO, transform);
+      }
+    }
 
     Bandolier::Renderer::Submit(mShader, mVAO);
 
