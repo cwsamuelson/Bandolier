@@ -161,7 +161,6 @@ Sandbox::Sandbox()
 {
   //! @TODO use member-initialization?
   PushLayer(std::make_shared<Example>());
-  PushOverlay(std::make_shared<Bandolier::ImguiLayer>());
 }
 
 Bandolier::Application& Bandolier::CreateApplication()

@@ -12,6 +12,9 @@ using time_point = float;
 
 class Layer
 {
+protected:
+  std::string mDebugName;
+
 public:
   Layer(std::string name = "Layer")
     : mDebugName(std::move(name))
@@ -33,9 +36,6 @@ public:
   {
     return mDebugName;
   }
-
-protected:
-  std::string mDebugName;
 };
 
 }

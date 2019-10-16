@@ -16,12 +16,10 @@
 
 namespace Bandolier {
 
+/*! Class for managing Dear IMgui
+ */
 class ImguiLayer : public Layer
 {
-protected:
-  float
-  mTime = 0.0f;
-
 public:
   ImguiLayer();
   ~ImguiLayer() = default;
@@ -35,6 +33,11 @@ public:
   bool
   OnEvent(const Events::BaseEvent& e) override;
 
+  void
+  Begin();
+  void
+  End();
+
 protected:
   using event_callback = bool(ImguiLayer::*)(const Bandolier::Events::BaseEvent&);
   std::unordered_map<Bandolier::Events::EventType, event_callback> mEventHandlers =
@@ -42,7 +45,7 @@ protected:
     //{Events::EventType::Unspecified,         &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::Window,              &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::WindowClose,         &ImguiLayer::UnspecifiedEvent},
-    {Events::EventType::WindowResize,        &ImguiLayer::WindowResize},
+//    {Events::EventType::WindowResize,        &ImguiLayer::WindowResize},
     //{Events::EventType::WindowFocus,         &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::WindowLostFocus,     &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::WindowGainedFocus,   &ImguiLayer::UnspecifiedEvent},
@@ -52,15 +55,15 @@ protected:
     //{Events::EventType::AppUpdate,           &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::AppRender,           &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::Key,                 &ImguiLayer::UnspecifiedEvent},
-    {Events::EventType::KeyPressed,          &ImguiLayer::KeyPressed},
-    {Events::EventType::KeyReleased,         &ImguiLayer::KeyReleased},
-    {Events::EventType::KeyTyped,            &ImguiLayer::KeyTyped},
+//    {Events::EventType::KeyPressed,          &ImguiLayer::KeyPressed},
+//    {Events::EventType::KeyReleased,         &ImguiLayer::KeyReleased},
+//    {Events::EventType::KeyTyped,            &ImguiLayer::KeyTyped},
     //{Events::EventType::Mouse,               &ImguiLayer::UnspecifiedEvent},
     //{Events::EventType::MouseButton,         &ImguiLayer::UnspecifiedEvent},
-    {Events::EventType::MouseButtonPressed,  &ImguiLayer::MouseButtonPressed},
-    {Events::EventType::MouseButtonReleased, &ImguiLayer::MouseButtonReleased},
-    {Events::EventType::MouseMoved,          &ImguiLayer::MouseMoved},
-    {Events::EventType::MouseScrolled,       &ImguiLayer::MouseScrolled},
+//    {Events::EventType::MouseButtonPressed,  &ImguiLayer::MouseButtonPressed},
+//    {Events::EventType::MouseButtonReleased, &ImguiLayer::MouseButtonReleased},
+//    {Events::EventType::MouseMoved,          &ImguiLayer::MouseMoved},
+//    {Events::EventType::MouseScrolled,       &ImguiLayer::MouseScrolled},
   };
 
   bool
@@ -70,7 +73,7 @@ protected:
     return false;
   }
 
-  bool
+  /*bool
   MouseButtonPressed(const Bandolier::Events::BaseEvent& e);
 
   bool
@@ -92,7 +95,7 @@ protected:
   KeyTyped(const Bandolier::Events::BaseEvent& e);
 
   bool
-  WindowResize(const Bandolier::Events::BaseEvent& e);
+  WindowResize(const Bandolier::Events::BaseEvent& e);*/
 };
 
 }

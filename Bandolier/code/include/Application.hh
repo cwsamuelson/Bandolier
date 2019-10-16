@@ -5,6 +5,7 @@
 
 #include <event_handler.hh>
 
+#include "imgui/imgui_layer.hh"
 #include <layer_stack.hh>
 #include <ApplicationEvent.hh>
 #include <Window.hh>
@@ -26,6 +27,7 @@ protected:
   bool mRunning = false;
   LayerStack mLayerStack;
   time_point mLastTime = 0.0f;
+  std::shared_ptr<ImguiLayer> mImguiLayer;
 
 public:
   explicit

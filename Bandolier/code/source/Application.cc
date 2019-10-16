@@ -11,6 +11,7 @@ namespace Bandolier{
 Application::Application(std::string WindowName, std::tuple<unsigned int, unsigned int> dims)
   : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName), std::get<0>(dims), std::get<1>(dims))))
   , mLastTime(float(glfwGetTime()))
+  , mImguiLayer(std::make_shared<ImguiLayer>())
 {
   if(Application::Instance)
   {
@@ -39,6 +40,8 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
       }
     }
   );
+
+  PushOverlay(mImguiLayer);
 }
 
 void
@@ -66,10 +69,12 @@ Application::run()
 
     Bandolier::RenderCommand::Clear();
 
+    mImguiLayer->Begin();
     for(auto& layer : mLayerStack)
     {
       layer->OnUpdate(timestep);
     }
+    mImguiLayer->End();
 
     mWindow->OnUpdate();
   }

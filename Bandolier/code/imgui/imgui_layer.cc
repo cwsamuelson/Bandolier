@@ -18,40 +18,25 @@ ImguiLayer::ImguiLayer()
 void
 ImguiLayer::OnAttach()
 {
+  IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-  ImGui::StyleColorsDark();
 
   ImGuiIO& io = ImGui::GetIO();
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
   io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
-  io.KeyMap[ImGuiKey_Tab] =        int(KeyCodes::TAB);
-  io.KeyMap[ImGuiKey_LeftArrow] =  int(KeyCodes::LEFT);
-  io.KeyMap[ImGuiKey_RightArrow] = int(KeyCodes::RIGHT);
-  io.KeyMap[ImGuiKey_UpArrow] =    int(KeyCodes::UP);
-  io.KeyMap[ImGuiKey_DownArrow] =  int(KeyCodes::DOWN);
-  io.KeyMap[ImGuiKey_PageUp] =     int(KeyCodes::PAGE_UP);
-  io.KeyMap[ImGuiKey_PageDown] =   int(KeyCodes::PAGE_DOWN);
-  io.KeyMap[ImGuiKey_Home] =       int(KeyCodes::HOME);
-  io.KeyMap[ImGuiKey_End] =        int(KeyCodes::END);
-  io.KeyMap[ImGuiKey_Insert] =     int(KeyCodes::INSERT);
-  io.KeyMap[ImGuiKey_Delete] =     int(KeyCodes::DELEET);
-  io.KeyMap[ImGuiKey_Backspace] =  int(KeyCodes::BACKSPACE);
-  io.KeyMap[ImGuiKey_Space] =      int(KeyCodes::SPACE);
-  io.KeyMap[ImGuiKey_Enter] =      int(KeyCodes::ENTER);
-  io.KeyMap[ImGuiKey_Escape] =     int(KeyCodes::ESCAPE);
-  io.KeyMap[ImGuiKey_A] =          int(KeyCodes::A);
-  io.KeyMap[ImGuiKey_C] =          int(KeyCodes::C);
-  io.KeyMap[ImGuiKey_V] =          int(KeyCodes::V);
-  io.KeyMap[ImGuiKey_X] =          int(KeyCodes::X);
-  io.KeyMap[ImGuiKey_Y] =          int(KeyCodes::Y);
-  io.KeyMap[ImGuiKey_Z] =          int(KeyCodes::Z);
+  ImGui::StyleColorsDark();
 
-  ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::Get().Window().Native()), false);
-  ImGui_ImplOpenGL3_Init("#version 410");
+  ImGuiStyle& style = ImGui::GetStyle();
+  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+  {
+    style.WindowRounding = 0.5f;
+    style.Colors[ImGuiCol_WindowBg].w = 0.5f;
+  }
 
-  mTime = float(glfwGetTime());
+  ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::Get().Window().Native()), true);
+  ImGui_ImplOpenGL3_Init("#version 450");
 }
 
 void
@@ -65,32 +50,35 @@ ImguiLayer::OnDetach()
 void
 ImguiLayer::OnUpdate(time_step)
 {
-  ImGuiIO& io = ImGui::GetIO();
-  Application& app = Application::Get();
-  Window& window = app.Window();
-  //ImGui::GetDrawData()->DisplaySize = ImVec2(window.Width(), window.Height());
-  io.DisplaySize = ImVec2(float(window.Width()), float(window.Height()));
+  static bool show = true;
+  ImGui::ShowDemoWindow(&show);
+}
 
-  auto time = float(glfwGetTime());
-  io.DeltaTime = time - mTime;
-  mTime = time;
-
+void
+ImguiLayer::Begin()
+{
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
+}
 
-  static bool show = true;
-  ImGui::ShowDemoWindow(&show);
+void
+ImguiLayer::End()
+{
+  ImGuiIO& io = ImGui::GetIO();
+  Application& app = Application::Get();
+  Window& window = app.Window();
+  io.DisplaySize = ImVec2(float(window.Width()), float(window.Height()));
 
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
   if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
   {
-    GLFWwindow* backup_window = glfwGetCurrentContext();
+    GLFWwindow* backup = glfwGetCurrentContext();
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
-    glfwMakeContextCurrent(backup_window);
+    glfwMakeContextCurrent(backup);
   }
 }
 
@@ -105,7 +93,7 @@ ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e)
   return false;
 }
 
-bool
+/*bool
 ImguiLayer::MouseButtonPressed(const Bandolier::Events::BaseEvent& e)
 {
   auto& event = static_cast<const Events::MouseButtonPressed&>(e);
@@ -193,6 +181,6 @@ ImguiLayer::WindowResize(const Bandolier::Events::BaseEvent& e)
   io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
   glViewport(0, 0, event.Width(), event.Height());
   return false;
-}
+}*/
 
 }
