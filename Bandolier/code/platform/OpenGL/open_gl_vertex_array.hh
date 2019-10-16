@@ -22,9 +22,9 @@ public:
   Unbind() const override;
 
   void
-  AddVertexBuffer(std::shared_ptr<VertexBuffer> VBO) override;
+  AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO) override;
   void
-  SetIndexBuffer(std::shared_ptr<IndexBuffer> IBO) override;
+  SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO) override;
 
   const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>&
   GetVertexBuffers() const override;

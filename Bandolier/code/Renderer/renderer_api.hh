@@ -27,7 +27,7 @@ public:
   Clear() = 0;
 
   virtual void
-  DrawIndexed(std::shared_ptr<VertexArray> VAO) = 0;
+  DrawIndexed(const std::shared_ptr<VertexArray>& VAO) = 0;
 
   inline static API
   GetAPI(){ return sRendererAPI; }

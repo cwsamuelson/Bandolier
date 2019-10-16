@@ -27,7 +27,7 @@ public:
   EndScene();
 
   static void
-  Submit(std::shared_ptr<Shader> shader, std::shared_ptr<VertexArray> VAO, const glm::mat4& transform = glm::mat4(1.0f));
+  Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& VAO, const glm::mat4& transform = glm::mat4(1.0f));
 
   inline static
   RendererAPI::API GetAPI()

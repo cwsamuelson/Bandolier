@@ -15,7 +15,7 @@ public:
   Clear() override;
 
   virtual void
-  DrawIndexed(std::shared_ptr<VertexArray> VAO) override;
+  DrawIndexed(const std::shared_ptr<VertexArray>& VAO) override;
 };
 
 }

@@ -16,7 +16,7 @@ Renderer::EndScene()
 }
 
 void
-Renderer::Submit(std::shared_ptr<Shader> shader, std::shared_ptr<VertexArray> VAO, const glm::mat4& transform)
+Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& VAO, const glm::mat4& transform)
 {
   auto oglShader = std::dynamic_pointer_cast<OpenGlShader>(shader);
 

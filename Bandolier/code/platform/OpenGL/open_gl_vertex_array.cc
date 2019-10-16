@@ -64,7 +64,7 @@ OpenGlVertexArray::Unbind() const
 }
 
 void
-OpenGlVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> VBO)
+OpenGlVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO)
 {
   glBindVertexArray(mID);
   VBO->Bind();
@@ -88,7 +88,7 @@ OpenGlVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> VBO)
 }
 
 void
-OpenGlVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer> IBO)
+OpenGlVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO)
 {
   glBindVertexArray(mID);
   IBO->Bind();

@@ -17,7 +17,7 @@ OpenGlRendererAPI::Clear()
 }
 
 void
-OpenGlRendererAPI::DrawIndexed(std::shared_ptr<VertexArray> VAO)
+OpenGlRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& VAO)
 {
   glDrawElements(GL_TRIANGLES, VAO->GetIndexBuffer()->Count(), GL_UNSIGNED_INT, nullptr);
 }

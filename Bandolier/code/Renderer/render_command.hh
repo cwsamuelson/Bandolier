@@ -24,7 +24,7 @@ public:
   }
 
   inline static void
-  DrawIndexed(std::shared_ptr<VertexArray> VAO)
+  DrawIndexed(const std::shared_ptr<VertexArray>& VAO)
   {
     sRendererAPI->DrawIndexed(VAO);
   }

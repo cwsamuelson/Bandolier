@@ -18,9 +18,9 @@ public:
   Unbind() const = 0;
 
   virtual void
-  AddVertexBuffer(std::shared_ptr<VertexBuffer> VBO) = 0;
+  AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO) = 0;
   virtual void
-  SetIndexBuffer(std::shared_ptr<IndexBuffer> IBO) = 0;
+  SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO) = 0;
 
   virtual const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>&
   GetVertexBuffers() const = 0;
