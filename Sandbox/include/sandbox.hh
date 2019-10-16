@@ -15,6 +15,7 @@ private:
   std::shared_ptr<Bandolier::VertexArray> mVAO;
   std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
   Bandolier::OrthographicCamera mCamera;
+  glm::vec3 mSquareColor{0.2f, 0.3f, 0.8f};
 
 public:
   Example();

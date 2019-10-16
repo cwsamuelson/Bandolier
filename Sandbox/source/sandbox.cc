@@ -7,9 +7,11 @@
 #include <ApplicationEvent.hh>
 #include <imgui/imgui_layer.hh>
 #include <Renderer/buffer.hh>
+#include <platform/OpenGL/open_gl_shader.hh>
 
 #include "sandbox.hh"
 #include "../../Bandolier/vendor/glm/glm/gtc/matrix_transform.hpp"
+#include "../../Bandolier/vendor/glm/glm/ext.hpp"
 
 using WindowResizeEvent = Bandolier::Events::WindowResize;
 
@@ -115,14 +117,16 @@ in vec3 v_Position;
 
 out vec4 color;
 
+uniform vec3 u_Color;
+
 void main()
 {
-  color = vec4(0.2, 0.3, 0.8, 1.0);
+  color = vec4(u_Color, 1.0);
 }
 )glsl";
 
-  mShader = std::make_shared<Bandolier::Shader>(vertexSource, fragmentSource);
-  mColorShader = std::make_shared<Bandolier::Shader>(colorVertexSource, colorFragmentSource);
+  mShader      = Bandolier::Shader::Create(vertexSource,      fragmentSource);
+  mColorShader = Bandolier::Shader::Create(colorVertexSource, colorFragmentSource);
 }
 
 Example::~Example()
@@ -144,10 +148,17 @@ Example::OnDetach()
 void
 Example::OnUpdate(Bandolier::time_step)
 {
+  ImGui::Begin("Settings");
+  ImGui::ColorEdit3("Square Color", glm::value_ptr(mSquareColor));
+  ImGui::End();
+
   Bandolier::Renderer::BeginScene(mCamera);
 
     glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+    auto oglShader = std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mColorShader);
+    oglShader->Bind();
+    oglShader->SetUniform("u_Color", mSquareColor);
     for(int y = 0; y < 20; ++y)
     {
       for(int x = 0; x < 20; ++x)
