@@ -9,7 +9,7 @@ namespace Bandolier{
 
 OpenGlShader::OpenGlShader(const std::string& vertexSource, const std::string& fragmentSource)
 {
-  GLuint vertexShader   = glCreateShader(GL_VERTEX_SHADER);
+  GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
   const GLchar* source = vertexSource.c_str();
 

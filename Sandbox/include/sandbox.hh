@@ -7,30 +7,6 @@
 #include <Application.hh>
 #include <Renderer/vertex_array.hh>
 
-class Example : public Bandolier::Layer
-{
-private:
-  std::shared_ptr<Bandolier::Shader> mColorShader;
-  std::shared_ptr<Bandolier::Shader> mShader;
-  std::shared_ptr<Bandolier::VertexArray> mVAO;
-  std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
-  Bandolier::OrthographicCamera mCamera;
-  glm::vec3 mSquareColor{0.2f, 0.3f, 0.8f};
-
-public:
-  Example();
-  ~Example();
-
-  void
-  OnAttach();
-  void
-  OnDetach();
-  void
-  OnUpdate(Bandolier::time_step ts);
-  bool
-  OnEvent(const Bandolier::Events::BaseEvent& e);
-};
-
 class Sandbox : public Bandolier::Application
 {
 public:
