@@ -8,6 +8,7 @@
 namespace Bandolier {
 
 using time_step = float;
+using time_point = float;
 
 class Layer
 {

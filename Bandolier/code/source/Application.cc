@@ -60,8 +60,8 @@ Application::run()
 
   while(mRunning)
   {
-    auto time = float(glfwGetTime());
-    float timestep = time - mLastTime;
+    auto time = time_point(glfwGetTime());
+    time_step timestep = time - mLastTime;
     mLastTime = time;
 
     Bandolier::RenderCommand::Clear();

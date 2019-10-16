@@ -25,7 +25,7 @@ protected:
   std::unique_ptr<Bandolier::Window> mWindow;
   bool mRunning = false;
   LayerStack mLayerStack;
-  time_step mLastTime = 0.0f;
+  time_point mLastTime = 0.0f;
 
 public:
   explicit
