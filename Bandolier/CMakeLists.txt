@@ -21,6 +21,9 @@ target_include_directories(imgui PUBLIC vendor/imgui/)
 target_compile_definitions(imgui PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
 target_link_libraries(imgui glfw glad)
 
+add_library(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
+target_include_directories(stbi PUBLIC vendor/stbi)
+
 add_library(Bandolier code/source/logger.cc
                       code/source/Application.cc
                       code/platform/Windows/windows_window.cc
@@ -59,5 +62,5 @@ add_library(Bandolier code/source/logger.cc
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
-target_link_libraries(Bandolier spdlog_header_only event_handler glfw opengl32 glad imgui glm_static)
+target_link_libraries(Bandolier stbi spdlog_header_only event_handler glfw opengl32 glad imgui glm_static)
 
