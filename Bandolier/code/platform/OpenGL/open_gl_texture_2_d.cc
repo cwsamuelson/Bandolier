@@ -13,7 +13,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path)
   int height;
   int channels;
   stbi_set_flip_vertically_on_load(true);
-  stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+  stbi_uc* data = stbi_load(mPath.c_str(), &width, &height, &channels, 0);
   BNDLR_ASSERT(data, "Failure to load image");
   //mWidth and mHeight are not passed directly to stbi_load because of type differences
   mWidth = width;
