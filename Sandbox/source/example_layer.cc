@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include <Renderer/renderer.hh>
 #include <platform/OpenGL/open_gl_shader.hh>
+#include <platform/OpenGL/open_gl_texture_2_d.hh>
 #include "example_layer.hh"
 #include "../../Bandolier/vendor/glm/glm/ext.hpp"
 
@@ -31,10 +32,10 @@ Example::Example()
   mVAO->SetIndexBuffer(IBO);
 
   std::vector<float> squareVertices{
-          -0.5f, -0.5f, 0.0f,
-          0.5f, -0.5f, 0.0f,
-          0.5f,  0.5f, 0.0f,
-          -0.5f,  0.5f, 0.0f,
+          -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+          0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+          0.5f,  0.5f, 0.0f, 1.0, 1.0f
+          -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
   };
   std::vector<uint32_t> squareIndices{
           0, 1, 2, 2, 3, 0
@@ -44,7 +45,8 @@ Example::Example()
   auto squareVB = Bandolier::VertexBuffer::create(squareVertices);
   auto squareIB = Bandolier::IndexBuffer::create(squareIndices);
   squareVB->Layout() = Bandolier::BufferLayout{
-          {Bandolier::ShaderDataType::Float3, "a_Position"}
+          {Bandolier::ShaderDataType::Float3, "a_Position"},
+          {Bandolier::ShaderDataType::Float2, "a_TexCoord"},
   };
   mSquareVAO->AddVertexBuffer(squareVB);
   mSquareVAO->SetIndexBuffer(squareIB);
@@ -115,8 +117,47 @@ void main()
 }
 )glsl";
 
-  mShader      = Bandolier::Shader::Create(vertexSource,      fragmentSource);
-  mColorShader = Bandolier::Shader::Create(colorVertexSource, colorFragmentSource);
+  std::string textureVertexSource = R"glsl(
+#version 330 core
+
+layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec2 a_TexCoord;
+
+uniform mat4 u_ViewProjection;
+uniform mat4 u_Transform;
+
+out vec2 v_TexCoord;
+
+void main()
+{
+  v_TexCoord = a_TexCoord;
+  gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+}
+  )glsl";
+
+  std::string textureFragmentSource = R"glsl(
+#version 330 core
+
+out vec4 color;
+
+in vec2 v_TexCoord;
+
+uniform sampler2D u_Texture;
+
+void main()
+{
+  color = texture(u_Texture, v_TexCoord);
+}
+  )glsl";
+
+  mTexture = Bandolier::Texture2D::Create("assets/textures/Checkerboard.png");
+
+  mShader        = Bandolier::Shader::Create(vertexSource,        fragmentSource);
+  mColorShader   = Bandolier::Shader::Create(colorVertexSource,   colorFragmentSource);
+  mTextureShader = Bandolier::Shader::Create(textureVertexSource, textureFragmentSource);
+
+  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->Bind();
+  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->SetUniform("u_Texture", 0);
 }
 
 Example::~Example()
@@ -161,6 +202,8 @@ Example::OnUpdate(Bandolier::time_step)
   }
 
   Bandolier::Renderer::Submit(mShader, mVAO);
+
+  Bandolier::Renderer::Submit(mTextureShader, mSquareVAO);
 
   Bandolier::Renderer::EndScene();
 }
