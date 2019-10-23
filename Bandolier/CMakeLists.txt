@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(Bandolier)
+project(Bandolier CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -58,7 +58,12 @@ add_library(Bandolier code/source/logger.cc
                       code/Renderer/orthographic_camera.cc
                       code/Renderer/orthographic_camera.hh
                       code/platform/OpenGL/open_gl_shader.cc
-                      code/platform/OpenGL/open_gl_shader.hh)
+                      code/platform/OpenGL/open_gl_shader.hh
+                      code/include/errors.hh
+                      code/Renderer/texture.cc
+                      code/Renderer/texture.hh
+                      code/platform/OpenGL/open_gl_texture_2_d.cc
+                      code/platform/OpenGL/open_gl_texture_2_d.hh vendor/stbi/stb_image.cc)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
