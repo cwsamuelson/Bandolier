@@ -6,7 +6,7 @@
 namespace Bandolier{
 
 std::shared_ptr<Texture2D>
-Create(const std::string& path)
+Texture2D::Create(const std::string& path)
 {
   switch(RendererAPI::GetAPI())
   {
