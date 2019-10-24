@@ -69,19 +69,18 @@ OpenGlVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO)
   glBindVertexArray(mID);
   VBO->Bind();
 
-  uint32_t index = 0;
   const auto& layout = VBO->Layout();
   for(const auto& element : layout)
   {
-    glEnableVertexAttribArray(index);
+    glEnableVertexAttribArray(mVBIndex);
     glVertexAttribPointer(
-            index,
+            mVBIndex,
             element.GetComponentCount(),
             ShaderDataTypeToOpenGLBase(element.Type),
             element.Normalized ? GL_TRUE : GL_FALSE,
             layout.Stride(),
             (const void*)element.Offset);
-    ++index;
+    ++mVBIndex;
   }
 
   mVBOs.push_back(VBO);

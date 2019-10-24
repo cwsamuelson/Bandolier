@@ -11,6 +11,7 @@ private:
   uint32_t mID;
   std::vector<std::shared_ptr<VertexBuffer>> mVBOs;
   std::shared_ptr<IndexBuffer> mIBO;
+  unsigned long mVBIndex = 0;
 
 public:
   OpenGlVertexArray();
