@@ -15,22 +15,28 @@ private:
   std::shared_ptr<Bandolier::Shader> mTextureShader;
   std::shared_ptr<Bandolier::VertexArray> mVAO;
   std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
+  std::shared_ptr<Bandolier::VertexArray> mTexVAO;
   std::shared_ptr<Bandolier::Texture2D> mTexture;
   Bandolier::OrthographicCamera mCamera;
   glm::vec3 mSquareColor{0.2f, 0.3f, 0.8f};
+
+  void
+  RenderImGui();
+  void
+  RenderOpenGL();
 
 public:
   Example();
   ~Example();
 
   void
-  OnAttach();
+  OnAttach() override;
   void
-  OnDetach();
+  OnDetach() override;
   void
-  OnUpdate(Bandolier::time_step ts);
+  OnUpdate(Bandolier::time_step ts) override;
   bool
-  OnEvent(const Bandolier::Events::BaseEvent& e);
+  OnEvent(const Bandolier::Events::BaseEvent& e) override;
 };
 
 #endif //BANDOLIER_EXAMPLE_LAYER_HH

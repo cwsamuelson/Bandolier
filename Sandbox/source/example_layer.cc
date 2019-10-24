@@ -32,12 +32,22 @@ Example::Example()
   mVAO->SetIndexBuffer(IBO);
 
   std::vector<float> squareVertices{
-          -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-          0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-          0.5f,  0.5f, 0.0f, 1.0, 1.0f
-          -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+          -0.5f, -0.5f, 0.0f,
+           0.5f, -0.5f, 0.0f,
+           0.5f,  0.5f, 0.0f,
+          -0.5f,  0.5f, 0.0f,
   };
   std::vector<uint32_t> squareIndices{
+          0, 1, 2, 2, 3, 0
+  };
+
+  std::vector<float> texSquareVertices{
+          -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+           0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+           0.5f,  0.5f, 0.0f, 1.0, 1.0f
+          -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+  };
+  std::vector<uint32_t> texSuareIndices{
           0, 1, 2, 2, 3, 0
   };
 
@@ -46,10 +56,19 @@ Example::Example()
   auto squareIB = Bandolier::IndexBuffer::create(squareIndices);
   squareVB->Layout() = Bandolier::BufferLayout{
           {Bandolier::ShaderDataType::Float3, "a_Position"},
-          {Bandolier::ShaderDataType::Float2, "a_TexCoord"},
   };
   mSquareVAO->AddVertexBuffer(squareVB);
   mSquareVAO->SetIndexBuffer(squareIB);
+
+  mTexVAO = Bandolier::VertexArray::Create();
+  auto texVB = Bandolier::VertexBuffer::create(texSquareVertices);
+  auto texIB = Bandolier::IndexBuffer::create(texSuareIndices);
+  texVB->Layout() = Bandolier::BufferLayout{
+          {Bandolier::ShaderDataType::Float3, "a_Position"},
+          {Bandolier::ShaderDataType::Float2, "a_TexCoord"},
+  };
+  mTexVAO->AddVertexBuffer(texVB);
+  mTexVAO->SetIndexBuffer(texIB);
 
   std::string vertexSource = R"glsl(
 #version 330 core
@@ -177,12 +196,16 @@ Example::OnDetach()
 {}
 
 void
-Example::OnUpdate(Bandolier::time_step)
+Example::RenderImGui()
 {
   ImGui::Begin("Settings");
   ImGui::ColorEdit3("Square Color", glm::value_ptr(mSquareColor));
   ImGui::End();
+}
 
+void
+Example::RenderOpenGL()
+{
   Bandolier::Renderer::BeginScene(mCamera);
 
   glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -203,9 +226,18 @@ Example::OnUpdate(Bandolier::time_step)
 
   Bandolier::Renderer::Submit(mShader, mVAO);
 
-  Bandolier::Renderer::Submit(mTextureShader, mSquareVAO);
+  mTexture->Bind(0);
+  Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
 
   Bandolier::Renderer::EndScene();
+}
+
+void
+Example::OnUpdate(Bandolier::time_step)
+{
+  RenderImGui();
+
+  RenderOpenGL();
 }
 
 bool
