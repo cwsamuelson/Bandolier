@@ -14,6 +14,7 @@ private:
   uint32_t mID;
 
 public:
+  explicit
   OpenGLTexture2D(std::string path);
   virtual ~OpenGLTexture2D();
 
