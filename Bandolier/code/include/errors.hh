@@ -30,7 +30,7 @@ private:
 
 public:
   Exception(const std::string& expression, const std::string& message, const std::string& fileName, unsigned int lineNumber)
-    : mMessage(std::string("\"" + message + "\"" + " occurred when executing the expression: " + expression + " at " + fileName + ":" + std::to_string(lineNumber))
+    : mMessage(std::string("\"") + message + "\"" + " occurred when executing the expression: " + expression + " at " + fileName + ":" + std::to_string(lineNumber))
   {}
 
   [[nodiscard]]
