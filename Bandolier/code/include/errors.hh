@@ -8,6 +8,8 @@
 
 namespace Bandolier::ErrorHandling{
 
+//! @TODO add support for formatted messages
+// Currently since the exception constructor does not support formatted messages, we cannot handle this successfully
 #define BNDLR_LOG_ERROR(message) ::Bandolier::logging::core()->error((message));
 #define BNDLR_LOG_WARN(message) ::Bandolier::logging::core()->warn((message));
 #define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->warn((message));
@@ -21,7 +23,6 @@ namespace Bandolier::ErrorHandling{
 #define BNDLR_CHECK_RV(expression, message, ret) BNDLR_CHECKER(expression, BNDLR_LOG_WARN(message), return ret;)
 #define BNDLR_TRACK(expression, message) BNDLR_CHECKER(expression, BNDLR_LOG_TRACE(message), )
 
-
 class Exception : public std::exception
 {
 private:
@@ -29,7 +30,7 @@ private:
 
 public:
   Exception(const std::string& expression, const std::string& message, const std::string& fileName, unsigned int lineNumber)
-    : mMessage(message + " occurred when executing the expression: " + expression + " at " + fileName + ":" + std::to_string(lineNumber))
+    : mMessage(std::string("\"" + message + "\"" + " occurred when executing the expression: " + expression + " at " + fileName + ":" + std::to_string(lineNumber))
   {}
 
   [[nodiscard]]
