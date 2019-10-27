@@ -9,7 +9,7 @@
 Example::Example()
         : Layer("Example")
           , mVAO(Bandolier::VertexArray::Create())
-          , mCamera(-1.6f, 1.6f, -0.1f, 0.9f)//! @TODO don't do it this way..?
+          , mCamera(-1.6f, 1.6f, -0.9f, 0.9f)//! @TODO don't do it this way..?
 {
   std::vector<float> vertices{
           -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -224,10 +224,10 @@ Example::RenderOpenGL()
     }
   }
 
-  Bandolier::Renderer::Submit(mShader, mVAO);
-
   mTexture->Bind(0);
   Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
+
+  Bandolier::Renderer::Submit(mShader, mVAO);
 
   Bandolier::Renderer::EndScene();
 }
