@@ -170,6 +170,7 @@ void main()
   )glsl";
 
   mTexture = Bandolier::Texture2D::Create("assets/textures/Checkerboard.png");
+  mAlphaTex = Bandolier::Texture2D::Create("assets/textures/Alpha.png");
 
   mShader        = Bandolier::Shader::Create(vertexSource,        fragmentSource);
   mColorShader   = Bandolier::Shader::Create(colorVertexSource,   colorFragmentSource);
@@ -225,6 +226,8 @@ Example::RenderOpenGL()
   }
 
   mTexture->Bind(0);
+  Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
+  mAlphaTex->Bind(0);
   Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
 
   Bandolier::Renderer::Submit(mShader, mVAO);

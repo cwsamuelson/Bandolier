@@ -41,6 +41,8 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
     }
   );
 
+  Bandolier::RenderCommand::Init();
+
   PushOverlay(mImguiLayer);
 }
 
