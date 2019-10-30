@@ -70,111 +70,12 @@ Example::Example()
   mTexVAO->AddVertexBuffer(texVB);
   mTexVAO->SetIndexBuffer(texIB);
 
-  std::string vertexSource = R"glsl(
-#version 330 core
-
-layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec4 a_Color;
-
-out vec3 v_Position;
-out vec4 v_Color;
-
-uniform mat4 u_ViewProjection;
-uniform mat4 u_Transform;
-
-void main()
-{
-  v_Color = a_Color;
-  v_Position = a_Position;
-  gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0f);
-}
-)glsl";
-
-  std::string fragmentSource = R"glsl(
-#version 330 core
-
-in vec3 v_Position;
-in vec4 v_Color;
-
-out vec4 color;
-
-void main()
-{
-  color = v_Color;
-}
-)glsl";
-
-  std::string colorVertexSource = R"glsl(
-#version 330 core
-
-layout(location = 0) in vec3 a_Position;
-
-out vec3 v_Position;
-
-uniform mat4 u_ViewProjection;
-uniform mat4 u_Transform;
-
-void main()
-{
-  v_Position = a_Position;
-  gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-}
-)glsl";
-
-  std::string colorFragmentSource = R"glsl(
-#version 330 core
-
-in vec3 v_Position;
-
-out vec4 color;
-
-uniform vec3 u_Color;
-
-void main()
-{
-  color = vec4(u_Color, 1.0);
-}
-)glsl";
-
-  std::string textureVertexSource = R"glsl(
-#version 330 core
-
-layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec2 a_TexCoord;
-
-uniform mat4 u_ViewProjection;
-uniform mat4 u_Transform;
-
-out vec2 v_TexCoord;
-
-void main()
-{
-  v_TexCoord = a_TexCoord;
-  gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-}
-  )glsl";
-
-  std::string textureFragmentSource = R"glsl(
-#version 330 core
-
-out vec4 color;
-
-in vec2 v_TexCoord;
-
-uniform sampler2D u_Texture;
-
-void main()
-{
-  color = texture(u_Texture, v_TexCoord);
-}
-  )glsl";
-
   mTexture = Bandolier::Texture2D::Create("assets/textures/Checkerboard.png");
   mAlphaTex = Bandolier::Texture2D::Create("assets/textures/Alpha.png");
 
-  mShader        = Bandolier::Shader::Create(vertexSource,        fragmentSource);
-  mColorShader   = Bandolier::Shader::Create(colorVertexSource,   colorFragmentSource);
-  mTextureShader = Bandolier::Shader::Create(textureVertexSource, textureFragmentSource);
+  mShader        = Bandolier::Shader::Create("assets/shaders/MagicColor.glsl");
+  mColorShader   = Bandolier::Shader::Create("assets/shaders/FlatColor.glsl");
+  mTextureShader = Bandolier::Shader::Create("assets/shaders/Texture.glsl");
 
   std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->Bind();
   std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->SetUniform("u_Texture", 0);
