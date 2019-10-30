@@ -38,5 +38,33 @@ Shader::Create(const std::string& vertexSource, const std::string& fragmentSourc
   return nullptr;
 }
 
+std::shared_ptr<Shader>
+Shader::Create(const std::string& filePath)
+{
+  switch(RendererAPI::GetAPI())
+  {
+  case RendererAPI::API::None:
+    logging::core()->error("Rendering API must be specified!");
+    return nullptr;
+
+  case RendererAPI::API::OpenGL:
+    return std::make_shared<OpenGlShader>(filePath);
+
+  case RendererAPI::API::Direct3D:
+    logging::core()->error("Rendering API Direct3D is not supported!");
+    break;
+
+  case RendererAPI::API::Vulkan:
+    logging::core()->error("Rendering API Vulkan is not supported!");
+    break;
+
+  default:
+    logging::core()->error("Unknown rendering API");
+    break;
+  }
+
+  return nullptr;
+}
+
 }
 
