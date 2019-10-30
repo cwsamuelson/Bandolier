@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <glad/glad.h>
+
 #include "Renderer/shader.hh"
 
 namespace Bandolier {
@@ -16,6 +18,7 @@ private:
   GetCached(const std::string& name);
 
 public:
+  OpenGlShader(const std::string& filePath);
   OpenGlShader(const std::string& vertexSource, const std::string& fragmentSource);
   virtual ~OpenGlShader();
 
@@ -40,6 +43,14 @@ public:
   SetUniform(const std::string& name, const glm::mat3& value);
   void
   SetUniform(const std::string& name, const glm::mat4& value);
+
+private:
+  std::string
+  ReadFile(const std::string& filePath);
+  std::unordered_map<GLenum, std::string>
+  PreProcess(const std::string& source);
+  void
+  Compile(const std::unordered_map<GLenum, std::string>& sources);
 };
 
 }
