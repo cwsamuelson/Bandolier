@@ -11,10 +11,19 @@ namespace Bandolier{
 
 OpenGlShader::OpenGlShader(const std::string& filePath)
 {
+  auto lastSlashIndex = filePath.find_last_of("/\\");
+  auto lastDotIndex = filePath.rfind('.');
+
+  auto nameStartIndex = lastSlashIndex == std::string::npos ? 0 : lastSlashIndex + 1;
+  auto nameEndIndex = lastDotIndex == std::string::npos ? filePath.size() : lastDotIndex;
+
+  mName = filePath.substr(nameStartIndex, nameEndIndex - nameStartIndex);
+
   Compile(PreProcess(ReadFile(filePath)));
 }
 
-OpenGlShader::OpenGlShader(const std::string& vertexSource, const std::string& fragmentSource)
+OpenGlShader::OpenGlShader(std::string name, const std::string& vertexSource, const std::string& fragmentSource)
+  : mName(std::move(name))
 {
   std::unordered_map<GLenum, std::string> sources{
     {GL_VERTEX_SHADER, vertexSource},
@@ -39,6 +48,12 @@ void
 OpenGlShader::Unbind() const
 {
 glUseProgram(0);
+}
+
+std::string
+OpenGlShader::Name() const
+{
+  return mName;
 }
 
 void

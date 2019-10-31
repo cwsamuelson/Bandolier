@@ -13,19 +13,28 @@ class OpenGlShader : public Shader
 {
 private:
   std::unordered_map<std::string, int> mUniformCache;
+  std::string mName;
 
   int
   GetCached(const std::string& name);
+  std::string
+  ReadFile(const std::string& filePath);
+  std::unordered_map<GLenum, std::string>
+  PreProcess(const std::string& source);
+  void
+  Compile(const std::unordered_map<GLenum, std::string>& sources);
 
 public:
   OpenGlShader(const std::string& filePath);
-  OpenGlShader(const std::string& vertexSource, const std::string& fragmentSource);
+  OpenGlShader(std::string name, const std::string& vertexSource, const std::string& fragmentSource);
   virtual ~OpenGlShader();
 
   void
   Bind() const override;
   void
   Unbind() const override;
+  std::string
+  Name() const override;
 
   void
   SetUniform(const std::string& name, int value);
@@ -43,14 +52,6 @@ public:
   SetUniform(const std::string& name, const glm::mat3& value);
   void
   SetUniform(const std::string& name, const glm::mat4& value);
-
-private:
-  std::string
-  ReadFile(const std::string& filePath);
-  std::unordered_map<GLenum, std::string>
-  PreProcess(const std::string& source);
-  void
-  Compile(const std::unordered_map<GLenum, std::string>& sources);
 };
 
 }
