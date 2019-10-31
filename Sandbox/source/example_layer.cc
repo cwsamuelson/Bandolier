@@ -73,12 +73,12 @@ Example::Example()
   mTexture = Bandolier::Texture2D::Create("assets/textures/Checkerboard.png");
   mAlphaTex = Bandolier::Texture2D::Create("assets/textures/Alpha.png");
 
-  mShader        = Bandolier::Shader::Create("assets/shaders/MagicColor.glsl");
-  mColorShader   = Bandolier::Shader::Create("assets/shaders/FlatColor.glsl");
-  mTextureShader = Bandolier::Shader::Create("assets/shaders/Texture.glsl");
+  mShaderLibrary.Load("assets/shaders/MagicColor.glsl");
+  mShaderLibrary.Load("assets/shaders/FlatColor.glsl");
+  mShaderLibrary.Load("assets/shaders/Texture.glsl");
 
-  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->Bind();
-  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mTextureShader)->SetUniform("u_Texture", 0);
+  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mShaderLibrary.Get("Texture"))->Bind();
+  std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mShaderLibrary.Get("Texture"))->SetUniform("u_Texture", 0);
 }
 
 Example::~Example()
@@ -112,7 +112,7 @@ Example::RenderOpenGL()
 
   glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-  auto oglShader = std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mColorShader);
+  auto oglShader = std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mShaderLibrary.Get("FlatColor"));
   oglShader->Bind();
   oglShader->SetUniform("u_Color", mSquareColor);
   for(int y = 0; y < 20; ++y)
@@ -122,16 +122,16 @@ Example::RenderOpenGL()
       glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
       glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
-      Bandolier::Renderer::Submit(mColorShader, mSquareVAO, transform);
+      Bandolier::Renderer::Submit(mShaderLibrary.Get("FlatColor"), mSquareVAO, transform);
     }
   }
 
   mTexture->Bind(0);
-  Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
+  Bandolier::Renderer::Submit(mShaderLibrary.Get("Texture"), mTexVAO);
   mAlphaTex->Bind(0);
-  Bandolier::Renderer::Submit(mTextureShader, mTexVAO);
+  Bandolier::Renderer::Submit(mShaderLibrary.Get("Texture"), mTexVAO);
 
-  Bandolier::Renderer::Submit(mShader, mVAO);
+  Bandolier::Renderer::Submit(mShaderLibrary.Get("MagicColor"), mVAO);
 
   Bandolier::Renderer::EndScene();
 }

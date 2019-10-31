@@ -10,9 +10,7 @@
 class Example : public Bandolier::Layer
 {
 private:
-  std::shared_ptr<Bandolier::Shader> mColorShader;
-  std::shared_ptr<Bandolier::Shader> mShader;
-  std::shared_ptr<Bandolier::Shader> mTextureShader;
+  Bandolier::ShaderLibrary mShaderLibrary;
   std::shared_ptr<Bandolier::VertexArray> mVAO;
   std::shared_ptr<Bandolier::VertexArray> mSquareVAO;
   std::shared_ptr<Bandolier::VertexArray> mTexVAO;
