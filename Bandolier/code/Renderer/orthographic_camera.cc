@@ -59,4 +59,11 @@ OrthographicCamera::GetViewProjection() const
   return mViewProjection;
 }
 
+void
+OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
+{
+  mProjection = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+  mViewProjection = mProjection * mView;
+}
+
 }
