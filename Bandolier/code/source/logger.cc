@@ -3,12 +3,12 @@
 namespace Bandolier {
 
 logger_ptr
-logging::make_logger(const std::string& name)
+logging::make_logger(const std::string& name, const std::string& pattern, spdlog::level::level_enum lvl)
 {
   auto lgr = spdlog::stdout_color_mt(name);
 
-  lgr->set_pattern("%^[%T] %n: %v%$");
-  lgr->set_level(spdlog::level::trace);
+  lgr->set_pattern(pattern);
+  lgr->set_level(lvl);
 
   sLoggers[name] = lgr;
 

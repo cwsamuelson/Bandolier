@@ -16,7 +16,7 @@ class logging
 public:
   static
   logger_ptr
-  make_logger(const std::string& name);
+  make_logger(const std::string& name, const std::string& pattern = "%^[%T] %n: %v%$", spdlog::level::level_enum lvl = spdlog::level::trace);
 
 private:
   inline static
