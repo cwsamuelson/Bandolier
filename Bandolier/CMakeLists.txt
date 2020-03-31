@@ -4,6 +4,7 @@ project(Bandolier CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 add_subdirectory(vendor/datastructures/event_handler)
+ADD_SUBDIRECTORY(vendor/datastructures/error)
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
 add_subdirectory(vendor/glad)
@@ -67,5 +68,5 @@ add_library(Bandolier code/source/logger.cc
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 
-target_link_libraries(Bandolier stbi spdlog_header_only event_handler glfw opengl32 glad imgui glm_static)
+target_link_libraries(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm_static)
 

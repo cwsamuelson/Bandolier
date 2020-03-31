@@ -5,6 +5,7 @@
 #include <string>
 
 #include "logger.hh"
+#include <error_handling.hh>
 
 namespace Bandolier::ErrorHandling{
 
