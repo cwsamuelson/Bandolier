@@ -15,14 +15,10 @@ namespace Bandolier::ErrorHandling{
 #define BNDLR_LOG_WARN(message) ::Bandolier::logging::core()->warn((message));
 #define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->trace((message));
 
-#define BNDLR_WRAPPER(stuff) do{stuff}while(false);
-#define BNDLR_CHECKER(condition, log, error) BNDLR_WRAPPER(if(!(condition)){log;error;})
-#define BNDLR_THROW(expression, message) throw ::Bandolier::ErrorHandling::Exception(#expression, message, __FILE__, __LINE__);
-
-#define BNDLR_ASSERT(expression, message) BNDLR_CHECKER(expression, BNDLR_LOG_ERROR(message), BNDLR_THROW(expression, message))
-#define BNDLR_CHECK(expression, message) BNDLR_CHECKER(expression, BNDLR_LOG_WARN(message), )
-#define BNDLR_CHECK_RV(expression, message, ret) BNDLR_CHECKER(expression, BNDLR_LOG_WARN(message), return ret;)
-#define BNDLR_TRACK(expression, message) BNDLR_CHECKER(expression, BNDLR_LOG_TRACE(message), )
+#define BNDLR_ASSERT(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_ERROR(message), message)
+#define BNDLR_CHECK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(message), message)
+#define BNDLR_CHECK_RV(expression, message, ret) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(message), message)
+#define BNDLR_TRACK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_TRACE(message), message)
 
 class Exception : public std::exception
 {
