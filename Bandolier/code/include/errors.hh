@@ -12,7 +12,7 @@ namespace Bandolier::ErrorHandling{
 // Currently since the exception constructor does not support formatted messages, we cannot handle this successfully
 #define BNDLR_LOG_ERROR(message) ::Bandolier::logging::core()->error((message));
 #define BNDLR_LOG_WARN(message) ::Bandolier::logging::core()->warn((message));
-#define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->warn((message));
+#define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->trace((message));
 
 #define BNDLR_WRAPPER(stuff) do{stuff}while(false);
 #define BNDLR_CHECKER(condition, log, error) BNDLR_WRAPPER(if(!(condition)){log;error;})
