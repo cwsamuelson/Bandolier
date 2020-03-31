@@ -15,6 +15,7 @@ namespace Bandolier::ErrorHandling{
 #define BNDLR_LOG_WARN(message) ::Bandolier::logging::core()->warn((message));
 #define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->trace((message));
 
+#define BNDLR_FAIL(message) GSW_WRAP(BNDLR_LOG_ERROR(message); GSW_THROW(message, ""))
 #define BNDLR_ASSERT(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_ERROR(message), message)
 #define BNDLR_CHECK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(message), message)
 #define BNDLR_TRACK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_TRACE(message), message)
