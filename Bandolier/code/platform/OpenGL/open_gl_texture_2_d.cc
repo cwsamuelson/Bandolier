@@ -34,7 +34,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path)
   }
   else
   {
-    BNDLR_ASSERT(false,"Encountered unsupported file format when reading file \"" + path + "\".");
+    BNDLR_FAIL("Encountered unsupported file format when reading file \"" + path + "\".");
   }
 
   glCreateTextures(GL_TEXTURE_2D, 1, &mID);

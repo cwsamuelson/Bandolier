@@ -11,13 +11,13 @@ Texture2D::Create(const std::string& path)
   switch(RendererAPI::GetAPI())
   {
   case RendererAPI::API::None:
-    BNDLR_ASSERT(false, "A rendering API must be chosen!");
+    BNDLR_FAIL("A rendering API must be chosen!");
   case RendererAPI::API::OpenGL:
     return std::make_shared<OpenGLTexture2D>(path);
   case RendererAPI::API::Vulkan:
-    BNDLR_ASSERT(false, "Vulkan is not supported");
+    BNDLR_FAIL("Vulkan is not supported");
   case RendererAPI::API::Direct3D:
-    BNDLR_ASSERT(false, "Direct3D is not supported");
+    BNDLR_FAIL("Direct3D is not supported");
   }
 }
 
