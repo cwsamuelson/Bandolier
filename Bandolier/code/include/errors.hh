@@ -20,24 +20,6 @@ namespace Bandolier::ErrorHandling{
 #define BNDLR_CHECK_RV(expression, message, ret) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(message), message)
 #define BNDLR_TRACK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_TRACE(message), message)
 
-class Exception : public std::exception
-{
-private:
-  std::string mMessage;
-
-public:
-  Exception(const std::string& expression, const std::string& message, const std::string& fileName, unsigned int lineNumber)
-    : mMessage(std::string("\"") + message + "\"" + " occurred when executing the expression: " + expression + " at " + fileName + ":" + std::to_string(lineNumber))
-  {}
-
-  [[nodiscard]]
-  const char*
-  what() const noexcept override
-  {
-    return mMessage.c_str();
-  }
-};
-
 }
 
 #endif //BANDOLIER_ERRORS_HH
