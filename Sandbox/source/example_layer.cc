@@ -8,8 +8,8 @@
 
 Example::Example()
         : Layer("Example")
-          , mVAO(Bandolier::VertexArray::Create())
-          , mCamera(-1.6f, 1.6f, -0.9f, 0.9f)//! @TODO don't do it this way..?
+        , mVAO(Bandolier::VertexArray::Create())
+        , mCameraController(1280.0f / 720.0f)
 {
   std::vector<float> vertices{
           -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -88,9 +88,6 @@ void
 Example::OnAttach()
 {
   Bandolier::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-
-  mCamera.SetPosition({ 0.5f, 0.5f, 0.0f });
-  mCamera.SetRotation(45.0f);
 }
 
 void
@@ -108,7 +105,7 @@ Example::RenderImGui()
 void
 Example::RenderOpenGL()
 {
-  Bandolier::Renderer::BeginScene(mCamera);
+  Bandolier::Renderer::BeginScene(mCameraController.Camera());
 
   glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -137,11 +134,13 @@ Example::RenderOpenGL()
 }
 
 void
-Example::OnUpdate(Bandolier::time_step)
+Example::OnUpdate(Bandolier::time_step ts)
 {
   RenderImGui();
 
   RenderOpenGL();
+
+  mCameraController.OnUpdate(ts);
 }
 
 bool

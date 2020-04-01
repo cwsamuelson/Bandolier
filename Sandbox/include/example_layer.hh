@@ -4,8 +4,8 @@
 #include <layer.hh>
 #include <Renderer/shader.hh>
 #include <Renderer/vertex_array.hh>
-#include <Renderer/orthographic_camera.hh>
 #include <Renderer/texture.hh>
+#include <Renderer/orthographic_camera_controller.hh>
 
 class Example : public Bandolier::Layer
 {
@@ -16,7 +16,7 @@ private:
   std::shared_ptr<Bandolier::VertexArray> mTexVAO;
   std::shared_ptr<Bandolier::Texture2D> mTexture;
   std::shared_ptr<Bandolier::Texture2D> mAlphaTex;
-  Bandolier::OrthographicCamera mCamera;
+  Bandolier::OrthographicCameraController mCameraController;
   glm::vec3 mSquareColor{0.2f, 0.3f, 0.8f};
 
   void

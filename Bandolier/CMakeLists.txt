@@ -64,7 +64,10 @@ add_library(Bandolier code/source/logger.cc
                       code/Renderer/texture.cc
                       code/Renderer/texture.hh
                       code/platform/OpenGL/open_gl_texture_2_d.cc
-                      code/platform/OpenGL/open_gl_texture_2_d.hh vendor/stbi/stb_image.cc)
+                      code/platform/OpenGL/open_gl_texture_2_d.hh
+                      vendor/stbi/stb_image.cc
+                      code/Renderer/orthographic_camera_controller.cc
+                      code/Renderer/orthographic_camera_controller.hh)
 
 target_include_directories(Bandolier PUBLIC code/include code/)
 

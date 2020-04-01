@@ -21,19 +21,25 @@ private:
 public:
   OrthographicCamera(float left, float right, float bottom, float top);
 
+  [[nodiscard]]
   const glm::vec3&
   GetPosition() const;
+
   void
   SetPosition(const glm::vec3& position);
 
+  [[nodiscard]]
   const glm::mat4&
   GetProjection() const;
+
   void
   SetRotation(float rotation);
 
+  [[nodiscard]]
   const glm::mat4&
   GetView() const;
 
+  [[nodiscard]]
   const glm::mat4&
   GetViewProjection() const;
 
