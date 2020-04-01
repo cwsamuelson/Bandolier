@@ -10,9 +10,9 @@ OrthographicCameraController::OrthographicCameraController(float aspectRatio, bo
   , mCamera(-mAspectRatio * mZoom, mAspectRatio * mZoom, -mZoom, mZoom)
 {
   mPosition = { 0.5f, 0.5f, 0.0f };
-  mRotation = 45.0f;
+  mCameraRotation = 45.0f;
   mCamera.SetPosition(mPosition);
-  mCamera.SetRotation(mRotation);
+  mCamera.SetRotation(mCameraRotation);
 }
 
 OrthographicCamera& OrthographicCameraController::Camera()
@@ -50,17 +50,18 @@ OrthographicCameraController::OnUpdate(Bandolier::time_step ts)
   {
     if(Input::IsKeyPressed(int(KeyCodes::Q)))
     {
-      mCameraRotation += mRotationSpeed * ts;
+      mCameraRotation -= mRotationSpeed * ts;
     }
     if(Input::IsKeyPressed(int(KeyCodes::E)))
     {
-      mCameraRotation -= mRotationSpeed * ts;
+      mCameraRotation += mRotationSpeed * ts;
     }
 
     mCamera.SetRotation(mRotation);
   }
 
   mCamera.SetPosition(mPosition);
+  mCamera.SetRotation(mCameraRotation);
   mTranslationSpeed = mZoom;
 }
 

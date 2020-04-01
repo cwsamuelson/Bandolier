@@ -9,7 +9,7 @@
 Example::Example()
         : Layer("Example")
         , mVAO(Bandolier::VertexArray::Create())
-        , mCameraController(1280.0f / 720.0f)
+        , mCameraController(1280.0f / 720.0f, true)
 {
   std::vector<float> vertices{
           -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
