@@ -16,10 +16,10 @@ _5      =  GLFW_MOUSE_BUTTON_5,
 _6      =  GLFW_MOUSE_BUTTON_6,
 _7      =  GLFW_MOUSE_BUTTON_7,
 _8      =  GLFW_MOUSE_BUTTON_8,
-_LAST   =  _8,
-_LEFT   =  _1,
-_RIGHT  =  _2,
-_MIDDLE =  _3,
+LAST   =  _8,
+LEFT   =  _1,
+RIGHT  =  _2,
+MIDDLE =  _3,
 };
 
 }

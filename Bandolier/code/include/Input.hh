@@ -28,6 +28,6 @@ protected:
   GetMousePositionImpl() = 0;
 };
 
-};
+}
 
 #endif //BANDOLIER_INPUT_HH
