@@ -57,11 +57,10 @@ OrthographicCameraController::OnUpdate(Bandolier::time_step ts)
       mCameraRotation += mRotationSpeed * ts;
     }
 
-    mCamera.SetRotation(mRotation);
+    mCamera.SetRotation(mCameraRotation);
   }
 
   mCamera.SetPosition(mPosition);
-  mCamera.SetRotation(mCameraRotation);
   mTranslationSpeed = mZoom;
 }
 
