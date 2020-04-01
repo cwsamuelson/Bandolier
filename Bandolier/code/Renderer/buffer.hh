@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <errors.hh>
 
 #include "logger.hh"
 
@@ -66,8 +67,7 @@ ShaderDataTypeSize(ShaderDataType type)
     return 1;
   }
 
-  logging::core()->error("Unknown shader data type");//! @TODO throw?
-  return 0;
+  BNDLR_FAIL("Unknown or unsupported shader data type");
 }
 
 struct BufferElement

@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <errors.hh>
 
 #include "logger.hh"
 #include "KeyEvent.hh"
@@ -34,11 +35,9 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
   //! @TODO error handling/check the window
   mContext = std::make_unique<OpenGLContext>(mWindow);
-  if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-  {
-    logging::core()->error("Failed to initialize GLAD");
-    throw std::runtime_error("Failed to initialize GLAD");
-  }
+
+  BNDLR_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Failed to initialize GLAD");
+
   glfwSetWindowUserPointer(mWindow, &mData);
   VSync(props.vsync);
 
