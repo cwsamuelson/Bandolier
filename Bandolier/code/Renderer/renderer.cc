@@ -28,5 +28,9 @@ Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Ve
   RenderCommand::DrawIndexed(VAO);
 }
 
+void Renderer::SetViewport(uint32_t width, uint32_t height) {
+  RenderCommand::SetViewport(width, height);
+}
+
 }
 

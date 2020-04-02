@@ -29,6 +29,9 @@ public:
   static void
   Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& VAO, const glm::mat4& transform = glm::mat4(1.0f));
 
+  static void
+  SetViewport(uint32_t width, uint32_t height);
+
   inline static
   RendererAPI::API GetAPI()
   {

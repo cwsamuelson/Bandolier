@@ -32,6 +32,9 @@ public:
   virtual void
   DrawIndexed(const std::shared_ptr<VertexArray>& VAO) = 0;
 
+  virtual void
+  SetViewport(uint32_t width, uint32_t height) = 0;
+
   inline static API
   GetAPI(){ return sRendererAPI; }
 

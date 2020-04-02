@@ -35,6 +35,11 @@ public:
     sRendererAPI->DrawIndexed(VAO);
   }
 
+  inline static void
+  SetViewport(uint32_t width, uint32_t height){
+    sRendererAPI->SetViewport(width, height);
+  }
+
 private:
   inline static std::unique_ptr<RendererAPI> sRendererAPI = std::make_unique<OpenGlRendererAPI>();
 };
