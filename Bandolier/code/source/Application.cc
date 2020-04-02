@@ -1,4 +1,5 @@
 #include <GLFW/glfw3.h>
+#include <Renderer/renderer.hh>
 
 #include "Renderer/render_command.hh"
 #include "platform/Windows/windows_window.hh"
@@ -41,6 +42,17 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
     }
   );
 
+  Window().ResizeChannel().lock()->subscribe(
+          [this](const Bandolier::Events::WindowResize& e)
+            {
+              mMinimized = e.Width() == 0 || e.Height() == 0;
+
+              if(!mMinimized){
+                Renderer::SetViewport(e.Width(), e.Height());
+              }
+            }
+  );
+
   Bandolier::RenderCommand::Init();
 
   PushOverlay(mImguiLayer);
@@ -72,9 +84,10 @@ Application::run()
     Bandolier::RenderCommand::Clear();
 
     mImguiLayer->Begin();
-    for(auto& layer : mLayerStack)
-    {
-      layer->OnUpdate(timestep);
+    if(!mMinimized) {
+      for(auto& layer : mLayerStack) {
+        layer->OnUpdate(timestep);
+      }
     }
     mImguiLayer->End();
 

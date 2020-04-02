@@ -25,6 +25,7 @@ protected:
 
   std::unique_ptr<Bandolier::Window> mWindow;
   bool mRunning = false;
+  bool mMinimized = false;
   LayerStack mLayerStack;
   time_point mLastTime = 0.0f;
   std::shared_ptr<ImguiLayer> mImguiLayer;
