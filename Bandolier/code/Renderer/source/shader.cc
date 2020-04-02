@@ -1,11 +1,11 @@
 #include <vector>
 
-#include <platform/OpenGL/open_gl_shader.hh>
+#include <open_gl_shader.hh>
 
 #include "logger.hh"
 
 #include "shader.hh"
-#include "../../vendor/glm/glm/gtc/type_ptr.inl"
+#include "glm/gtc/type_ptr.inl"
 #include "renderer_api.hh"
 
 namespace Bandolier {

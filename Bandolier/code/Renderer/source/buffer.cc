@@ -1,6 +1,6 @@
 #include "logger.hh"
-#include "platform/OpenGL/open_gl_buffer.hh"
-#include "Renderer/renderer_api.hh"
+#include "open_gl_buffer.hh"
+#include "renderer_api.hh"
 
 #include "buffer.hh"
 #include "renderer.hh"

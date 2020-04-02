@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_OPEN_GL_BUFFER_HH
 #define BANDOLIER_OPEN_GL_BUFFER_HH
 
-#include "Renderer/buffer.hh"
+#include "buffer.hh"
 
 namespace Bandolier {
 

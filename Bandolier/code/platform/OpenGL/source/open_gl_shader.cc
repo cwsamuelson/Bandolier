@@ -5,7 +5,7 @@
 #include <errors.hh>
 
 #include "open_gl_shader.hh"
-#include "../../../vendor/glm/glm/ext.hpp"
+#include "glm/ext.hpp"
 
 namespace Bandolier{
 

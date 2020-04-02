@@ -1,8 +1,8 @@
 #include <GLFW/glfw3.h>
-#include <Renderer/renderer.hh>
+#include <renderer.hh>
 
-#include "Renderer/render_command.hh"
-#include "platform/Windows/windows_window.hh"
+#include "render_command.hh"
+#include "windows_window.hh"
 #include "logger.hh"
 
 #include "Application.hh"

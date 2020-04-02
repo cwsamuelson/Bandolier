@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Renderer/GraphicsContext.hh"
+#include "GraphicsContext.hh"
 #include "Window.hh"
 
 struct GLFWwindow;

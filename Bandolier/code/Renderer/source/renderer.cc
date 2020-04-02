@@ -1,4 +1,4 @@
-#include <platform/OpenGL/open_gl_shader.hh>
+#include <open_gl_shader.hh>
 #include "renderer.hh"
 #include "render_command.hh"
 

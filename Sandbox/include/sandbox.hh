@@ -1,11 +1,11 @@
 #ifndef TEST_SANDBOX_HH
 #define TEST_SANDBOX_HH
 
-#include "Renderer/shader.hh"
-#include "Renderer/buffer.hh"
+#include "shader.hh"
+#include "buffer.hh"
 
 #include <Application.hh>
-#include <Renderer/vertex_array.hh>
+#include <vertex_array.hh>
 
 class Sandbox : public Bandolier::Application
 {

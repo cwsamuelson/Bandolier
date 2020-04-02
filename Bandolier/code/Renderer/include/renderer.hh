@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_RENDERER_HH
 #define BANDOLIER_RENDERER_HH
 
-#include <memory>
+#include "memory"
 #include "vertex_array.hh"
 #include "renderer_api.hh"
 #include "orthographic_camera.hh"

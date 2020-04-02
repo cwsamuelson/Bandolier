@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_OPEN_GL_RENDERER_API_HH
 #define BANDOLIER_OPEN_GL_RENDERER_API_HH
 
-#include <Renderer/renderer_api.hh>
+#include <renderer_api.hh>
 
 namespace Bandolier {
 

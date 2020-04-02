@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "Renderer/buffer.hh"
+#include "buffer.hh"
 
 namespace Bandolier {
 

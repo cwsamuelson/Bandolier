@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 
-#include "Renderer/buffer.hh"
+#include "buffer.hh"
 
 #include "open_gl_vertex_array.hh"
 

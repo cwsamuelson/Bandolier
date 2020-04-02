@@ -5,11 +5,11 @@
 
 #include <event_handler.hh>
 
-#include "imgui/imgui_layer.hh"
+#include "imgui_layer.hh"
 #include <layer_stack.hh>
 #include <ApplicationEvent.hh>
 #include <Window.hh>
-#include <Renderer/orthographic_camera.hh>
+#include <orthographic_camera.hh>
 
 namespace Bandolier {
 

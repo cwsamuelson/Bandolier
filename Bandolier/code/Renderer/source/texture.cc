@@ -1,4 +1,4 @@
-#include <platform/OpenGL/open_gl_texture_2_d.hh>
+#include <open_gl_texture_2_d.hh>
 #include <errors.hh>
 #include "texture.hh"
 #include "renderer_api.hh"

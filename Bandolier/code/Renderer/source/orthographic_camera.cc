@@ -1,4 +1,4 @@
-#include "../../vendor/glm/glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #include "orthographic_camera.hh"
 
@@ -8,7 +8,7 @@ OrthographicCamera::OrthographicCamera(float left, float right, float bottom, fl
   : mProjection(glm::ortho(left, right, bottom,  top, -1.0f, 1.0f))
   , mView(1.0)
 {
-  mViewProjection = mProjection * mView;
+  RecalculateViewMatrix();
 }
 
 void

@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_OPEN_GL_TEXTURE_2_D_HH
 #define BANDOLIER_OPEN_GL_TEXTURE_2_D_HH
 
-#include <Renderer/texture.hh>
+#include <texture.hh>
 
 namespace Bandolier {
 

@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_OPEN_GL_VERTEX_ARRAY_HH
 #define BANDOLIER_OPEN_GL_VERTEX_ARRAY_HH
 
-#include "Renderer/vertex_array.hh"
+#include "vertex_array.hh"
 
 namespace Bandolier{
 

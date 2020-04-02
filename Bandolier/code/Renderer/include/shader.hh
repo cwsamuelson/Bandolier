@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 
-#include "../../vendor/glm/glm/glm.hpp"
+#include "glm/glm.hpp"
 
 namespace Bandolier {
 

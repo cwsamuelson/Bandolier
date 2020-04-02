@@ -2,10 +2,10 @@
 #define BANDOLIER_EXAMPLE_LAYER_HH
 
 #include <layer.hh>
-#include <Renderer/shader.hh>
-#include <Renderer/vertex_array.hh>
-#include <Renderer/texture.hh>
-#include <Renderer/orthographic_camera_controller.hh>
+#include <shader.hh>
+#include <vertex_array.hh>
+#include <texture.hh>
+#include <orthographic_camera_controller.hh>
 
 class Example : public Bandolier::Layer
 {

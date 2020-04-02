@@ -5,7 +5,7 @@
 
 #include <glad/glad.h>
 
-#include "Renderer/shader.hh"
+#include "shader.hh"
 
 namespace Bandolier {
 

@@ -1,7 +1,7 @@
 #include "vertex_array.hh"
 #include "renderer.hh"
 
-#include "platform/OpenGL/open_gl_vertex_array.hh"
+#include "open_gl_vertex_array.hh"
 
 namespace Bandolier{
 

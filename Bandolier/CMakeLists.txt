@@ -25,51 +25,51 @@ target_link_libraries(imgui glfw glad)
 add_library(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
 target_include_directories(stbi PUBLIC vendor/stbi)
 
-add_library(Bandolier code/source/logger.cc
-                      code/source/Application.cc
-                      code/platform/Windows/windows_window.cc
-                      code/source/layer_stack.cc
-                      code/imgui/imgui_layer.cc
-                      code/imgui/imgui_layer.hh
-                      code/platform/Windows/windows_input.cc
-                      code/platform/Windows/windows_input.hh
-                      code/include/Input.hh
-                      code/include/Window.hh
-                      code/include/mouse_button_codes.hh
-                      code/include/key_codes.hh
-                      code/Renderer/GraphicsContext.hh
-                      code/platform/OpenGL/open_gl_context.cc
-                      code/platform/OpenGL/open_gl_context.hh
-                      code/Renderer/shader.cc
-                      code/Renderer/shader.hh
-                      code/Renderer/buffer.cc
-                      code/Renderer/buffer.hh
-                      code/Renderer/renderer.hh
-                      code/platform/OpenGL/open_gl_buffer.cc
-                      code/platform/OpenGL/open_gl_buffer.hh
-                      code/platform/OpenGL/open_gl_vertex_array.cc
-                      code/platform/OpenGL/open_gl_vertex_array.hh
-                      code/Renderer/vertex_array.cc
-                      code/Renderer/vertex_array.hh
-                      code/Renderer/render_command.hh
-                      code/Renderer/renderer_api.hh
-                      code/platform/OpenGL/open_gl_renderer_api.cc
-                      code/platform/OpenGL/open_gl_renderer_api.hh
-                      code/Renderer/renderer.cc
-                      code/Renderer/orthographic_camera.cc
-                      code/Renderer/orthographic_camera.hh
-                      code/platform/OpenGL/open_gl_shader.cc
-                      code/platform/OpenGL/open_gl_shader.hh
-                      code/include/errors.hh
-                      code/Renderer/texture.cc
-                      code/Renderer/texture.hh
-                      code/platform/OpenGL/open_gl_texture_2_d.cc
-                      code/platform/OpenGL/open_gl_texture_2_d.hh
-                      vendor/stbi/stb_image.cc
-                      code/Renderer/orthographic_camera_controller.cc
-                      code/Renderer/orthographic_camera_controller.hh)
+ADD_LIBRARY(Bandolier code/core/source/logger.cc
+            code/core/source/Application.cc
+            code/platform/Windows/source/windows_window.cc
+            code/core/source/layer_stack.cc
+            code/imgui/source/imgui_layer.cc
+            code/imgui/include/imgui_layer.hh
+            code/platform/Windows/source/windows_input.cc
+            code/platform/Windows/include/windows_input.hh
+            code/core/include/Input.hh
+            code/core/include/Window.hh
+            code/core/include/mouse_button_codes.hh
+            code/core/include/key_codes.hh
+            code/Renderer/include/GraphicsContext.hh
+            code/platform/OpenGL/source/open_gl_context.cc
+            code/platform/OpenGL/include/open_gl_context.hh
+            code/Renderer/source/shader.cc
+            code/Renderer/include/shader.hh
+            code/Renderer/source/buffer.cc
+            code/Renderer/include/buffer.hh
+            code/Renderer/include/renderer.hh
+            code/platform/OpenGL/source/open_gl_buffer.cc
+            code/platform/OpenGL/include/open_gl_buffer.hh
+            code/platform/OpenGL/source/open_gl_vertex_array.cc
+            code/platform/OpenGL/include/open_gl_vertex_array.hh
+            code/Renderer/source/vertex_array.cc
+            code/Renderer/include/vertex_array.hh
+            code/Renderer/include/render_command.hh
+            code/Renderer/include/renderer_api.hh
+            code/platform/OpenGL/source/open_gl_renderer_api.cc
+            code/platform/OpenGL/include/open_gl_renderer_api.hh
+            code/Renderer/source/renderer.cc
+            code/Renderer/source/orthographic_camera.cc
+            code/Renderer/include/orthographic_camera.hh
+            code/platform/OpenGL/source/open_gl_shader.cc
+            code/platform/OpenGL/include/open_gl_shader.hh
+            code/core/include/errors.hh
+            code/Renderer/source/texture.cc
+            code/Renderer/include/texture.hh
+            code/platform/OpenGL/source/open_gl_texture_2_d.cc
+            code/platform/OpenGL/include/open_gl_texture_2_d.hh
+            vendor/stbi/stb_image.cc
+            code/Renderer/source/orthographic_camera_controller.cc
+            code/Renderer/include/orthographic_camera_controller.hh)
 
-target_include_directories(Bandolier PUBLIC code/include code/)
+TARGET_INCLUDE_DIRECTORIES(Bandolier PUBLIC code/core/include code/events code/imgui/include code/platform/OpenGL/include code/platform/Windows/include code/Renderer/include)
 
 target_link_libraries(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm_static)
 

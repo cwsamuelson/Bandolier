@@ -7,7 +7,7 @@
 #include "logger.hh"
 #include "KeyEvent.hh"
 #include "MouseEvents.hh"
-#include "platform/OpenGL/open_gl_context.hh"
+#include "open_gl_context.hh"
 
 #include "windows_window.hh"
 

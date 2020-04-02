@@ -1,7 +1,7 @@
 #ifndef BANDOLIER_OPEN_GL_CONTEXT_HH
 #define BANDOLIER_OPEN_GL_CONTEXT_HH
 
-#include "Renderer/GraphicsContext.hh"
+#include "GraphicsContext.hh"
 
 struct GLFWwindow;
 

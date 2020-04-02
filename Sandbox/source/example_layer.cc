@@ -1,8 +1,8 @@
-#include <Renderer/render_command.hh>
+#include <render_command.hh>
 #include <imgui.h>
-#include <Renderer/renderer.hh>
-#include <platform/OpenGL/open_gl_shader.hh>
-#include <platform/OpenGL/open_gl_texture_2_d.hh>
+#include <renderer.hh>
+#include <open_gl_shader.hh>
+#include <open_gl_texture_2_d.hh>
 #include "example_layer.hh"
 #include "../../Bandolier/vendor/glm/glm/ext.hpp"
 

@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "Renderer/renderer_api.hh"
-#include "platform/OpenGL/open_gl_renderer_api.hh"
+#include "renderer_api.hh"
+#include "open_gl_renderer_api.hh"
 
 namespace Bandolier {
 
