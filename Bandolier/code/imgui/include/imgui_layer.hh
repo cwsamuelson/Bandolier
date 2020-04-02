@@ -18,57 +18,52 @@ namespace Bandolier {
 
 /*! Class for managing Dear IMgui
  */
-class ImguiLayer : public Layer
-{
+class ImguiLayer : public Layer {
 public:
   ImguiLayer();
+
   ~ImguiLayer() = default;
 
-  void
-  OnAttach() override;
-  void
-  OnDetach() override;
-  void
-  OnUpdate(time_step ts) override;
-  bool
-  OnEvent(const Events::BaseEvent& e) override;
+  void OnAttach() override;
 
-  void
-  Begin();
-  void
-  End();
+  void OnDetach() override;
+
+  void OnUpdate(time_step ts) override;
+
+  bool OnEvent(const Events::BaseEvent& e) override;
+
+  void Begin();
+
+  void End();
 
 protected:
-  using event_callback = bool(ImguiLayer::*)(const Bandolier::Events::BaseEvent&);
-  std::unordered_map<Bandolier::Events::EventType, event_callback> mEventHandlers =
-  {
-    //{Events::EventType::Unspecified,         &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::Window,              &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::WindowClose,         &ImguiLayer::UnspecifiedEvent},
-//    {Events::EventType::WindowResize,        &ImguiLayer::WindowResize},
-    //{Events::EventType::WindowFocus,         &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::WindowLostFocus,     &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::WindowGainedFocus,   &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::WindowMoved,         &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::App,                 &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::AppTick,             &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::AppUpdate,           &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::AppRender,           &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::Key,                 &ImguiLayer::UnspecifiedEvent},
-//    {Events::EventType::KeyPressed,          &ImguiLayer::KeyPressed},
-//    {Events::EventType::KeyReleased,         &ImguiLayer::KeyReleased},
-//    {Events::EventType::KeyTyped,            &ImguiLayer::KeyTyped},
-    //{Events::EventType::Mouse,               &ImguiLayer::UnspecifiedEvent},
-    //{Events::EventType::MouseButton,         &ImguiLayer::UnspecifiedEvent},
-//    {Events::EventType::MouseButtonPressed,  &ImguiLayer::MouseButtonPressed},
-//    {Events::EventType::MouseButtonReleased, &ImguiLayer::MouseButtonReleased},
-//    {Events::EventType::MouseMoved,          &ImguiLayer::MouseMoved},
-//    {Events::EventType::MouseScrolled,       &ImguiLayer::MouseScrolled},
+  using event_callback = bool (ImguiLayer::*)(const Bandolier::Events::BaseEvent&);
+  std::unordered_map<Bandolier::Events::EventType, event_callback> mEventHandlers = {
+          //{Events::EventType::Unspecified,         &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::Window,              &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::WindowClose,         &ImguiLayer::UnspecifiedEvent},
+          //    {Events::EventType::WindowResize,        &ImguiLayer::WindowResize},
+          //{Events::EventType::WindowFocus,         &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::WindowLostFocus,     &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::WindowGainedFocus,   &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::WindowMoved,         &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::App,                 &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::AppTick,             &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::AppUpdate,           &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::AppRender,           &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::Key,                 &ImguiLayer::UnspecifiedEvent},
+          //    {Events::EventType::KeyPressed,          &ImguiLayer::KeyPressed},
+          //    {Events::EventType::KeyReleased,         &ImguiLayer::KeyReleased},
+          //    {Events::EventType::KeyTyped,            &ImguiLayer::KeyTyped},
+          //{Events::EventType::Mouse,               &ImguiLayer::UnspecifiedEvent},
+          //{Events::EventType::MouseButton,         &ImguiLayer::UnspecifiedEvent},
+          //    {Events::EventType::MouseButtonPressed,  &ImguiLayer::MouseButtonPressed},
+          //    {Events::EventType::MouseButtonReleased, &ImguiLayer::MouseButtonReleased},
+          //    {Events::EventType::MouseMoved,          &ImguiLayer::MouseMoved},
+          //    {Events::EventType::MouseScrolled,       &ImguiLayer::MouseScrolled},
   };
 
-  bool
-  UnspecifiedEvent(const Bandolier::Events::BaseEvent& e)
-  {
+  bool UnspecifiedEvent(const Bandolier::Events::BaseEvent& e) {
     logging::client()->warn("Unhandled event type {0} occurred.", e.Type());
     return false;
   }

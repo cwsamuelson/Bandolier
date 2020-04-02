@@ -3,13 +3,10 @@
 
 #include "open_gl_vertex_array.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-std::unique_ptr<VertexArray>
-VertexArray::Create()
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::unique_ptr<VertexArray> VertexArray::Create() {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;

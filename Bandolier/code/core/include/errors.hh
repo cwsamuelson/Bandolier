@@ -7,7 +7,7 @@
 #include "logger.hh"
 #include <error_handling.hh>
 
-namespace Bandolier::ErrorHandling{
+namespace Bandolier::ErrorHandling {
 
 //! @TODO add support for formatted messages
 // Currently since the exception constructor does not support formatted messages, we cannot handle this successfully

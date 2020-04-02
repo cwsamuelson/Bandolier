@@ -10,30 +10,31 @@ namespace Bandolier {
 using time_step = float;
 using time_point = float;
 
-class Layer
-{
+class Layer {
 protected:
   std::string mDebugName;
 
 public:
   Layer(std::string name = "Layer")
-    : mDebugName(std::move(name))
-  {}
+          : mDebugName(std::move(name)) {
+  }
+
   virtual ~Layer() = default;
 
-  virtual void
-  OnAttach() {}
-  virtual void
-  OnDetach() {}
-  virtual void
-  OnUpdate(time_step ts) {}
-  virtual bool
-  OnEvent(const Events::BaseEvent& e) { return false; }
+  virtual void OnAttach() {
+  }
 
-  inline
-  const std::string&
-  Name() const
-  {
+  virtual void OnDetach() {
+  }
+
+  virtual void OnUpdate(time_step ts) {
+  }
+
+  virtual bool OnEvent(const Events::BaseEvent& e) {
+    return false;
+  }
+
+  inline const std::string& Name() const {
     return mDebugName;
   }
 };

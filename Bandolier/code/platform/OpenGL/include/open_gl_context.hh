@@ -7,14 +7,13 @@ struct GLFWwindow;
 
 namespace Bandolier {
 
-class OpenGLContext : public GraphicsContext
-{
+class OpenGLContext : public GraphicsContext {
 public:
   OpenGLContext(GLFWwindow* window);
+
   ~OpenGLContext();
 
-  virtual void
-  SwapBuffers() override;
+  virtual void SwapBuffers() override;
 
 private:
   GLFWwindow* mWindow;

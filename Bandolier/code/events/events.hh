@@ -9,42 +9,55 @@
 
 namespace Bandolier::Events {
 
-enum struct EventType{
+enum struct EventType {
   Unspecified = 0,
-  Window, WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowGainedFocus, WindowMoved,
-  App, AppTick, AppUpdate, AppRender,
-  Key, KeyPressed, KeyReleased, KeyTyped,
-  Mouse, MouseButton, MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
+  Window,
+  WindowClose,
+  WindowResize,
+  WindowFocus,
+  WindowLostFocus,
+  WindowGainedFocus,
+  WindowMoved,
+  App,
+  AppTick,
+  AppUpdate,
+  AppRender,
+  Key,
+  KeyPressed,
+  KeyReleased,
+  KeyTyped,
+  Mouse,
+  MouseButton,
+  MouseButtonPressed,
+  MouseButtonReleased,
+  MouseMoved,
+  MouseScrolled,
 };
 
-enum EventCategory{
-  None = 0,
-  Application = BIT(1),
-  Input =       BIT(2),
-  Keyboard =    BIT(3),
-  Mouse =       BIT(4),
-  MouseButton = BIT(5),
+enum EventCategory {
+  None = 0, Application = BIT(1), Input = BIT(2), Keyboard = BIT(3), Mouse = BIT(4), MouseButton = BIT(5),
 };
 
-class BaseEvent
-{
+class BaseEvent {
 public:
   virtual const char* Name() const = 0;
-  virtual unsigned short Categories() const = 0;
-  virtual EventType Type() const { return EventType::Unspecified; }
 
-  inline bool HasCategory(EventCategory category) const
-  {
-    return Categories() & (unsigned short)(category);
+  virtual unsigned short Categories() const = 0;
+
+  virtual EventType Type() const {
+    return EventType::Unspecified;
+  }
+
+  inline bool HasCategory(EventCategory category) const {
+    return Categories() & (unsigned short) (category);
   }
 };
 
-inline std::ostream& operator<<(std::ostream& os, const BaseEvent& e)
-{
+inline std::ostream& operator<<(std::ostream& os, const BaseEvent& e) {
   return os << e.Name();
 }
 
-class None : public BaseEvent{
+class None : public BaseEvent {
   EVENT_CATEGORY(0)
 };
 

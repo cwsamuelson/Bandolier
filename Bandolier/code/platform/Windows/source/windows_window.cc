@@ -11,19 +11,15 @@
 
 #include "windows_window.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-void
-WindowErrorHandler(int error_code, const char* description)
-{
+void WindowErrorHandler(int error_code, const char* description) {
   logging::core()->error("GLFW error ({0}): {1}", error_code, description);
 }
 
 WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
-  : mData(props)
-{
-  if(!sGLFWInitialized)
-  {
+        : mData(props) {
+  if(!sGLFWInitialized) {
     int success = glfwInit();
     sGLFWInitialized = true;
     glfwSetErrorCallback(WindowErrorHandler);
@@ -36,15 +32,14 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
   //! @TODO error handling/check the window
   mContext = std::make_unique<OpenGLContext>(mWindow);
 
-  BNDLR_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Failed to initialize GLAD");
+  BNDLR_ASSERT(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to initialize GLAD");
 
   glfwSetWindowUserPointer(mWindow, &mData);
   VSync(props.vsync);
 
-  glfwSetWindowSizeCallback(mWindow,
-    [](GLFWwindow* window, int width, int height)
+  glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* window, int width, int height)
     {
-      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
       data.width = width;
       data.height = height;
 
@@ -52,71 +47,59 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
       data.resizeTrigger.fire(event);
       data.appTrigger.fire(event);
       data.allEventsTrigger.fire(event);
-    }
-  );
+    });
 
-  glfwSetWindowCloseCallback(mWindow,
-    [](GLFWwindow* window)
+  glfwSetWindowCloseCallback(mWindow, [](GLFWwindow* window)
     {
-        WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
 
-        auto event = Events::WindowClose();
-        data.closeTrigger.fire(event);
-        data.appTrigger.fire(event);
+      auto event = Events::WindowClose();
+      data.closeTrigger.fire(event);
+      data.appTrigger.fire(event);
+      data.allEventsTrigger.fire(event);
+    });
+
+  glfwSetKeyCallback(mWindow, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
+
+      switch(action) {
+      case GLFW_PRESS: {
+        auto event = Events::KeyPressed(key, 0);
+        data.keyPressTrigger.fire(event);
+        data.keyTrigger.fire(event);
         data.allEventsTrigger.fire(event);
-    }
-  );
+      }
+        break;
 
-  glfwSetKeyCallback(mWindow,
-     [](GLFWwindow* window, int key, int scancode, int action, int mods)
-     {
-         WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      case GLFW_RELEASE: {
+        auto event = Events::KeyReleased(key);
+        data.keyReleaseTrigger.fire(event);
+        data.keyTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
+      }
+        break;
 
-         switch(action)
-         {
-         case GLFW_PRESS:
-         {
-           auto event = Events::KeyPressed(key, 0);
-           data.keyPressTrigger.fire(event);
-           data.keyTrigger.fire(event);
-           data.allEventsTrigger.fire(event);
-         }
-           break;
+      case GLFW_REPEAT: {
+        auto event = Events::KeyPressed(key, 1);
+        data.keyPressTrigger.fire(event);
+        data.keyTrigger.fire(event);
+        data.allEventsTrigger.fire(event);
+      }
+        break;
 
-         case GLFW_RELEASE:
-         {
-           auto event = Events::KeyReleased(key);
-           data.keyReleaseTrigger.fire(event);
-           data.keyTrigger.fire(event);
-           data.allEventsTrigger.fire(event);
-         }
-           break;
+      default:
+        //wat
+        break;
+      }
+    });
 
-         case GLFW_REPEAT:
-         {
-           auto event = Events::KeyPressed(key, 1);
-           data.keyPressTrigger.fire(event);
-           data.keyTrigger.fire(event);
-           data.allEventsTrigger.fire(event);
-         }
-           break;
-
-         default:
-           //wat
-           break;
-         }
-     }
-  );
-
-  glfwSetMouseButtonCallback(mWindow,
-    [](GLFWwindow* window, int button, int action, int mods)
+  glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* window, int button, int action, int mods)
     {
-      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
 
-      switch(action)
-      {
-      case GLFW_PRESS:
-      {
+      switch(action) {
+      case GLFW_PRESS: {
         auto event = Events::MouseButtonPressed(button);
         data.mouseButtonPressTrigger.fire(event);
         data.mouseButtonTrigger.fire(event);
@@ -125,8 +108,7 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
       }
         break;
 
-      case GLFW_RELEASE:
-      {
+      case GLFW_RELEASE: {
         auto event = Events::MouseButtonReleased(button);
         data.mouseButtonReleaseTrigger.fire(event);
         data.mouseButtonTrigger.fire(event);
@@ -139,191 +121,139 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
         //wat
         break;
       }
-    }
-  );
+    });
 
-  glfwSetScrollCallback(mWindow,
-    [](GLFWwindow* window, double xOffset, double yOffset)
+  glfwSetScrollCallback(mWindow, [](GLFWwindow* window, double xOffset, double yOffset)
     {
-      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
 
       auto event = Events::MouseScrolled((float(xOffset)), float(yOffset));
       data.mouseScrollTrigger.fire(event);
       data.mouseTrigger.fire(event);
       data.allEventsTrigger.fire(event);
-    }
-  );
+    });
 
-  glfwSetCursorPosCallback(mWindow,
-     [](GLFWwindow* window, double xPos, double yPos)
-     {
-       WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
-
-       auto event = Events::MouseMoved((float(xPos)), float(yPos));
-       data.mouseMoveTrigger.fire(event);
-       data.mouseTrigger.fire(event);
-       data.allEventsTrigger.fire(event);
-     }
-  );
-
-  glfwSetWindowFocusCallback(mWindow,
-    [](GLFWwindow* window, int hasFocus)
+  glfwSetCursorPosCallback(mWindow, [](GLFWwindow* window, double xPos, double yPos)
     {
-      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
 
-      if(hasFocus)
-      {
+      auto event = Events::MouseMoved((float(xPos)), float(yPos));
+      data.mouseMoveTrigger.fire(event);
+      data.mouseTrigger.fire(event);
+      data.allEventsTrigger.fire(event);
+    });
+
+  glfwSetWindowFocusCallback(mWindow, [](GLFWwindow* window, int hasFocus)
+    {
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
+
+      if(hasFocus) {
         auto event = Events::WindowGainedFocus();
         data.windowGainFocusTrigger.fire(event);
         data.windowTrigger.fire(event);
         data.appTrigger.fire(event);
         data.allEventsTrigger.fire(event);
-      }
-      else
-      {
+      } else {
         auto event = Events::WindowLostFocus();
         data.windowLostFocusTrigger.fire(event);
         data.windowTrigger.fire(event);
         data.appTrigger.fire(event);
         data.allEventsTrigger.fire(event);
       }
-    }
-  );
+    });
 
-  glfwSetCharCallback(mWindow,
-    [](GLFWwindow* window, unsigned int keycode)
+  glfwSetCharCallback(mWindow, [](GLFWwindow* window, unsigned int keycode)
     {
-      WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+      WindowProperties& data = *(WindowProperties*) glfwGetWindowUserPointer(window);
 
       auto event = Events::KeyTyped(keycode);
       data.keyTypedTrigger.fire(event);
       data.keyTrigger.fire(event);
       data.allEventsTrigger.fire(event);
-    }
-  );
+    });
 }
 
-WindowsWindow::~WindowsWindow()
-{
+WindowsWindow::~WindowsWindow() {
   glfwDestroyWindow(mWindow);
   glfwTerminate();//maybe shouldn't do this one, but eh for now
 }
 
-std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t>
-WindowsWindow::AllChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t> WindowsWindow::AllChannel() const {
   return mData.allEventsTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t>
-WindowsWindow::AppChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t> WindowsWindow::AppChannel() const {
   return mData.appTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t>
-WindowsWindow::KeyChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t> WindowsWindow::KeyChannel() const {
   return mData.keyTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t>
-WindowsWindow::MouseChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t> WindowsWindow::MouseChannel() const {
   return mData.mouseTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t>
-WindowsWindow::MouseButtonChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t> WindowsWindow::MouseButtonChannel() const {
   return mData.mouseButtonTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t>
-WindowsWindow::ResizeChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t> WindowsWindow::ResizeChannel() const {
   return mData.resizeTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t>
-WindowsWindow::CloseChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t> WindowsWindow::CloseChannel() const {
   return mData.closeTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t>
-WindowsWindow::KeyTypedChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t> WindowsWindow::KeyTypedChannel() const {
   return mData.keyTypedTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t>
-WindowsWindow::KeyPressChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t> WindowsWindow::KeyPressChannel() const {
   return mData.keyPressTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t>
-WindowsWindow::KeyReleaseChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t> WindowsWindow::KeyReleaseChannel() const {
   return mData.keyReleaseTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseButtonPressTrigger)::channel_t>
-WindowsWindow::MousePressChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseButtonPressTrigger)::channel_t> WindowsWindow::MousePressChannel() const {
   return mData.mouseButtonPressTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseButtonReleaseTrigger)::channel_t>
-WindowsWindow::MouseReleaseChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseButtonReleaseTrigger)::channel_t> WindowsWindow::MouseReleaseChannel() const {
   return mData.mouseButtonReleaseTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseScrollTrigger)::channel_t>
-WindowsWindow::MouseScrollChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseScrollTrigger)::channel_t> WindowsWindow::MouseScrollChannel() const {
   return mData.mouseScrollTrigger.getChannel();
 }
 
-std::weak_ptr<decltype(WindowProperties::mouseMoveTrigger)::channel_t>
-WindowsWindow::MouseMoveChannel() const
-{
+std::weak_ptr<decltype(WindowProperties::mouseMoveTrigger)::channel_t> WindowsWindow::MouseMoveChannel() const {
   return mData.mouseMoveTrigger.getChannel();
 }
 
-void
-WindowsWindow::OnUpdate()
-{
+void WindowsWindow::OnUpdate() {
   glfwPollEvents();
   mContext->SwapBuffers();
 }
 
-void
-WindowsWindow::VSync(bool enabled)
-{
-  if(enabled)
-  {
+void WindowsWindow::VSync(bool enabled) {
+  if(enabled) {
     glfwSwapInterval(1);
-  }
-  else
-  {
+  } else {
     glfwSwapInterval(0);
   }
 
   mData.vsync = enabled;
 }
 
-bool
-WindowsWindow::VSync() const
-{
+bool WindowsWindow::VSync() const {
   return mData.vsync;
 }
 
-void*
-WindowsWindow::Native()
-{
+void* WindowsWindow::Native() {
   return mWindow;
 }
 

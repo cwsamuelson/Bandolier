@@ -7,32 +7,14 @@
 
 #include "logger.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-enum class ShaderDataType
-{
-  None = 0,
-  Float,
-  Float2,
-  Float3,
-  Float4,
-  Mat2,
-  Mat3,
-  Mat4,
-  Int,
-  Int2,
-  Int3,
-  Int4,
-  Bool,
-  Float1 = Float,
-  Int1 = Int,
+enum class ShaderDataType {
+  None = 0, Float, Float2, Float3, Float4, Mat2, Mat3, Mat4, Int, Int2, Int3, Int4, Bool, Float1 = Float, Int1 = Int,
 };
 
-static uint32_t
-ShaderDataTypeSize(ShaderDataType type)
-{
-  switch(type)
-  {
+static uint32_t ShaderDataTypeSize(ShaderDataType type) {
+  switch(type) {
   case ShaderDataType::Float:
     return 4;
 
@@ -70,8 +52,7 @@ ShaderDataTypeSize(ShaderDataType type)
   BNDLR_FAIL("Unknown or unsupported shader data type");
 }
 
-struct BufferElement
-{
+struct BufferElement {
   std::string Name;
   ShaderDataType Type;
   uint32_t Size;
@@ -79,18 +60,15 @@ struct BufferElement
   bool Normalized;
 
   BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-    : Name(std::move(name))
-    , Type(type)
-    , Size(ShaderDataTypeSize(type))
-    , Offset(0)
-    , Normalized(normalized)
-  {}
+          : Name(std::move(name))
+          , Type(type)
+          , Size(ShaderDataTypeSize(type))
+          , Offset(0)
+          , Normalized(normalized) {
+  }
 
-  uint32_t
-  GetComponentCount() const
-  {
-    switch(Type)
-    {
+  uint32_t GetComponentCount() const {
+    switch(Type) {
     case ShaderDataType::Float:
       return 1;
 
@@ -130,8 +108,7 @@ struct BufferElement
   }
 };
 
-class BufferLayout
-{
+class BufferLayout {
 private:
   std::vector<BufferElement> mElements;
   uint32_t mStride = 0;
@@ -140,55 +117,39 @@ public:
   BufferLayout() = default;
 
   BufferLayout(const std::initializer_list<BufferElement>& elements)
-    : mElements(elements)
-  {
+          : mElements(elements) {
     CalculateOffsetAndStride();
   }
 
-  inline uint32_t
-  Stride() const
-  {
+  inline uint32_t Stride() const {
     return mStride;
   }
 
-  inline const std::vector<BufferElement>&
-  Elements() const
-  {
+  inline const std::vector<BufferElement>& Elements() const {
     return mElements;
   }
 
-  auto
-  begin()
-  {
+  auto begin() {
     return mElements.begin();
   }
 
-  auto
-  end()
-  {
+  auto end() {
     return mElements.end();
   }
 
-  auto
-  begin() const
-  {
+  auto begin() const {
     return mElements.begin();
   }
 
-  auto
-  end() const
-  {
+  auto end() const {
     return mElements.end();
   }
 
 private:
-  void
-  CalculateOffsetAndStride()
-  {
+  void CalculateOffsetAndStride() {
     uint32_t offset = 0;
     mStride = 0;
-    for(auto& element : mElements)
-    {
+    for(auto& element : mElements) {
       element.Offset = offset;
       offset += element.Size;
       mStride += element.Size;
@@ -196,44 +157,36 @@ private:
   }
 };
 
-class VertexBuffer
-{
+class VertexBuffer {
 public:
   virtual ~VertexBuffer() = default;
 
-  virtual void
-  Bind() const = 0;
-  virtual void
-  Unbind() const = 0;
+  virtual void Bind() const = 0;
 
-  virtual const BufferLayout&
-  Layout() const = 0;
-  virtual BufferLayout&
-  Layout() = 0;
+  virtual void Unbind() const = 0;
 
-  static std::shared_ptr<VertexBuffer>
-  create(const float* vertices, uint32_t size);
-  static std::shared_ptr<VertexBuffer>
-  create(const std::vector<float>& indices);
+  virtual const BufferLayout& Layout() const = 0;
+
+  virtual BufferLayout& Layout() = 0;
+
+  static std::shared_ptr<VertexBuffer> create(const float* vertices, uint32_t size);
+
+  static std::shared_ptr<VertexBuffer> create(const std::vector<float>& indices);
 };
 
-class IndexBuffer
-{
+class IndexBuffer {
 public:
   virtual ~IndexBuffer() = default;
 
-  virtual void
-  Bind() const = 0;
-  virtual void
-  Unbind() const = 0;
+  virtual void Bind() const = 0;
 
-  virtual uint32_t
-  Count() const = 0;
+  virtual void Unbind() const = 0;
 
-  static std::shared_ptr<IndexBuffer>
-  create(const uint32_t* indices, uint32_t count);
-  static std::shared_ptr<IndexBuffer>
-  create(const std::vector<uint32_t>& indices);
+  virtual uint32_t Count() const = 0;
+
+  static std::shared_ptr<IndexBuffer> create(const uint32_t* indices, uint32_t count);
+
+  static std::shared_ptr<IndexBuffer> create(const std::vector<uint32_t>& indices);
 };
 
 }

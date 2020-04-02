@@ -1,29 +1,29 @@
-cmake_minimum_required(VERSION 3.14)
-project(Bandolier CXX)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+PROJECT(Bandolier CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(vendor/datastructures/event_handler)
+ADD_SUBDIRECTORY(vendor/datastructures/event_handler)
 ADD_SUBDIRECTORY(vendor/datastructures/error)
-add_subdirectory(vendor/spdlog)
-add_subdirectory(vendor/glfw)
-add_subdirectory(vendor/glad)
-add_subdirectory(vendor/glm)
+ADD_SUBDIRECTORY(vendor/spdlog)
+ADD_SUBDIRECTORY(vendor/glfw)
+ADD_SUBDIRECTORY(vendor/glad)
+ADD_SUBDIRECTORY(vendor/glm)
 
-add_library(imgui vendor/imgui/imgui.cpp
-                  vendor/imgui/imgui_demo.cpp
-                  vendor/imgui/imgui_draw.cpp
-                  vendor/imgui/imgui_widgets.cpp
-                  vendor/imgui/examples/imgui_impl_opengl3.cpp
-                  vendor/imgui/examples/imgui_impl_opengl3.h
-                  vendor/imgui/examples/imgui_impl_glfw.h
-                  vendor/imgui/examples/imgui_impl_glfw.cpp)
-target_include_directories(imgui PUBLIC vendor/imgui/)
-target_compile_definitions(imgui PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
-target_link_libraries(imgui glfw glad)
+ADD_LIBRARY(imgui vendor/imgui/imgui.cpp
+            vendor/imgui/imgui_demo.cpp
+            vendor/imgui/imgui_draw.cpp
+            vendor/imgui/imgui_widgets.cpp
+            vendor/imgui/examples/imgui_impl_opengl3.cpp
+            vendor/imgui/examples/imgui_impl_opengl3.h
+            vendor/imgui/examples/imgui_impl_glfw.h
+            vendor/imgui/examples/imgui_impl_glfw.cpp)
+TARGET_INCLUDE_DIRECTORIES(imgui PUBLIC vendor/imgui/)
+TARGET_COMPILE_DEFINITIONS(imgui PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+TARGET_LINK_LIBRARIES(imgui glfw glad)
 
-add_library(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
-target_include_directories(stbi PUBLIC vendor/stbi)
+ADD_LIBRARY(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
+TARGET_INCLUDE_DIRECTORIES(stbi PUBLIC vendor/stbi)
 
 ADD_LIBRARY(Bandolier code/core/source/logger.cc
             code/core/source/Application.cc
@@ -71,5 +71,5 @@ ADD_LIBRARY(Bandolier code/core/source/logger.cc
 
 TARGET_INCLUDE_DIRECTORIES(Bandolier PUBLIC code/core/include code/events code/imgui/include code/platform/OpenGL/include code/platform/Windows/include code/Renderer/include)
 
-target_link_libraries(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm_static)
+TARGET_LINK_LIBRARIES(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm_static)
 

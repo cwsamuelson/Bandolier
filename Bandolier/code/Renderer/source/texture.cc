@@ -3,13 +3,10 @@
 #include "texture.hh"
 #include "renderer_api.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-std::shared_ptr<Texture2D>
-Texture2D::Create(const std::string& path)
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::shared_ptr<Texture2D> Texture2D::Create(const std::string& path) {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     BNDLR_FAIL("A rendering API must be chosen!");
   case RendererAPI::API::OpenGL:

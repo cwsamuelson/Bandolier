@@ -7,8 +7,7 @@
 
 namespace Bandolier::Events {
 
-class KeyEvent : public BaseEvent
-{
+class KeyEvent : public BaseEvent {
 public:
   using Trigger_t = gsw::event_trigger<KeyEvent>;
   using Channel_t = Trigger_t::channel_t;
@@ -16,29 +15,28 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  inline int
-  KeyCode() const
-  {
+  inline int KeyCode() const {
     return mKeyCode;
   }
 
   EVENT_CATEGORY(EventCategory::Keyboard | EventCategory::Input)
-  EVENT_TYPE(EventType::Key)
-protected:
-  explicit
-  KeyEvent(int keycode)
-    : mKeyCode(keycode)
-  {}
 
-  virtual const char*
-  Name() const override {return "KeyEvent"; }
+  EVENT_TYPE(EventType::Key)
+
+protected:
+  explicit KeyEvent(int keycode)
+          : mKeyCode(keycode) {
+  }
+
+  virtual const char* Name() const override {
+    return "KeyEvent";
+  }
 
 private:
   int mKeyCode;
 };
 
-class KeyPressed : public KeyEvent
-{
+class KeyPressed : public KeyEvent {
 public:
   using Trigger_t = gsw::event_trigger<KeyPressed>;
   using Channel_t = Trigger_t::channel_t;
@@ -47,26 +45,25 @@ public:
 
 public:
   KeyPressed(int keycode, int repeatCount)
-    : KeyEvent(keycode)
-    , mRepeatCount(repeatCount)
-  {}
+          : KeyEvent(keycode)
+          , mRepeatCount(repeatCount) {
+  }
 
-  const char*
-  Name() const override {return "KeyPressed"; }
+  const char* Name() const override {
+    return "KeyPressed";
+  }
 
-  inline int
-  RepeatCount() const
-  {
+  inline int RepeatCount() const {
     return mRepeatCount;
   }
 
   EVENT_TYPE(EventType::KeyPressed)
+
 private:
   int mRepeatCount;
 };
 
-class KeyReleased : public KeyEvent
-{
+class KeyReleased : public KeyEvent {
 public:
   using Trigger_t = gsw::event_trigger<KeyReleased>;
   using Channel_t = Trigger_t::channel_t;
@@ -74,19 +71,18 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  explicit
-  KeyReleased(int keycode)
-    : KeyEvent(keycode)
-  {}
+  explicit KeyReleased(int keycode)
+          : KeyEvent(keycode) {
+  }
 
-  const char*
-  Name() const override {return "KeyReleased"; }
+  const char* Name() const override {
+    return "KeyReleased";
+  }
 
   EVENT_TYPE(EventType::KeyReleased)
 };
 
-class KeyTyped : public KeyEvent
-{
+class KeyTyped : public KeyEvent {
 public:
   using Trigger_t = gsw::event_trigger<KeyReleased>;
   using Channel_t = Trigger_t::channel_t;
@@ -94,10 +90,9 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  explicit
-  KeyTyped(int keycode)
-    : KeyEvent(keycode)
-  {}
+  explicit KeyTyped(int keycode)
+          : KeyEvent(keycode) {
+  }
 
   EVENT_TYPE(EventType::KeyTyped)
 };

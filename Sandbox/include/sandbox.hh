@@ -7,10 +7,10 @@
 #include <Application.hh>
 #include <vertex_array.hh>
 
-class Sandbox : public Bandolier::Application
-{
+class Sandbox : public Bandolier::Application {
 public:
   Sandbox();
+
   ~Sandbox() = default;
 };
 

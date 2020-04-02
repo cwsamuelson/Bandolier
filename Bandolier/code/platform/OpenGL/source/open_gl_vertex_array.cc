@@ -6,11 +6,8 @@
 
 namespace Bandolier {
 
-static GLenum
-ShaderDataTypeToOpenGLBase(Bandolier::ShaderDataType type)
-{
-  switch(type)
-  {
+static GLenum ShaderDataTypeToOpenGLBase(Bandolier::ShaderDataType type) {
+  switch(type) {
   case Bandolier::ShaderDataType::Float:
     [[fallthrough]];
   case Bandolier::ShaderDataType::Float2:
@@ -41,69 +38,53 @@ ShaderDataTypeToOpenGLBase(Bandolier::ShaderDataType type)
   return GL_NONE;
 }
 
-OpenGlVertexArray::OpenGlVertexArray()
-{
+OpenGlVertexArray::OpenGlVertexArray() {
   glCreateVertexArrays(1, &mID);
 }
 
-OpenGlVertexArray::~OpenGlVertexArray()
-{
+OpenGlVertexArray::~OpenGlVertexArray() {
   glDeleteVertexArrays(1, &mID);
 }
 
-void
-OpenGlVertexArray::Bind() const
-{
+void OpenGlVertexArray::Bind() const {
   glBindVertexArray(mID);
 }
 
-void
-OpenGlVertexArray::Unbind() const
-{
+void OpenGlVertexArray::Unbind() const {
   glBindVertexArray(0);
 }
 
-void
-OpenGlVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO)
-{
+void OpenGlVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO) {
   glBindVertexArray(mID);
   VBO->Bind();
 
   const auto& layout = VBO->Layout();
-  for(const auto& element : layout)
-  {
+  for(const auto& element : layout) {
     glEnableVertexAttribArray(mVBIndex);
-    glVertexAttribPointer(
-            mVBIndex,
-            element.GetComponentCount(),
-            ShaderDataTypeToOpenGLBase(element.Type),
-            element.Normalized ? GL_TRUE : GL_FALSE,
-            layout.Stride(),
-            (const void*)element.Offset);
+    glVertexAttribPointer(mVBIndex,
+                          element.GetComponentCount(),
+                          ShaderDataTypeToOpenGLBase(element.Type),
+                          element.Normalized ? GL_TRUE : GL_FALSE,
+                          layout.Stride(),
+                          (const void*) element.Offset);
     ++mVBIndex;
   }
 
   mVBOs.push_back(VBO);
 }
 
-void
-OpenGlVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO)
-{
+void OpenGlVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO) {
   glBindVertexArray(mID);
   IBO->Bind();
 
   mIBO = IBO;
 }
 
-const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>&
-OpenGlVertexArray::GetVertexBuffers() const
-{
+const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>& OpenGlVertexArray::GetVertexBuffers() const {
   return mVBOs;
 }
 
-const std::shared_ptr<Bandolier::IndexBuffer>&
-OpenGlVertexArray::GetIndexBuffer() const
-{
+const std::shared_ptr<Bandolier::IndexBuffer>& OpenGlVertexArray::GetIndexBuffer() const {
   return mIBO;
 }
 

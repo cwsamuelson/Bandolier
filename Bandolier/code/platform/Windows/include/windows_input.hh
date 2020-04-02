@@ -5,15 +5,13 @@
 
 namespace Bandolier {
 
-class WindowsInput : public Input
-{
+class WindowsInput : public Input {
 protected:
-  virtual bool
-  IsKeyPressedImpl(int keycode) override;
-  virtual bool
-  IsMouseButtonPressedImpl(int button) override;
-  virtual std::tuple<float, float>
-  GetMousePositionImpl() override;
+  virtual bool IsKeyPressedImpl(int keycode) override;
+
+  virtual bool IsMouseButtonPressedImpl(int button) override;
+
+  virtual std::tuple<float, float> GetMousePositionImpl() override;
 };
 
 }

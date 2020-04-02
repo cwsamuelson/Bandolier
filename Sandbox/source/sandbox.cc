@@ -9,14 +9,12 @@
 #include "sandbox.hh"
 
 Sandbox::Sandbox()
-  : Application("Sandbox")
-{
+        : Application("Sandbox") {
   //! @TODO use member-initialization?
   PushLayer(std::make_shared<Example>());
 }
 
-Bandolier::Application& Bandolier::CreateApplication()
-{
+Bandolier::Application& Bandolier::CreateApplication() {
   Application::Instance = new Sandbox;
   return Application::Get();
 }

@@ -6,13 +6,10 @@
 #include "renderer.hh"
 #include "renderer_api.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-std::shared_ptr<VertexBuffer>
-VertexBuffer::create(const float* vertices, uint32_t size)
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::shared_ptr<VertexBuffer> VertexBuffer::create(const float* vertices, uint32_t size) {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
@@ -36,17 +33,12 @@ VertexBuffer::create(const float* vertices, uint32_t size)
   return nullptr;
 }
 
-std::shared_ptr<VertexBuffer>
-VertexBuffer::create(const std::vector<float>& vertexes)
-{
+std::shared_ptr<VertexBuffer> VertexBuffer::create(const std::vector<float>& vertexes) {
   return VertexBuffer::create(vertexes.data(), vertexes.size() * sizeof(float));
 }
 
-std::shared_ptr<IndexBuffer>
-IndexBuffer::create(const uint32_t* indices, uint32_t count)
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::shared_ptr<IndexBuffer> IndexBuffer::create(const uint32_t* indices, uint32_t count) {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
@@ -70,9 +62,7 @@ IndexBuffer::create(const uint32_t* indices, uint32_t count)
   return nullptr;
 }
 
-std::shared_ptr<IndexBuffer>
-IndexBuffer::create(const std::vector<uint32_t>& indices)
-{
+std::shared_ptr<IndexBuffer> IndexBuffer::create(const std::vector<uint32_t>& indices) {
   return IndexBuffer::create(indices.data(), indices.size());
 }
 

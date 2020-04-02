@@ -5,46 +5,37 @@
 
 namespace Bandolier {
 
-class OrthographicCamera
-{
+class OrthographicCamera {
 private:
-  void
-  RecalculateViewMatrix();
+  void RecalculateViewMatrix();
 
   glm::mat4 mProjection;
   glm::mat4 mView;
   glm::mat4 mViewProjection;
 
-  glm::vec3 mPosition = {0.0f, 0.0f, 0.0f};
+  glm::vec3 mPosition = { 0.0f, 0.0f, 0.0f };
   float mRotation = 0.0f;
 
 public:
   OrthographicCamera(float left, float right, float bottom, float top);
 
   [[nodiscard]]
-  const glm::vec3&
-  GetPosition() const;
+  const glm::vec3& GetPosition() const;
 
-  void
-  SetPosition(const glm::vec3& position);
+  void SetPosition(const glm::vec3& position);
 
   [[nodiscard]]
-  const glm::mat4&
-  GetProjection() const;
+  const glm::mat4& GetProjection() const;
 
-  void
-  SetRotation(float rotation);
+  void SetRotation(float rotation);
 
   [[nodiscard]]
-  const glm::mat4&
-  GetView() const;
+  const glm::mat4& GetView() const;
 
   [[nodiscard]]
-  const glm::mat4&
-  GetViewProjection() const;
+  const glm::mat4& GetViewProjection() const;
 
-  void
-  SetProjection(float left, float right, float bottom, float top);
+  void SetProjection(float left, float right, float bottom, float top);
 };
 
 }

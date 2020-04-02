@@ -5,52 +5,44 @@
 
 namespace Bandolier {
 
-class OpenGlVertexBuffer : public VertexBuffer
-{
+class OpenGlVertexBuffer : public VertexBuffer {
 private:
   uint32_t mID;
   BufferLayout mLayout;
 
 public:
   OpenGlVertexBuffer(const float* vertices, uint32_t size);
+
   virtual ~OpenGlVertexBuffer();
 
-  void
-  Bind() const override;
-  void
-  Unbind() const override;
+  void Bind() const override;
 
-  const BufferLayout&
-  Layout() const override
-  {
+  void Unbind() const override;
+
+  const BufferLayout& Layout() const override {
     return mLayout;
   }
 
-  BufferLayout&
-  Layout() override
-  {
+  BufferLayout& Layout() override {
     return mLayout;
   }
 };
 
-class OpenGlIndexBuffer : public IndexBuffer
-{
+class OpenGlIndexBuffer : public IndexBuffer {
 private:
   uint32_t mID;
   uint32_t mCount;
 
 public:
   OpenGlIndexBuffer(const uint32_t* indices, uint32_t count);
+
   virtual ~OpenGlIndexBuffer();
 
-  void
-  Bind() const override;
-  void
-  Unbind() const override;
+  void Bind() const override;
 
-  uint32_t
-  Count() const override
-  {
+  void Unbind() const override;
+
+  uint32_t Count() const override {
     return mCount;
   }
 };

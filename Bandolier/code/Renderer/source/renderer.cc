@@ -2,22 +2,18 @@
 #include "renderer.hh"
 #include "render_command.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-void
-Renderer::BeginScene(OrthographicCamera& camera)
-{
+void Renderer::BeginScene(OrthographicCamera& camera) {
   sSceneData->ViewProjectionMatrix = camera.GetViewProjection();
 }
 
-void
-Renderer::EndScene()
-{
+void Renderer::EndScene() {
 }
 
-void
-Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& VAO, const glm::mat4& transform)
-{
+void Renderer::Submit(const std::shared_ptr<Shader>& shader,
+                      const std::shared_ptr<VertexArray>& VAO,
+                      const glm::mat4& transform) {
   auto oglShader = std::dynamic_pointer_cast<OpenGlShader>(shader);
 
   shader->Bind();

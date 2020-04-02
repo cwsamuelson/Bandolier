@@ -9,15 +9,13 @@
 #include "Application.hh"
 #include "logger.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
 ImguiLayer::ImguiLayer()
-  : Layer("ImGuiLayer")
-{}
+        : Layer("ImGuiLayer") {
+}
 
-void
-ImguiLayer::OnAttach()
-{
+void ImguiLayer::OnAttach() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
 
@@ -29,8 +27,7 @@ ImguiLayer::OnAttach()
   ImGui::StyleColorsDark();
 
   ImGuiStyle& style = ImGui::GetStyle();
-  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-  {
+  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
     style.WindowRounding = 0.5f;
     style.Colors[ImGuiCol_WindowBg].w = 0.5f;
   }
@@ -39,32 +36,24 @@ ImguiLayer::OnAttach()
   ImGui_ImplOpenGL3_Init("#version 450");
 }
 
-void
-ImguiLayer::OnDetach()
-{
+void ImguiLayer::OnDetach() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 }
 
-void
-ImguiLayer::OnUpdate(time_step)
-{
-  static bool show = true;
-  ImGui::ShowDemoWindow(&show);
+void ImguiLayer::OnUpdate(time_step) {
+  //static bool show = true;
+  //ImGui::ShowDemoWindow(&show);
 }
 
-void
-ImguiLayer::Begin()
-{
+void ImguiLayer::Begin() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
 }
 
-void
-ImguiLayer::End()
-{
+void ImguiLayer::End() {
   ImGuiIO& io = ImGui::GetIO();
   Application& app = Application::Get();
   Window& window = app.Window();
@@ -73,8 +62,7 @@ ImguiLayer::End()
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-  {
+  if(io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
     GLFWwindow* backup = glfwGetCurrentContext();
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
@@ -82,11 +70,8 @@ ImguiLayer::End()
   }
 }
 
-bool
-ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e)
-{
-  if(mEventHandlers.count(e.Type()))
-  {
+bool ImguiLayer::OnEvent(const Bandolier::Events::BaseEvent& e) {
+  if(mEventHandlers.count(e.Type())) {
     return std::invoke(mEventHandlers.at(e.Type()), this, e);
   }
 

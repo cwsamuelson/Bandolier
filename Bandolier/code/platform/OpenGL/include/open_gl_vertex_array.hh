@@ -3,10 +3,9 @@
 
 #include "vertex_array.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
-class OpenGlVertexArray : public VertexArray
-{
+class OpenGlVertexArray : public VertexArray {
 private:
   uint32_t mID;
   std::vector<std::shared_ptr<VertexBuffer>> mVBOs;
@@ -15,22 +14,20 @@ private:
 
 public:
   OpenGlVertexArray();
+
   ~OpenGlVertexArray();
 
-  void
-  Bind() const override;
-  void
-  Unbind() const override;
+  void Bind() const override;
 
-  void
-  AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO) override;
-  void
-  SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO) override;
+  void Unbind() const override;
 
-  const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>&
-  GetVertexBuffers() const override;
-  const std::shared_ptr<Bandolier::IndexBuffer>&
-  GetIndexBuffer() const override;
+  void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& VBO) override;
+
+  void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& IBO) override;
+
+  const std::vector<std::shared_ptr<Bandolier::VertexBuffer>>& GetVertexBuffers() const override;
+
+  const std::shared_ptr<Bandolier::IndexBuffer>& GetIndexBuffer() const override;
 };
 
 }

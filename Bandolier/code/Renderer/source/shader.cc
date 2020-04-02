@@ -10,11 +10,10 @@
 
 namespace Bandolier {
 
-std::shared_ptr<Shader>
-Shader::Create(std::string name, const std::string& vertexSource, const std::string& fragmentSource)
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::shared_ptr<Shader> Shader::Create(std::string name,
+                                       const std::string& vertexSource,
+                                       const std::string& fragmentSource) {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
@@ -38,11 +37,8 @@ Shader::Create(std::string name, const std::string& vertexSource, const std::str
   return nullptr;
 }
 
-std::shared_ptr<Shader>
-Shader::Create(const std::string& filePath)
-{
-  switch(RendererAPI::GetAPI())
-  {
+std::shared_ptr<Shader> Shader::Create(const std::string& filePath) {
+  switch(RendererAPI::GetAPI()) {
   case RendererAPI::API::None:
     logging::core()->error("Rendering API must be specified!");
     return nullptr;
@@ -66,37 +62,31 @@ Shader::Create(const std::string& filePath)
   return nullptr;
 }
 
-void ShaderLibrary::Add(const std::shared_ptr<Shader>& shader)
-{
+void ShaderLibrary::Add(const std::shared_ptr<Shader>& shader) {
   Add(shader->Name(), shader);
 }
 
-void ShaderLibrary::Add(const std::string& name, const std::shared_ptr<Shader>& shader)
-{
+void ShaderLibrary::Add(const std::string& name, const std::shared_ptr<Shader>& shader) {
   mShaders[name] = shader;
 }
 
-std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& filePath)
-{
+std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& filePath) {
   auto shader = Shader::Create(filePath);
   Add(shader);
   return shader;
 }
 
-std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filePath)
-{
+std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filePath) {
   auto shader = Shader::Create(filePath);
   Add(name, shader);
   return shader;
 }
 
-std::shared_ptr<Shader> ShaderLibrary::Get(const std::string& name)
-{
+std::shared_ptr<Shader> ShaderLibrary::Get(const std::string& name) {
   return mShaders.at(name);
 }
 
-bool ShaderLibrary::Exists(const std::string& name)
-{
+bool ShaderLibrary::Exists(const std::string& name) {
   return mShaders.count(name) > 0;
 }
 

@@ -14,13 +14,14 @@
 namespace Bandolier {
 
 class Application;
+
 // To be defined by the client
 Application& CreateApplication();
 
-class Application
-{
+class Application {
 protected:
   friend Application& Bandolier::CreateApplication();
+
   inline static Application* Instance = nullptr;
 
   std::unique_ptr<Bandolier::Window> mWindow;
@@ -31,37 +32,30 @@ protected:
   std::shared_ptr<ImguiLayer> mImguiLayer;
 
 public:
-  explicit
-  Application(std::string WindowName = "Bandolier", std::tuple<unsigned int, unsigned int> dims = {1280, 720});
+  explicit Application(std::string WindowName = "Bandolier",
+                       std::tuple<unsigned int, unsigned int> dims = { 1280, 720 });
+
   virtual ~Application() = default;
 
-  virtual void
-  run() final;
+  virtual void run() final;
 
-  Bandolier::Window&
-  Window()
-  {
+  Bandolier::Window& Window() {
     return *mWindow;
   }
 
-  const Bandolier::Window&
-  Window() const
-  {
+  const Bandolier::Window& Window() const {
     return *mWindow;
   }
 
   //Using a static app instance allows the application to be accessed using only this base class,
   // and without knowledge of the client's implimentation.
-  static Application&
-  Get()
-  {
+  static Application& Get() {
     return *Instance;
   }
 
-  virtual void
-  PushLayer(LayerStack::value_type layer);
-  virtual void
-  PushOverlay(LayerStack::value_type overlay);
+  virtual void PushLayer(LayerStack::value_type layer);
+
+  virtual void PushOverlay(LayerStack::value_type overlay);
 };
 
 }

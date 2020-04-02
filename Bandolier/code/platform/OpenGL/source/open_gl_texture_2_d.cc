@@ -4,11 +4,10 @@
 #include "stb_image.h"
 #include "open_gl_texture_2_d.hh"
 
-namespace Bandolier{
+namespace Bandolier {
 
 OpenGLTexture2D::OpenGLTexture2D(std::string path)
-  : mPath(std::move(path))
-{
+        : mPath(std::move(path)) {
   int width;
   int height;
   int channels;
@@ -22,18 +21,13 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path)
   GLenum internalFormat = 0;
   GLenum dataFormat = 0;
 
-  if(channels == 4)
-  {
+  if(channels == 4) {
     internalFormat = GL_RGBA8;
     dataFormat = GL_RGBA;
-  }
-  else if(channels == 3)
-  {
+  } else if(channels == 3) {
     internalFormat = GL_RGB8;
     dataFormat = GL_RGB;
-  }
-  else
-  {
+  } else {
     BNDLR_FAIL("Encountered unsupported file format when reading file \"" + path + "\".");
   }
 
@@ -48,26 +42,19 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path)
   stbi_image_free(data);
 }
 
-OpenGLTexture2D::~OpenGLTexture2D()
-{
+OpenGLTexture2D::~OpenGLTexture2D() {
   glDeleteTextures(1, &mID);
 }
 
-uint32_t
-OpenGLTexture2D::Width() const
-{
+uint32_t OpenGLTexture2D::Width() const {
   return mWidth;
 }
 
-uint32_t
-OpenGLTexture2D::Height() const
-{
+uint32_t OpenGLTexture2D::Height() const {
   return mHeight;
 }
 
-void
-OpenGLTexture2D::Bind(uint32_t slot) const
-{
+void OpenGLTexture2D::Bind(uint32_t slot) const {
   glBindTextureUnit(slot, mID);
 }
 

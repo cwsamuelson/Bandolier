@@ -8,8 +8,7 @@
 
 namespace Bandolier {
 
-class LayerStack
-{
+class LayerStack {
 public:
   using container = std::vector<std::shared_ptr<Bandolier::Layer>>;
   using iterator = container::iterator;
@@ -24,54 +23,42 @@ private:
 
 public:
   LayerStack();
+
   ~LayerStack();
 
-  void
-  PushLayer(value_type layer);
-  void
-  PopLayer();
-  void
-  EraseLayer(value_type layer);
-  void
-  PushOverlay(value_type overlay);
-  void
-  PopOverlay();
-  void
-  EraseOverlay(value_type overlay);
+  void PushLayer(value_type layer);
 
-  iterator
-  begin()
-  {
+  void PopLayer();
+
+  void EraseLayer(value_type layer);
+
+  void PushOverlay(value_type overlay);
+
+  void PopOverlay();
+
+  void EraseOverlay(value_type overlay);
+
+  iterator begin() {
     return mLayers.begin();
   }
 
-  iterator
-  end()
-  {
+  iterator end() {
     return mLayers.end();
   }
 
-  const_iterator
-  cbegin() const
-  {
+  const_iterator cbegin() const {
     return mLayers.cbegin();
   }
 
-  const_iterator
-  cend()
-  {
+  const_iterator cend() {
     return mLayers.cend();
   }
 
-  reverse_iterator
-  rbegin()
-  {
+  reverse_iterator rbegin() {
     return mLayers.rbegin();
   }
 
-  reverse_iterator
-  rend()
-  {
+  reverse_iterator rend() {
     return mLayers.rend();
   }
 };
