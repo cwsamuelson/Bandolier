@@ -49,6 +49,12 @@ void OrthographicCameraController::OnUpdate(Bandolier::time_step ts) {
       mCameraRotation += mRotationSpeed * ts;
     }
 
+    if(mCameraRotation > 180.0f){
+      mCameraRotation -= 360.0f;
+    } else if(mCameraRotation <= -180.0f) {
+      mCameraRotation += 360.0f;
+    }
+
     mCamera.SetRotation(mCameraRotation);
   }
 
