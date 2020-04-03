@@ -18,6 +18,7 @@ public:
 
   virtual void Unbind() const = 0;
 
+  [[nodiscard]]
   virtual std::string Name() const = 0;
 
   static std::shared_ptr<Shader> Create(std::string name,

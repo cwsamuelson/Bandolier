@@ -24,6 +24,7 @@ private:
   void Compile(const std::unordered_map<GLenum, std::string>& sources);
 
 public:
+  explicit
   OpenGlShader(const std::string& filePath);
 
   OpenGlShader(std::string name, const std::string& vertexSource, const std::string& fragmentSource);
@@ -34,6 +35,7 @@ public:
 
   void Unbind() const override;
 
+  [[nodiscard]]
   std::string Name() const override;
 
   void SetUniform(const std::string& name, int value);

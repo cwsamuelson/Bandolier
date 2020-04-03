@@ -23,7 +23,7 @@ public:
 
   virtual const std::shared_ptr<Bandolier::IndexBuffer>& GetIndexBuffer() const = 0;
 
-  static std::unique_ptr<VertexArray> Create();
+  static std::shared_ptr<VertexArray> Create();
 };
 
 }

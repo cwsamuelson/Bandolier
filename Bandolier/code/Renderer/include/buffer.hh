@@ -171,7 +171,7 @@ public:
 
   static std::shared_ptr<VertexBuffer> create(const float* vertices, uint32_t size);
 
-  static std::shared_ptr<VertexBuffer> create(const std::vector<float>& indices);
+  static std::shared_ptr<VertexBuffer> create(const std::vector<float>& vertices);
 };
 
 class IndexBuffer {

@@ -9,6 +9,8 @@
 Example::Example()
         : Layer("Example")
         , mVAO(Bandolier::VertexArray::Create())
+        , mSquareVAO(Bandolier::VertexArray::Create())
+        , mTexVAO(Bandolier::VertexArray::Create())
         , mCameraController(1280.0f / 720.0f, true) {
   std::vector<float> vertices{ -0.5f,
                                -0.5f,
@@ -67,14 +69,12 @@ Example::Example()
                                         1.0f, };
   std::vector<uint32_t> texSuareIndices{ 0, 1, 2, 2, 3, 0 };
 
-  mSquareVAO = Bandolier::VertexArray::Create();
   auto squareVB = Bandolier::VertexBuffer::create(squareVertices);
   auto squareIB = Bandolier::IndexBuffer::create(squareIndices);
   squareVB->Layout() = Bandolier::BufferLayout{{ Bandolier::ShaderDataType::Float3, "a_Position" }, };
   mSquareVAO->AddVertexBuffer(squareVB);
   mSquareVAO->SetIndexBuffer(squareIB);
 
-  mTexVAO = Bandolier::VertexArray::Create();
   auto texVB = Bandolier::VertexBuffer::create(texSquareVertices);
   auto texIB = Bandolier::IndexBuffer::create(texSuareIndices);
   texVB->Layout() = Bandolier::BufferLayout{{ Bandolier::ShaderDataType::Float3, "a_Position" },
