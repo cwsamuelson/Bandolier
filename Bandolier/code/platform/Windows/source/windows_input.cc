@@ -6,7 +6,7 @@
 
 namespace Bandolier {
 
-Input* Input::Instance = new WindowsInput;
+std::unique_ptr<Input> Input::Instance = std::make_unique<WindowsInput>();
 
 bool WindowsInput::IsKeyPressedImpl(int keycode) {
   auto window = static_cast<GLFWwindow*>(Application::Get().Window().Native());

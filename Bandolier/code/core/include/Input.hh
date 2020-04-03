@@ -1,6 +1,7 @@
 #ifndef BANDOLIER_INPUT_HH
 #define BANDOLIER_INPUT_HH
 
+#include <memory>
 #include <tuple>
 
 namespace Bandolier {
@@ -20,7 +21,7 @@ public:
   }
 
 protected:
-  static Input* Instance;
+  static std::unique_ptr<Input> Instance;
 
   virtual bool IsKeyPressedImpl(int keycode) = 0;
 
