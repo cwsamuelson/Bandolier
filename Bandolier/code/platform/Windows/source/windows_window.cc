@@ -32,8 +32,6 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
   //! @TODO error handling/check the window
   mContext = std::make_unique<OpenGLContext>(mWindow);
 
-  BNDLR_ASSERT(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to initialize GLAD");
-
   glfwSetWindowUserPointer(mWindow, &mData);
   VSync(props.vsync);
 

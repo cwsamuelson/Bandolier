@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <errors.hh>
 
 #include "logger.hh"
 
@@ -10,7 +11,7 @@ namespace Bandolier {
 OpenGLContext::OpenGLContext(GLFWwindow* window)
         : mWindow(window) {
   glfwMakeContextCurrent(mWindow);//! @TODO validate mWindow
-  int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);//! @TODO validLoading
+  BNDLR_ASSERT(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to initialize GLAD");
 
   logging::core()->info("OpenGL info:\n\tVendor: {0}\n\tRenderer: {1}\n\tVersion: {2}",
                         glGetString(GL_VENDOR),
