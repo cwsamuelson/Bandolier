@@ -2,7 +2,7 @@
 
 #include <entrypoint.hh>
 #include <imgui_layer.hh>
-#include "../../Bandolier/vendor/glm/glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #include "example_layer.hh"
 

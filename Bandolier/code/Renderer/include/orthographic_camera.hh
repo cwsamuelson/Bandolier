@@ -1,8 +1,7 @@
 #ifndef BANDOLIER_ORTHOGRAPHIC_CAMERA_HH
 #define BANDOLIER_ORTHOGRAPHIC_CAMERA_HH
 
-#include "../../../vendor/glm/glm/glm.hpp"
-//#include "glm/glm.hpp"
+#include "glm/glm.hpp"
 
 namespace Bandolier {
 

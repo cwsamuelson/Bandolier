@@ -6,8 +6,7 @@
 #include <glad/glad.h>
 
 #include "shader.hh"
-#include "../../../../vendor/glm/glm/glm.hpp"
-//#include "glm/glm.hpp"
+#include "glm/glm.hpp"
 
 namespace Bandolier {
 

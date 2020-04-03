@@ -4,7 +4,7 @@
 #include <open_gl_shader.hh>
 #include <open_gl_texture_2_d.hh>
 #include "example_layer.hh"
-#include "../../Bandolier/vendor/glm/glm/ext.hpp"
+#include "glm/ext.hpp"
 
 Example::Example()
         : Layer("Example")

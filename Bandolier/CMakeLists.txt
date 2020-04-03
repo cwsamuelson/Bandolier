@@ -65,11 +65,10 @@ ADD_LIBRARY(Bandolier code/core/source/logger.cc
             code/Renderer/include/texture.hh
             code/platform/OpenGL/source/open_gl_texture_2_d.cc
             code/platform/OpenGL/include/open_gl_texture_2_d.hh
-            vendor/stbi/stb_image.cc
             code/Renderer/source/orthographic_camera_controller.cc
             code/Renderer/include/orthographic_camera_controller.hh)
 
 TARGET_INCLUDE_DIRECTORIES(Bandolier PUBLIC code/core/include code/events code/imgui/include code/platform/OpenGL/include code/platform/Windows/include code/Renderer/include)
 
-TARGET_LINK_LIBRARIES(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm_static)
+TARGET_LINK_LIBRARIES(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm)
 

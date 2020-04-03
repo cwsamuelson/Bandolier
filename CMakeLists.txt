@@ -3,5 +3,7 @@ project(Bandolier)
 
 set(CMAKE_CXX_STANDARD 17)
 
+ADD_SUBDIRECTORY(Bandolier)
+
 add_subdirectory(Sandbox)
 
