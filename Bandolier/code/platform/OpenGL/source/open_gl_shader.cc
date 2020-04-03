@@ -199,6 +199,7 @@ void OpenGlShader::Compile(const std::unordered_map<GLenum, std::string>& source
 
   for(auto ID : shaderIDs) {
     glDetachShader(mID, ID);
+    glDeleteShader(ID);
   }
 }
 
