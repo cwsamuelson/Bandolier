@@ -131,10 +131,12 @@ std::unordered_map<GLenum, std::string> OpenGlShader::PreProcess(const std::stri
     BNDLR_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified");
 
     auto nextPos = source.find_first_not_of("\r\n", eol);
+    BNDLR_ASSERT(nextPos != std::string::npos, "Shader file syntax error.");
     pos = source.find(typeToken, nextPos);
     sources[ShaderTypeFromString(type)] = source.substr(nextPos,
                                                         pos -
                                                         (nextPos == std::string::npos ? source.size() - 1 : nextPos));
+    sources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? source.substr(nextPos) : source.substr(nextPos, pos - nextPos);
   }
 
   return sources;
