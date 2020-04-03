@@ -17,6 +17,15 @@ OpenGLContext::OpenGLContext(GLFWwindow* window)
                         glGetString(GL_VENDOR),
                         glGetString(GL_RENDERER),
                         glGetString(GL_VERSION));
+
+#ifdef BNDLR_ENABLE_ASSERTS
+  int versionMajor;
+		int versionMinor;
+		glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
+		glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
+
+		BNDLR_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Bandolier requires at least OpenGL version 4.5");
+#endif
 }
 
 OpenGLContext::~OpenGLContext() {
