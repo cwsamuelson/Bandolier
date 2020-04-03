@@ -24,17 +24,21 @@ const OrthographicCamera& OrthographicCameraController::Camera() const {
 
 void OrthographicCameraController::OnUpdate(Bandolier::time_step ts) {
   if(Input::IsKeyPressed(int(KeyCodes::W))) {
-    mPosition.y += mTranslationSpeed * ts;
+    mPosition.x += -std::sin(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
+    mPosition.y += std::cos(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
   }
   if(Input::IsKeyPressed(int(KeyCodes::S))) {
-    mPosition.y -= mTranslationSpeed * ts;
+    mPosition.x -= -std::sin(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
+    mPosition.y -= std::cos(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
   }
 
   if(Input::IsKeyPressed(int(KeyCodes::D))) {
-    mPosition.x += mTranslationSpeed * ts;
+    mPosition.x += std::cos(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
+    mPosition.y += std::sin(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
   }
   if(Input::IsKeyPressed(int(KeyCodes::A))) {
-    mPosition.x -= mTranslationSpeed * ts;
+    mPosition.x -= std::cos(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
+    mPosition.y -= std::sin(glm::radians(mCameraRotation)) * mTranslationSpeed * ts;
   }
 
   if(mRotation) {
