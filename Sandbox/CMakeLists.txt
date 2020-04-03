@@ -11,3 +11,10 @@ ADD_EXECUTABLE(Sandbox source/sandbox.cc
 TARGET_INCLUDE_DIRECTORIES(Sandbox PRIVATE include/)
 TARGET_LINK_LIBRARIES(Sandbox Bandolier)
 
+CONFIGURE_FILE(assets/shaders/FlatColor.glsl assets/shaders/FlatColor.glsl COPYONLY)
+CONFIGURE_FILE(assets/shaders/MagicColor.glsl assets/shaders/MagicColor.glsl COPYONLY)
+CONFIGURE_FILE(assets/shaders/Texture.glsl assets/shaders/Texture.glsl COPYONLY)
+
+CONFIGURE_FILE(assets/textures/Alpha.png assets/textures/Alpha.png COPYONLY)
+CONFIGURE_FILE(assets/textures/Checkerboard.png assets/textures/Checkerboard.png COPYONLY)
+
