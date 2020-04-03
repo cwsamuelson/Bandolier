@@ -16,7 +16,7 @@ private:
   std::shared_ptr<Bandolier::Texture2D> mTexture;
   std::shared_ptr<Bandolier::Texture2D> mAlphaTex;
   Bandolier::OrthographicCameraController mCameraController;
-  glm::vec3 mSquareColor{ 0.2f, 0.3f, 0.8f };
+  glm::vec4 mSquareColor{ 0.2f, 0.3f, 0.8f, 1.0f };
 
   void RenderImGui();
 

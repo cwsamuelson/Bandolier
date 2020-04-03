@@ -105,7 +105,7 @@ void Example::OnDetach() {
 
 void Example::RenderImGui() {
   ImGui::Begin("Settings");
-  ImGui::ColorEdit3("Square Color", glm::value_ptr(mSquareColor));
+  ImGui::ColorEdit4("Square Color", glm::value_ptr(mSquareColor));
   ImGui::End();
 }
 
