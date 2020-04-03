@@ -4,8 +4,9 @@
 #include <memory>
 
 //! @TODO fix this include path!
-#include "glm/glm.hpp"
 #include "vertex_array.hh"
+#include "../../../vendor/glm/glm/glm.hpp"
+//#include "glm/glm.hpp"
 
 namespace Bandolier {
 
