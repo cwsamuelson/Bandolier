@@ -5,7 +5,6 @@
 #include "logger.hh"
 
 #include "shader.hh"
-#include "glm/gtc/type_ptr.inl"
 #include "renderer_api.hh"
 
 namespace Bandolier {
@@ -19,7 +18,7 @@ std::shared_ptr<Shader> Shader::Create(std::string name,
     return nullptr;
 
   case RendererAPI::API::OpenGL:
-    return std::make_shared<OpenGlShader>(name, vertexSource, fragmentSource);
+    return std::make_shared<OpenGlShader>(std::move(name), vertexSource, fragmentSource);
 
   case RendererAPI::API::Direct3D:
     logging::core()->error("Rendering API Direct3D is not supported!");
