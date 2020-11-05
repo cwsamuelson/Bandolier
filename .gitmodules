@@ -1,15 +1,20 @@
 [submodule "Bandolier/vendor/spdlog"]
 	path = Bandolier/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "Bandolier/vendor/datastructures"]
 	path = Bandolier/vendor/datastructures
 	url = https://github.com/jing361/datastructures
+	branch = develop
 [submodule "Bandolier/vendor/glfw"]
 	path = Bandolier/vendor/glfw
 	url = https://github.com/glfw/glfw
+	branch = master
 [submodule "Bandolier/vendor/imgui"]
 	path = Bandolier/vendor/imgui
 	url = https://github.com/ocornut/imgui
+	branch = docking
 [submodule "Bandolier/vendor/glm"]
 	path = Bandolier/vendor/glm
 	url = https://github.com/g-truc/glm
+	branch = master
