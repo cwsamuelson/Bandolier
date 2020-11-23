@@ -1,31 +1,35 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 PROJECT(Bandolier CXX)
 
-SET(CMAKE_CXX_STANDARD 17)
-
 ADD_SUBDIRECTORY(vendor/datastructures/event_handler)
 ADD_SUBDIRECTORY(vendor/datastructures/error)
 ADD_SUBDIRECTORY(vendor/spdlog)
 ADD_SUBDIRECTORY(vendor/glfw)
 ADD_SUBDIRECTORY(vendor/glad)
 ADD_SUBDIRECTORY(vendor/glm)
+ADD_SUBDIRECTORY(vendor/fmt)
 
 ADD_LIBRARY(imgui vendor/imgui/imgui.cpp
             vendor/imgui/imgui_demo.cpp
             vendor/imgui/imgui_draw.cpp
             vendor/imgui/imgui_widgets.cpp
-            vendor/imgui/examples/imgui_impl_opengl3.cpp
-            vendor/imgui/examples/imgui_impl_opengl3.h
-            vendor/imgui/examples/imgui_impl_glfw.h
-            vendor/imgui/examples/imgui_impl_glfw.cpp)
+            vendor/imgui/backends/imgui_impl_opengl3.cpp
+            vendor/imgui/backends/imgui_impl_opengl3.h
+            vendor/imgui/backends/imgui_impl_glfw.h
+            vendor/imgui/backends/imgui_impl_glfw.cpp)
 TARGET_INCLUDE_DIRECTORIES(imgui PUBLIC vendor/imgui/)
 TARGET_COMPILE_DEFINITIONS(imgui PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
 TARGET_LINK_LIBRARIES(imgui glfw glad)
+SET_TARGET_PROPERTIES(imgui PROPERTIES
+                      CXX_STANDARD 20
+                      CXX_STANDARD_REQUIRED YES
+                      CXX_EXTENSIONS NO)
 
 ADD_LIBRARY(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
 TARGET_INCLUDE_DIRECTORIES(stbi PUBLIC vendor/stbi)
 
-ADD_LIBRARY(Bandolier code/core/source/logger.cc
+ADD_LIBRARY(Bandolier
+            code/core/source/logger.cc
             code/core/source/Application.cc
             code/platform/Windows/source/windows_window.cc
             code/core/source/layer_stack.cc
@@ -68,7 +72,17 @@ ADD_LIBRARY(Bandolier code/core/source/logger.cc
             code/Renderer/source/orthographic_camera_controller.cc
             code/Renderer/include/orthographic_camera_controller.hh)
 
-TARGET_INCLUDE_DIRECTORIES(Bandolier PUBLIC code/core/include code/events code/imgui/include code/platform/OpenGL/include code/platform/Windows/include code/Renderer/include)
+TARGET_INCLUDE_DIRECTORIES(Bandolier
+                           PUBLIC code/core/include
+                           PUBLIC code/events
+                           PUBLIC code/imgui/include
+                           PUBLIC code/platform/OpenGL/include
+                           PUBLIC code/platform/Windows/include
+                           PUBLIC code/Renderer/include)
 
-TARGET_LINK_LIBRARIES(Bandolier stbi spdlog_header_only event_handler error glfw opengl32 glad imgui glm)
+TARGET_LINK_LIBRARIES(Bandolier stbi spdlog event_handler error glfw opengl32 glad imgui glm)
 
+SET_TARGET_PROPERTIES(Bandolier PROPERTIES
+                      CXX_STANDARD 20
+                      CXX_STANDARD_REQUIRED YES
+                      CXX_EXTENSIONS NO)
