@@ -47,8 +47,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  WindowClose() {
-  }
+  WindowClose() = default;
 
   EVENT_TYPE(EventType::WindowClose)
 };
@@ -96,8 +95,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  WindowGainedFocus() {
-  }
+  WindowGainedFocus() = default;
 
   [[nodiscard]]
   const char* Name() const override {
@@ -115,8 +113,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  WindowLostFocus() {
-  }
+  WindowLostFocus() = default;
 
   [[nodiscard]]
   const char* Name() const override {
@@ -134,8 +131,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  WindowMoved() {
-  }
+  WindowMoved() = default;
 
   [[nodiscard]]
   const char* Name() const override {
@@ -153,8 +149,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  AppTick() {
-  }
+  AppTick() = default;
 
   [[nodiscard]]
   const char* Name() const override {
@@ -172,8 +167,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  AppUpdate() {
-  }
+  AppUpdate() = default;
 
   [[nodiscard]]
   const char* Name() const override {
@@ -191,8 +185,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  AppRender() {
-  }
+  AppRender() = default;
 
   [[nodiscard]]
   const char* Name() const override {
