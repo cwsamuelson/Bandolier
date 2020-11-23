@@ -7,7 +7,7 @@ namespace Bandolier::Events {
 
 class ApplicationEvent : public BaseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<ApplicationEvent>;
+  using Trigger_t = gsw::event_trigger<void(ApplicationEvent)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -24,7 +24,7 @@ public:
 
 class WindowEvent : public ApplicationEvent {
 public:
-  using Trigger_t = gsw::event_trigger<ApplicationEvent>;
+  using Trigger_t = gsw::event_trigger<void(ApplicationEvent)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -41,7 +41,7 @@ public:
 
 class WindowClose : public WindowEvent {
 public:
-  using Trigger_t = gsw::event_trigger<WindowClose>;
+  using Trigger_t = gsw::event_trigger<void(WindowClose)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -55,7 +55,7 @@ public:
 
 class WindowResize : public WindowEvent {
 public:
-  using Trigger_t = gsw::event_trigger<WindowResize>;
+  using Trigger_t = gsw::event_trigger<void(WindowResize)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -90,7 +90,7 @@ public:
 
 class WindowGainedFocus : public WindowEvent {
 public:
-  using Trigger_t = gsw::event_trigger<WindowGainedFocus>;
+  using Trigger_t = gsw::event_trigger<void(WindowGainedFocus)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -109,7 +109,7 @@ public:
 
 class WindowLostFocus : public WindowEvent {
 public:
-  using Trigger_t = gsw::event_trigger<WindowLostFocus>;
+  using Trigger_t = gsw::event_trigger<void(WindowLostFocus)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -128,7 +128,7 @@ public:
 
 class WindowMoved : public WindowEvent {
 public:
-  using Trigger_t = gsw::event_trigger<WindowMoved>;
+  using Trigger_t = gsw::event_trigger<void(WindowMoved)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -147,7 +147,7 @@ public:
 
 class AppTick : public ApplicationEvent {
 public:
-  using Trigger_t = gsw::event_trigger<AppTick>;
+  using Trigger_t = gsw::event_trigger<void(AppTick)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -166,7 +166,7 @@ public:
 
 class AppUpdate : public ApplicationEvent {
 public:
-  using Trigger_t = gsw::event_trigger<AppUpdate>;
+  using Trigger_t = gsw::event_trigger<void(AppUpdate)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -185,7 +185,7 @@ public:
 
 class AppRender : public ApplicationEvent {
 public:
-  using Trigger_t = gsw::event_trigger<AppRender>;
+  using Trigger_t = gsw::event_trigger<void(AppRender)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;

@@ -13,7 +13,7 @@
 namespace Bandolier {
 
 struct WindowProperties {
-  template<typename T> using trigger_t = gsw::event_trigger<const T&>;
+  template<typename T> using trigger_t = gsw::event_trigger<void(const T&)>;
 
   std::string title;
   unsigned int width;

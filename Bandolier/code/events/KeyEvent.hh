@@ -9,7 +9,7 @@ namespace Bandolier::Events {
 
 class KeyEvent : public BaseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<KeyEvent>;
+  using Trigger_t = gsw::event_trigger<void(KeyEvent)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -38,7 +38,7 @@ private:
 
 class KeyPressed : public KeyEvent {
 public:
-  using Trigger_t = gsw::event_trigger<KeyPressed>;
+  using Trigger_t = gsw::event_trigger<void(KeyPressed)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -65,7 +65,7 @@ private:
 
 class KeyReleased : public KeyEvent {
 public:
-  using Trigger_t = gsw::event_trigger<KeyReleased>;
+  using Trigger_t = gsw::event_trigger<void(KeyReleased)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -84,7 +84,7 @@ public:
 
 class KeyTyped : public KeyEvent {
 public:
-  using Trigger_t = gsw::event_trigger<KeyReleased>;
+  using Trigger_t = gsw::event_trigger<void(KeyReleased)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;

@@ -9,7 +9,7 @@ namespace Bandolier::Events {
 
 class MouseEvent : public BaseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseEvent>;
+  using Trigger_t = gsw::event_trigger<void(MouseEvent)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -25,7 +25,7 @@ public:
 
 class MouseButtonEvent : public MouseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseButtonEvent>;
+  using Trigger_t = gsw::event_trigger<void(MouseButtonEvent)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -53,7 +53,7 @@ protected:
 
 class MouseButtonPressed : public MouseButtonEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseButtonPressed>;
+  using Trigger_t = gsw::event_trigger<void(MouseButtonPressed)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -71,7 +71,7 @@ public:
 
 class MouseButtonReleased : public MouseButtonEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseButtonReleased>;
+  using Trigger_t = gsw::event_trigger<void(MouseButtonReleased)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -89,7 +89,7 @@ public:
 
 class MouseMoved : public MouseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseMoved>;
+  using Trigger_t = gsw::event_trigger<void(MouseMoved)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
@@ -124,7 +124,7 @@ private:
 
 class MouseScrolled : public MouseEvent {
 public:
-  using Trigger_t = gsw::event_trigger<MouseScrolled>;
+  using Trigger_t = gsw::event_trigger<void(MouseScrolled)>;
   using Channel_t = Trigger_t::channel_t;
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
