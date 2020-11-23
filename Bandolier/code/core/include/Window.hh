@@ -51,10 +51,13 @@ public:
 
   virtual void OnUpdate() = 0;
 
+  [[nodiscard]]
   virtual unsigned int Width() const = 0;
 
+  [[nodiscard]]
   virtual unsigned int Height() const = 0;
 
+  [[nodiscard]]
   virtual bool VSync() const = 0;
 
   virtual void VSync(bool enabled) = 0;

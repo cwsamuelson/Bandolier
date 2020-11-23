@@ -12,7 +12,8 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "ApplicationEvent";
   }
 
@@ -28,7 +29,8 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "WindowEvent";
   }
 
@@ -68,14 +70,17 @@ public:
           , mHeight(height) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "WindowResize";
   }
 
+  [[nodiscard]]
   inline unsigned int Width() const {
     return mWidth;
   }
 
+  [[nodiscard]]
   inline unsigned int Height() const {
     return mHeight;
   }
@@ -94,7 +99,8 @@ public:
   WindowGainedFocus() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "WindowGainedfocus";
   }
 
@@ -112,7 +118,8 @@ public:
   WindowLostFocus() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "WindowLostfocus";
   }
 
@@ -130,7 +137,8 @@ public:
   WindowMoved() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "WindowMoved";
   }
 
@@ -148,7 +156,8 @@ public:
   AppTick() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "AppTick";
   }
 
@@ -166,7 +175,8 @@ public:
   AppUpdate() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "AppUpdate";
   }
 
@@ -184,7 +194,8 @@ public:
   AppRender() {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "AppRender";
   }
 

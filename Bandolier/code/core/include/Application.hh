@@ -39,10 +39,12 @@ public:
 
   virtual void run() final;
 
+  [[nodiscard]]
   Bandolier::Window& Window() {
     return *mWindow;
   }
 
+  [[nodiscard]]
   const Bandolier::Window& Window() const {
     return *mWindow;
   }
