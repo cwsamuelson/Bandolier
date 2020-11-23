@@ -18,3 +18,6 @@
 	path = Bandolier/vendor/glm
 	url = https://github.com/g-truc/glm
 	branch = master
+[submodule "Bandolier/vendor/fmt"]
+	path = Bandolier/vendor/fmt
+	url = https://github.com/fmtlib/fmt
