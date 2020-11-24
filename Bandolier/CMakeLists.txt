@@ -85,7 +85,7 @@ TARGET_INCLUDE_DIRECTORIES(Bandolier
                            PUBLIC code/platform/Windows/include
                            PUBLIC code/Renderer/include)
 
-TARGET_LINK_LIBRARIES(Bandolier stbi spdlog event_handler error glfw opengl32 glad imgui glm)
+TARGET_LINK_LIBRARIES(Bandolier stbi spdlog event_handler error glfw glad imgui glm)
 
 SET_TARGET_PROPERTIES(Bandolier PROPERTIES
                       CXX_STANDARD 20
