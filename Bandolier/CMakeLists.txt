@@ -30,9 +30,13 @@ TARGET_INCLUDE_DIRECTORIES(stbi PUBLIC vendor/stbi)
 
 ADD_LIBRARY(Bandolier
             code/core/source/logger.cc
+            code/core/include/logger.hh
             code/core/source/Application.cc
+            code/core/include/Application.hh
             code/platform/Windows/source/windows_window.cc
+            code/platform/Windows/include/windows_window.hh
             code/core/source/layer_stack.cc
+            code/core/include/layer_stack.hh
             code/imgui/source/imgui_layer.cc
             code/imgui/include/imgui_layer.hh
             code/platform/Windows/source/windows_input.cc
@@ -60,6 +64,7 @@ ADD_LIBRARY(Bandolier
             code/platform/OpenGL/source/open_gl_renderer_api.cc
             code/platform/OpenGL/include/open_gl_renderer_api.hh
             code/Renderer/source/renderer.cc
+            code/Renderer/include/renderer.hh
             code/Renderer/source/orthographic_camera.cc
             code/Renderer/include/orthographic_camera.hh
             code/platform/OpenGL/source/open_gl_shader.cc
