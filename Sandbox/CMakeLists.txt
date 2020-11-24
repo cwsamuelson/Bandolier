@@ -6,8 +6,7 @@ ADD_EXECUTABLE(Sandbox source/sandbox.cc
                include/example_layer.hh source/sandbox_2_d.cc include/sandbox_2_d.hh)
 TARGET_INCLUDE_DIRECTORIES(Sandbox PRIVATE include/)
 TARGET_LINK_LIBRARIES(Sandbox Bandolier)
-
-SET_TARGET_PROPERTIES(imgui PROPERTIES
+SET_TARGET_PROPERTIES(Sandbox PROPERTIES
                       CXX_STANDARD 20
                       CXX_STANDARD_REQUIRED YES
                       CXX_EXTENSIONS NO)
