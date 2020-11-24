@@ -25,19 +25,23 @@ public:
 
   void OnUpdate() override;
 
+  [[nodiscard]]
   inline unsigned int Width() const override {
     return mData.width;
   }
 
+  [[nodiscard]]
   inline unsigned int Height() const override {
     return mData.height;
   }
 
-  virtual bool VSync() const;
+  [[nodiscard]]
+  bool VSync() const override;
 
-  virtual void VSync(bool enabled);
+  void VSync(bool enabled) override;
 
-  virtual void* Native();
+  [[nodiscard]]
+  void* Native() override;
 
   [[nodiscard]]
   std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t> AllChannel() const override;

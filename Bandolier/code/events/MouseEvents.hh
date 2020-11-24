@@ -14,7 +14,8 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override{
     return "MouseEvent";
   }
 
@@ -38,11 +39,13 @@ public:
   EVENT_TYPE(EventType::MouseButton)
 
 protected:
+  explicit
   MouseButtonEvent(int button)
           : mButton(button) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override{
     return "MouseButtonEvent";
   }
 
@@ -58,11 +61,13 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
+  explicit
   MouseButtonPressed(int button)
           : MouseButtonEvent(button) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override{
     return "MouseButtonPressed";
   }
 
@@ -76,11 +81,13 @@ public:
   using Handler_t = Channel_t::handler;
   using SimpleHandler_t = Channel_t::simple_handler;
 
+  explicit
   MouseButtonReleased(int button)
           : MouseButtonEvent(button) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "MouseButtonReleased";
   }
 
@@ -99,7 +106,8 @@ public:
           , mY(y) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "MouseMoved";
   }
 
@@ -134,7 +142,8 @@ public:
           , mYOffset(yOffset) {
   }
 
-  virtual const char* Name() const {
+  [[nodiscard]]
+  const char* Name() const override {
     return "MouseScrolled";
   }
 

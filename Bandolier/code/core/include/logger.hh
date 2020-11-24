@@ -12,10 +12,16 @@ namespace Bandolier {
 using logger_ptr = std::shared_ptr<spdlog::logger>;
 
 class logging {
+private:
+  inline static const std::string default_pattern = "%^[%T] %n: %v%$";
+
 public:
   static logger_ptr make_logger(const std::string& name,
-                                const std::string& pattern = "%^[%T] %n: %v%$",
-                                spdlog::level::level_enum lvl = spdlog::level::trace);
+                                const std::string& pattern,
+                                spdlog::level::level_enum lvl);
+  inline static logger_ptr make_logger(const std::string& name){ return make_logger(name, default_pattern, spdlog::level::trace); }
+  inline static logger_ptr make_logger(const std::string& name, const std::string& pattern){ return make_logger(name, pattern, spdlog::level::trace); }
+  inline static logger_ptr make_logger(const std::string& name, spdlog::level::level_enum lvl){ return make_logger(name, default_pattern, spdlog::level::trace); }
 
 private:
   inline static std::unordered_map<std::string, logger_ptr> sLoggers;

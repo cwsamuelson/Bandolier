@@ -47,9 +47,10 @@ static uint32_t ShaderDataTypeSize(ShaderDataType type) {
 
   case ShaderDataType::Bool:
     return 1;
-  }
 
-  BNDLR_FAIL("Unknown or unsupported shader data type");
+  default:
+    BNDLR_FAIL("Unknown or unsupported shader data type");
+  }
 }
 
 struct BufferElement {
@@ -101,9 +102,12 @@ struct BufferElement {
 
     case ShaderDataType::Bool:
       return 1;
+
+    default:
+      break;
     }
 
-    logging::core()->error("Unjnown shader data type!");//! @TODO throw?
+    logging::core()->error("Unknown shader data type!");//! @TODO throw?
     return 0;
   }
 };

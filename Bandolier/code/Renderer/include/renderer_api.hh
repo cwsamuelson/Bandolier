@@ -11,6 +11,8 @@ namespace Bandolier {
 
 class RendererAPI {
 public:
+  virtual ~RendererAPI() = default;
+
   enum class API {
     None = 0, OpenGL, Direct3D, Vulkan, DirectX = int(Direct3D),
   };
