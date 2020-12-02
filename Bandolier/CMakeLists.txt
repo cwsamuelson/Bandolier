@@ -24,9 +24,15 @@ SET_TARGET_PROPERTIES(imgui PROPERTIES
                       CXX_STANDARD 20
                       CXX_STANDARD_REQUIRED YES
                       CXX_EXTENSIONS NO)
+TARGET_COMPILE_FEATURES(imgui PUBLIC cxx_std_20)
 
 ADD_LIBRARY(stbi vendor/stbi/stb_image.h vendor/stbi/stb_image.cc)
 TARGET_INCLUDE_DIRECTORIES(stbi PUBLIC vendor/stbi)
+SET_TARGET_PROPERTIES(stbi PROPERTIES
+                      CXX_STANDARD 20
+                      CXX_STANDARD_REQUIRED YES
+                      CXX_EXTENSIONS NO)
+TARGET_COMPILE_FEATURES(stbi PUBLIC cxx_std_20)
 
 ADD_LIBRARY(Bandolier
             code/core/source/logger.cc
@@ -91,3 +97,4 @@ SET_TARGET_PROPERTIES(Bandolier PROPERTIES
                       CXX_STANDARD 20
                       CXX_STANDARD_REQUIRED YES
                       CXX_EXTENSIONS NO)
+TARGET_COMPILE_FEATURES(Bandolier PUBLIC cxx_std_20)

@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.14)
-project(Bandolier)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+PROJECT(Bandolier)
 
 ADD_SUBDIRECTORY(Bandolier)
 
-add_subdirectory(Sandbox)
+ADD_SUBDIRECTORY(Sandbox)
 

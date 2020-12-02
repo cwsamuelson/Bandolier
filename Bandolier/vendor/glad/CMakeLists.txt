@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.14)
 project(glad)
 
-set(CMAKE_CXX_STANDARD 17)#doesn't /actually/ need C++17
+ADD_LIBRARY(glad src/glad.c)
 
-add_library(glad src/glad.c)
+TARGET_INCLUDE_DIRECTORIES(glad PUBLIC include/)
 
-target_include_directories(glad PUBLIC include/)
+SET_TARGET_PROPERTIES(glad PROPERTIES
+                      CXX_STANDARD 20
+                      CXX_STANDARD_REQUIRED YES
+                      CXX_EXTENSIONS NO)
+TARGET_COMPILE_FEATURES(glad PUBLIC cxx_std_20)
+

@@ -10,6 +10,7 @@ SET_TARGET_PROPERTIES(Sandbox PROPERTIES
                       CXX_STANDARD 20
                       CXX_STANDARD_REQUIRED YES
                       CXX_EXTENSIONS NO)
+TARGET_COMPILE_FEATURES(Sandbox PUBLIC cxx_std_20)
 
 CONFIGURE_FILE(assets/shaders/FlatColor.glsl assets/shaders/FlatColor.glsl COPYONLY)
 CONFIGURE_FILE(assets/shaders/MagicColor.glsl assets/shaders/MagicColor.glsl COPYONLY)
