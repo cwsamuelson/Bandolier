@@ -11,7 +11,7 @@ class Sandbox : public Bandolier::Application {
 public:
   Sandbox();
 
-  ~Sandbox() = default;
+  ~Sandbox() override = default;
 };
 
 #endif //TEST_SANDBOX_HH

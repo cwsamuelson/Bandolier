@@ -32,6 +32,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
+  [[nodiscard]]
   inline int MouseButton() const {
     return mButton;
   }
@@ -111,14 +112,17 @@ public:
     return "MouseMoved";
   }
 
+  [[nodiscard]]
   inline float X() const {
     return mX;
   }
 
+  [[nodiscard]]
   inline float Y() const {
     return mY;
   }
 
+  [[nodiscard]]
   inline std::pair<float, float> position() const {
     return { mX, mY };
   }
@@ -147,14 +151,17 @@ public:
     return "MouseScrolled";
   }
 
+  [[nodiscard]]
   inline float XOffset() const {
     return mXOffset;
   }
 
+  [[nodiscard]]
   inline float YOffset() const {
     return mYOffset;
   }
 
+  [[nodiscard]]
   inline std::pair<float, float> Offset() const {
     return { mXOffset, mYOffset };
   }

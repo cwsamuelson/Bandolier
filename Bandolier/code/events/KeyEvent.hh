@@ -15,6 +15,7 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
+  [[nodiscard]]
   inline int KeyCode() const {
     return mKeyCode;
   }
@@ -24,16 +25,18 @@ public:
   EVENT_TYPE(EventType::Key)
 
 protected:
-  explicit KeyEvent(int keycode)
+  explicit
+  KeyEvent(unsigned int keycode)
           : mKeyCode(keycode) {
   }
 
-  virtual const char* Name() const override {
+  [[nodiscard]]
+  const char* Name() const override {
     return "KeyEvent";
   }
 
 private:
-  int mKeyCode;
+  unsigned int mKeyCode;
 };
 
 class KeyPressed : public KeyEvent {
@@ -49,10 +52,12 @@ public:
           , mRepeatCount(repeatCount) {
   }
 
+  [[nodiscard]]
   const char* Name() const override {
     return "KeyPressed";
   }
 
+  [[nodiscard]]
   inline int RepeatCount() const {
     return mRepeatCount;
   }
@@ -71,10 +76,12 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  explicit KeyReleased(int keycode)
+  explicit
+  KeyReleased(int keycode)
           : KeyEvent(keycode) {
   }
 
+  [[nodiscard]]
   const char* Name() const override {
     return "KeyReleased";
   }
@@ -90,7 +97,8 @@ public:
   using SimpleHandler_t = Channel_t::simple_handler;
 
 public:
-  explicit KeyTyped(int keycode)
+  explicit
+  KeyTyped(unsigned int keycode)
           : KeyEvent(keycode) {
   }
 

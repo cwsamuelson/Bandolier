@@ -25,7 +25,7 @@ private:
 public:
   Example();
 
-  ~Example();
+  ~Example() override;
 
   void OnAttach() override;
 

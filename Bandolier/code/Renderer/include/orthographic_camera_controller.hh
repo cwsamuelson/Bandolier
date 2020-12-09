@@ -20,10 +20,12 @@ private:
   OrthographicCamera mCamera;
 
 public:
+  explicit
   OrthographicCameraController(float aspectRatio, bool rotation = false);
 
   OrthographicCamera& Camera();
 
+  [[nodiscard]]
   const OrthographicCamera& Camera() const;
 
   void OnUpdate(Bandolier::time_step ts);

@@ -93,8 +93,7 @@ Example::Example()
   std::dynamic_pointer_cast<Bandolier::OpenGlShader>(mShaderLibrary.Get("Texture"))->SetUniform("u_Texture", 0);
 }
 
-Example::~Example() {
-}
+Example::~Example() = default;
 
 void Example::OnAttach() {
   Bandolier::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
