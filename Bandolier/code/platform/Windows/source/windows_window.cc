@@ -19,8 +19,9 @@ void WindowErrorHandler(int error_code, const char* description) {
 
 WindowsWindow::WindowsWindow(Bandolier::WindowProperties props)
         : Window(std::move(props)){
+  //! @NOTE this may be problematic when multithreaded
   if(!sGLFWInitialized) {
-    int success = glfwInit();
+    VERIFY_AND_LOG(glfwInit(), "GLFW failed to initialize");
     sGLFWInitialized = true;
     glfwSetErrorCallback(WindowErrorHandler);
   }
@@ -30,6 +31,7 @@ WindowsWindow::WindowsWindow(Bandolier::WindowProperties props)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   mWindow = glfwCreateWindow(int(mData.width), int(mData.height), mData.title.c_str(), nullptr, nullptr);
   //! @TODO error handling/check the window
+  VERIFY_AND_LOG(mWindow != nullptr, "GLFW failed to create {} window", mData.title);
   mContext = std::make_unique<OpenGLContext>(mWindow);
 
   glfwSetWindowUserPointer(mWindow, &mData);

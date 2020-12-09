@@ -13,12 +13,8 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
         : mWindow(std::make_unique<WindowsWindow>(WindowProperties(std::move(WindowName),
                                                                    std::get<0>(dims),
                                                                    std::get<1>(dims))))
-        , mLastTime(float(glfwGetTime()))
-        , mImguiLayer(std::make_shared<ImguiLayer>()) {
-  if(Application::Instance) {
-    logging::core()->error("Initializing a new application when one already exists!");
-    throw std::runtime_error("Initializing a new application when one already exists!");
-  }
+        , mLastTime(float(glfwGetTime())){
+  VERIFY_AND_LOG(Application::Instance == nullptr, "Initializing a new application when one already exists!");
   Application::Instance = this;
 
   Window().CloseChannel.subscribe([this](const Events::WindowClose&)
