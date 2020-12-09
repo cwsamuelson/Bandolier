@@ -78,6 +78,8 @@ ADD_LIBRARY(Bandolier
             code/core/include/errors.hh
             code/Renderer/source/texture.cc
             code/Renderer/include/texture.hh
+            code/platform/OpenGL/source/open_gl_texture_1_d.cc
+            code/platform/OpenGL/include/open_gl_texture_1_d.hh
             code/platform/OpenGL/source/open_gl_texture_2_d.cc
             code/platform/OpenGL/include/open_gl_texture_2_d.hh
             code/Renderer/source/orthographic_camera_controller.cc
