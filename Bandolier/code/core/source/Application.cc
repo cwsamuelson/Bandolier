@@ -46,8 +46,6 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
                                                });
 
   Bandolier::RenderCommand::Init();
-
-  PushOverlay(mImguiLayer);
 }
 
 void Application::PushLayer(LayerStack::value_type layer) {
@@ -68,13 +66,11 @@ void Application::run() {
 
     Bandolier::RenderCommand::Clear();
 
-    mImguiLayer->Begin();
     if(!mMinimized) {
       for(auto& layer : mLayerStack) {
         layer->OnUpdate(timestep);
       }
     }
-    mImguiLayer->End();
 
     mWindow->OnUpdate();
   }
