@@ -17,8 +17,8 @@ void WindowErrorHandler(int error_code, const char* description) {
   logging::core()->error("GLFW error ({0}): {1}", error_code, description);
 }
 
-WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
-        : mData(props) {
+WindowsWindow::WindowsWindow(Bandolier::WindowProperties props)
+        : Window(std::move(props)){
   if(!sGLFWInitialized) {
     int success = glfwInit();
     sGLFWInitialized = true;
@@ -174,62 +174,6 @@ WindowsWindow::WindowsWindow(const Bandolier::WindowProperties& props)
 WindowsWindow::~WindowsWindow() {
   glfwDestroyWindow(mWindow);
   glfwTerminate();//maybe shouldn't do this one, but eh for now
-}
-
-std::weak_ptr<decltype(WindowProperties::allEventsTrigger)::channel_t> WindowsWindow::AllChannel() const {
-  return mData.allEventsTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::appTrigger)::channel_t> WindowsWindow::AppChannel() const {
-  return mData.appTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::keyTrigger)::channel_t> WindowsWindow::KeyChannel() const {
-  return mData.keyTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseTrigger)::channel_t> WindowsWindow::MouseChannel() const {
-  return mData.mouseTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseButtonTrigger)::channel_t> WindowsWindow::MouseButtonChannel() const {
-  return mData.mouseButtonTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::resizeTrigger)::channel_t> WindowsWindow::ResizeChannel() const {
-  return mData.resizeTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::closeTrigger)::channel_t> WindowsWindow::CloseChannel() const {
-  return mData.closeTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::keyTypedTrigger)::channel_t> WindowsWindow::KeyTypedChannel() const {
-  return mData.keyTypedTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::keyPressTrigger)::channel_t> WindowsWindow::KeyPressChannel() const {
-  return mData.keyPressTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::keyReleaseTrigger)::channel_t> WindowsWindow::KeyReleaseChannel() const {
-  return mData.keyReleaseTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseButtonPressTrigger)::channel_t> WindowsWindow::MousePressChannel() const {
-  return mData.mouseButtonPressTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseButtonReleaseTrigger)::channel_t> WindowsWindow::MouseReleaseChannel() const {
-  return mData.mouseButtonReleaseTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseScrollTrigger)::channel_t> WindowsWindow::MouseScrollChannel() const {
-  return mData.mouseScrollTrigger.getChannel();
-}
-
-std::weak_ptr<decltype(WindowProperties::mouseMoveTrigger)::channel_t> WindowsWindow::MouseMoveChannel() const {
-  return mData.mouseMoveTrigger.getChannel();
 }
 
 void WindowsWindow::OnUpdate() {

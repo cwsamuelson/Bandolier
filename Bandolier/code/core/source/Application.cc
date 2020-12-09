@@ -21,13 +21,13 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
   }
   Application::Instance = this;
 
-  mWindow->CloseChannel().lock()->subscribe([this](const Events::WindowClose&)
+  Window().CloseChannel.subscribe([this](const Events::WindowClose&)
                                               {
                                                 mRunning = false;
                                                 Bandolier::logging::client()->trace("Window close event occurred!");
                                               });
 
-  Window().AllChannel().lock()->subscribe([this](const Bandolier::Events::BaseEvent& e)
+  Window().AllChannel.subscribe([this](const Bandolier::Events::BaseEvent& e)
                                             {
                                               for(auto it = mLayerStack.rbegin(); it != mLayerStack.rend(); ++it) {
                                                 if((*it)->OnEvent(e)) {
@@ -36,7 +36,7 @@ Application::Application(std::string WindowName, std::tuple<unsigned int, unsign
                                               }
                                             });
 
-  Window().ResizeChannel().lock()->subscribe([this](const Bandolier::Events::WindowResize& e)
+  Window().ResizeChannel.subscribe([this](const Bandolier::Events::WindowResize& e)
                                                {
                                                  mMinimized = e.Width() == 0 || e.Height() == 0;
 
