@@ -64,7 +64,15 @@ void Application::run() {
 
     if(!mMinimized) {
       for(auto& layer : mLayerStack) {
-        layer->OnUpdate(timestep);
+        try {
+          layer->OnUpdate(timestep);
+        } catch(gsw::exception& e){
+          Bandolier::logging::core()->error(e.what());
+        } catch(std::exception& e){
+          Bandolier::logging::core()->error("Encountered an error in the run loop: ", e.what());
+        } catch(...){
+          Bandolier::logging::core()->error("Encountered an unknown error in the run loop.");
+        }
       }
     }
 
