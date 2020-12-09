@@ -13,15 +13,13 @@ private:
   uint32_t mID;
 
 public:
-  explicit OpenGLTexture2D(std::string path);
-
-  virtual ~OpenGLTexture2D();
-
-  uint32_t Width() const override;
-
-  uint32_t Height() const override;
+  [[nodiscard]]
+  std::array<uint32_t, 3> Dims() const override;
 
   void Bind(uint32_t slot) const override;
+
+  explicit OpenGLTexture2D(std::string path);
+  virtual ~OpenGLTexture2D();
 };
 
 }

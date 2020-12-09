@@ -46,16 +46,12 @@ OpenGLTexture2D::~OpenGLTexture2D() {
   glDeleteTextures(1, &mID);
 }
 
-uint32_t OpenGLTexture2D::Width() const {
-  return mWidth;
-}
-
-uint32_t OpenGLTexture2D::Height() const {
-  return mHeight;
-}
-
 void OpenGLTexture2D::Bind(uint32_t slot) const {
   glBindTextureUnit(slot, mID);
+}
+
+std::array<uint32_t, 3> OpenGLTexture2D::Dims() const {
+  return {mWidth, mHeight, 1};
 }
 
 }
