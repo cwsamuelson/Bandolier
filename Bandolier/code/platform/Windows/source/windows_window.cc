@@ -45,6 +45,7 @@ WindowsWindow::WindowsWindow(Bandolier::WindowProperties props)
 
       auto event = Events::WindowResize(width, height);
       data.resizeTrigger.fire(event);
+      data.windowTrigger.fire(event);
       data.appTrigger.fire(event);
       data.allEventsTrigger.fire(event);
     });
@@ -55,6 +56,7 @@ WindowsWindow::WindowsWindow(Bandolier::WindowProperties props)
 
       auto event = Events::WindowClose();
       data.closeTrigger.fire(event);
+      data.windowTrigger.fire(event);
       data.appTrigger.fire(event);
       data.allEventsTrigger.fire(event);
     });
