@@ -11,14 +11,16 @@ namespace Bandolier::ErrorHandling {
 
 //! @TODO add support for formatted messages
 // Currently since the exception constructor does not support formatted messages, we cannot handle this successfully
-#define BNDLR_LOG_ERROR(message) ::Bandolier::logging::core()->error((message));
-#define BNDLR_LOG_WARN(message) ::Bandolier::logging::core()->warn((message));
-#define BNDLR_LOG_TRACE(message) ::Bandolier::logging::core()->trace((message));
+#define BNDLR_LOG_ERROR(...) ::Bandolier::logging::core()->error((__VA_ARGS__));
+#define BNDLR_LOG_WARN(...) ::Bandolier::logging::core()->warn((__VA_ARGS__));
+#define BNDLR_LOG_TRACE(...) ::Bandolier::logging::core()->trace((__VA_ARGS__));
 
-#define BNDLR_FAIL(message) GSW_WRAP(BNDLR_LOG_ERROR(message); GSW_THROW(message, ""))
-#define BNDLR_ASSERT(expression, message) GSW_VERIFY_AND(expression, BNDLR_LOG_ERROR(message), message)
-#define BNDLR_CHECK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(message), message)
-#define BNDLR_TRACK(expression, message) GSW_CHECK_AND(expression, BNDLR_LOG_TRACE(message), message)
+#define BNDLR_FAIL(...) GSW_WRAP(BNDLR_LOG_ERROR(__VA_ARGS__); GSW_THROW(__VA_ARGS__))
+#define BNDLR_ASSERT(expression, ...) GSW_VERIFY_AND(expression, BNDLR_LOG_ERROR(__VA_ARGS__), __VA_ARGS__)
+#define BNDLR_CHECK(expression, ...) GSW_CHECK_AND(expression, BNDLR_LOG_WARN(__VA_ARGS__), __VA_ARGS__)
+#define BNDLR_TRACK(expression, ...) GSW_CHECK_AND(expression, BNDLR_LOG_TRACE(__VA_ARGS__), __VA_ARGS__)
+
+#define VERIFY_AND_LOG(cond, ...) GSW_VERIFY_AND(cond, ::Bandolier::logging::core()->error(FMT format(__VA_ARGS__));, __VA_ARGS__);
 
 }
 
