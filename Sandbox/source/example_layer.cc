@@ -102,13 +102,7 @@ void Example::OnAttach() {
 void Example::OnDetach() {
 }
 
-void Example::RenderImGui() {
-  ImGui::Begin("Settings");
-  ImGui::ColorEdit4("Square Color", glm::value_ptr(mSquareColor));
-  ImGui::End();
-}
-
-void Example::RenderOpenGL() {
+void Example::OnUpdate(Bandolier::time_step ts) {
   Bandolier::Renderer::BeginScene(mCameraController.Camera());
 
   glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -133,12 +127,6 @@ void Example::RenderOpenGL() {
   Bandolier::Renderer::Submit(mShaderLibrary.Get("MagicColor"), mVAO);
 
   Bandolier::Renderer::EndScene();
-}
-
-void Example::OnUpdate(Bandolier::time_step ts) {
-  RenderImGui();
-
-  RenderOpenGL();
 
   mCameraController.OnUpdate(ts);
 }

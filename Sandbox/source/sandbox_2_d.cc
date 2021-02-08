@@ -41,13 +41,6 @@ void Sandbox2d::OnUpdate(Bandolier::time_step ts) {
   mCameraController.OnUpdate(ts);
 
   OpenGLRender();
-  IMGUIRender();
-}
-
-void Sandbox2d::IMGUIRender(){
-  ImGui::Begin("settings");
-  ImGui::ColorEdit4("Square Color", glm::value_ptr(mSquareColor));
-  ImGui::End();
 }
 
 void Sandbox2d::OpenGLRender(){

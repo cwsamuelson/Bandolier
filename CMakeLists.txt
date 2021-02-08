@@ -4,4 +4,3 @@ PROJECT(Bandolier)
 ADD_SUBDIRECTORY(Bandolier)
 
 ADD_SUBDIRECTORY(Sandbox)
-

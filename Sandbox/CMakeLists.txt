@@ -3,7 +3,7 @@ PROJECT(Sandbox)
 
 ADD_EXECUTABLE(Sandbox source/sandbox.cc
                source/example_layer.cc
-               include/example_layer.hh source/sandbox_2_d.cc include/sandbox_2_d.hh)
+               include/example_layer.hh source/sandbox_2_d.cc include/sandbox_2_d.hh source/gui_layer.cc include/gui_layer.hh)
 TARGET_INCLUDE_DIRECTORIES(Sandbox PRIVATE include/)
 TARGET_LINK_LIBRARIES(Sandbox Bandolier)
 SET_TARGET_PROPERTIES(Sandbox PROPERTIES

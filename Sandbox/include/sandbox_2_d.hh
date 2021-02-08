@@ -17,7 +17,6 @@ private:
 
   glm::vec4 mSquareColor;
 
-  void IMGUIRender();
   void OpenGLRender();
 
 public:
