@@ -9,9 +9,13 @@ ADD_SUBDIRECTORY(vendor/glad)
 ADD_SUBDIRECTORY(vendor/glm)
 ADD_SUBDIRECTORY(vendor/fmt)
 
-ADD_LIBRARY(imgui vendor/imgui/imgui.cpp
+ADD_LIBRARY(imgui
+            vendor/imgui/imgui.h
+            vendor/imgui/imgui.cpp
             vendor/imgui/imgui_demo.cpp
             vendor/imgui/imgui_draw.cpp
+            vendor/imgui/imgui_internal.h
+            vendor/imgui/imgui_tables.cpp
             vendor/imgui/imgui_widgets.cpp
             vendor/imgui/backends/imgui_impl_opengl3.cpp
             vendor/imgui/backends/imgui_impl_opengl3.h
