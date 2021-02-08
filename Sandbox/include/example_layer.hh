@@ -18,10 +18,6 @@ private:
   Bandolier::OrthographicCameraController mCameraController;
   glm::vec4 mSquareColor{ 0.2f, 0.3f, 0.8f, 1.0f };
 
-  void RenderImGui();
-
-  void RenderOpenGL();
-
 public:
   Example();
 

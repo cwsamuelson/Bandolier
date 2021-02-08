@@ -7,11 +7,15 @@
 #include <Application.hh>
 #include <vertex_array.hh>
 
-class Sandbox : public Bandolier::Application {
-public:
-  Sandbox();
+namespace Sandbox {
 
-  ~Sandbox() override = default;
+class Application : public Bandolier::Application {
+public:
+  Application();
+
+  ~Application() override = default;
 };
+
+}
 
 #endif //TEST_SANDBOX_HH
